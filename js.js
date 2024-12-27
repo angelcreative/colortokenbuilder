@@ -1,5 +1,8 @@
-// Declarar colorWheel en el scope global
+// Declarar variables globales
 let colorWheel;
+let colorWheelContainer;
+let hexInput;
+let currentPalettes = [];
 
 
 
@@ -106,42 +109,64 @@ function getRGBValues(hex) {
 }
 
 
-
+// Evento principal
 document.addEventListener('DOMContentLoaded', function() {
-
-const toggleSwitch = document.getElementById('theme-toggle');
-
-// Get the current theme from localStorage
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-  document.documentElement.setAttribute('data-theme', currentTheme);
-
-  // If the theme is dark, mark the switch as active
-  if (currentTheme === 'dark') {
-    toggleSwitch.checked = true;
-  }
-}
-
-// Listen for changes in the switch
-toggleSwitch.addEventListener('change', function() {
-  if (this.checked) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  }
-});
-
-
+    // Inicializar variables
+    colorWheelContainer = document.getElementById('colorWheelContainer');
+    hexInput = document.getElementById('hexInput');
     
+    // Inicializar tema
+    const toggleSwitch = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
     
-    var colorWheelContainer = document.getElementById('colorWheelContainer');
-    var hexInput = document.getElementById('hexInput');
-    var currentPalettes = [];  // Store currently displayed palettes
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
 
-  
+    // Eventos del tema
+    toggleSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
     });
+
+    // Inicializar colorWheel
+    colorWheel = new iro.ColorPicker(colorWheelContainer, {
+        width: 200,
+        color: "#a2c299"
+    });
+
+    // Eventos del colorWheel
+    colorWheel.on(['color:init', 'color:change'], function(color) {
+        updateHarmonyColors(color.hexString);
+        hexInput.value = color.hexString;
+        
+        const colors = getHarmonyColors(color.hexString, document.getElementById('harmonyType').value);
+        const colorPalette = generatePaletteJSON(colors);
+        applyDynamicStyles(colorPalette);
+    });
+
+    // Eventos de los inputs
+    document.getElementById('harmonyType').addEventListener('change', function() {
+        updateHarmonyColors(colorWheel.color.hexString);
+    });
+
+    hexInput.addEventListener('input', debounceColorUpdate);
+
+    // Eventos de exportación
+    document.getElementById('exportSvgButton').addEventListener('click', exportPalettesAsSVG);
+    document.getElementById('exportJsonButton').addEventListener('click', exportPalettesAsJSON);
+
+    // Inicialización inicial
+    updateHarmonyColors(colorWheel.color.hexString);
+});
 
     function updateHarmonyColors(baseColor) {
         const harmonyType = document.getElementById('harmonyType').value;
