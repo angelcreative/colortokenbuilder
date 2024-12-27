@@ -1,12 +1,17 @@
-// Declarar variables globales
+// Variables globales
 let colorWheel;
 let colorWheelContainer;
 let hexInput;
 let currentPalettes = [];
+let debounceTimer;
 
+// Funciones de utilidad
+function getRGBValues(hex) {
+    const rgb = chroma(hex).rgb();
+    return `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
+}
 
-
-// Mover las funciones de UI fuera del DOMContentLoaded
+// Funciones de UI
 function applyDynamicStyles(colorPalette) {
     const root = document.documentElement;
 
@@ -35,7 +40,6 @@ function applyDynamicStyles(colorPalette) {
         root.style.setProperty(`--${colorName}-disabled`, palette["300"]);
     });
 
-    // Actualizar componentes UI
     updateUIComponents(colorPalette);
 }
 
@@ -88,6 +92,7 @@ function updateInputs(colorPalette) {
     }
 }
 
+
 function updateCards(colorPalette) {
     const cards = document.querySelectorAll('#uiPreview .card');
     
@@ -103,146 +108,93 @@ function updateCards(colorPalette) {
     }
 }
 
-function getRGBValues(hex) {
-    const rgb = chroma(hex).rgb();
-    return `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
+function updateHarmonyColors(baseColor) {
+    const harmonyType = document.getElementById('harmonyType').value;
+    const colors = getHarmonyColors(baseColor, harmonyType);
+    displayColors(colors);
+    updateColorIndicators(colors);
+    updateDisplayedPalettes(colors);
+    displayColorCards(colors, baseColor);
 }
 
+function getHarmonyColors(color, type) {
+    const baseColor = chroma(color);
+    const baseHue = baseColor.get('hsl.h');
+    const baseSaturation = baseColor.get('hsl.s');
+    const baseLightness = baseColor.get('hsl.l');
+    let hues;
 
-// Evento principal
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar variables
-    colorWheelContainer = document.getElementById('colorWheelContainer');
-    hexInput = document.getElementById('hexInput');
-    
-    // Inicializar tema
-    const toggleSwitch = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme');
-    
-    if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            toggleSwitch.checked = true;
-        }
+    switch (type) {
+        case 'complementary':
+            hues = [baseHue, (baseHue + 180) % 360];
+            break;
+        case 'analogous':
+            hues = [(baseHue - 30 + 360) % 360, baseHue, (baseHue + 30) % 360];
+            break;
+        case 'triadic':
+            hues = [baseHue, (baseHue + 120) % 360, (baseHue + 240) % 360];
+            break;
+        case 'square':
+            hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
+            break;
     }
 
-    // Eventos del tema
-    toggleSwitch.addEventListener('change', function() {
-        if (this.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        }
+    return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
+}
+
+function displayColors(colors) {
+    const harmonyColors = document.getElementById('harmonyColors');
+    harmonyColors.innerHTML = '';
+    colors.forEach(color => {
+        const colorDiv = document.createElement('div');
+        colorDiv.style.backgroundColor = color;
+        harmonyColors.appendChild(colorDiv);
     });
+}
 
-    // Inicializar colorWheel
-    colorWheel = new iro.ColorPicker(colorWheelContainer, {
-        width: 200,
-        color: "#a2c299"
+function updateColorIndicators(colors) {
+    colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
+
+    const wheelRadius = colorWheelContainer.offsetWidth / 2;
+    const centerX = wheelRadius;
+    const centerY = wheelRadius;
+
+    colors.forEach((color, index) => {
+        if (index === 0) return;
+
+        const hue = chroma(color).get('hsl.h');
+        const angleRadians = (hue * Math.PI / 180);
+        const indicatorX = centerX + wheelRadius * Math.cos(angleRadians);
+        const indicatorY = centerY - wheelRadius * Math.sin(angleRadians);
+
+        const indicator = document.createElement('div');
+        indicator.classList.add('colorIndicator');
+        indicator.style.position = 'absolute';
+        indicator.style.left = `${indicatorX}px`;
+        indicator.style.top = `${indicatorY}px`;
+        indicator.style.transform = 'translate(-50%, -50%)';
+        indicator.style.backgroundColor = color;
+
+        colorWheelContainer.appendChild(indicator);
     });
+}
 
-    // Eventos del colorWheel
-    colorWheel.on(['color:init', 'color:change'], function(color) {
-        updateHarmonyColors(color.hexString);
-        hexInput.value = color.hexString;
-        
-        const colors = getHarmonyColors(color.hexString, document.getElementById('harmonyType').value);
-        const colorPalette = generatePaletteJSON(colors);
-        applyDynamicStyles(colorPalette);
-    });
+function showAlert(message) {
+    const alertBox = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
 
-    // Eventos de los inputs
-    document.getElementById('harmonyType').addEventListener('change', function() {
-        updateHarmonyColors(colorWheel.color.hexString);
-    });
+    alertMessage.textContent = message;
+    alertBox.style.display = 'flex';
+    alertBox.style.flexDirection = 'column';
+    alertBox.style.alignItems = 'center';
+    alertBox.style.gap = '24px';
 
-    hexInput.addEventListener('input', debounceColorUpdate);
+    const alertOkButton = document.getElementById('alert-ok');
+    alertOkButton.onclick = function() {
+        alertBox.style.display = 'none';
+    };
+}
 
-    // Eventos de exportación
-    document.getElementById('exportSvgButton').addEventListener('click', exportPalettesAsSVG);
-    document.getElementById('exportJsonButton').addEventListener('click', exportPalettesAsJSON);
-
-    // Inicialización inicial
-    updateHarmonyColors(colorWheel.color.hexString);
-});
-
-    function updateHarmonyColors(baseColor) {
-        const harmonyType = document.getElementById('harmonyType').value;
-        const colors = getHarmonyColors(baseColor, harmonyType);
-        displayColors(colors);
-        updateColorIndicators(colors);
-        updateDisplayedPalettes(colors);
-        displayColorCards(colors, baseColor);
-    }
-
-    function getHarmonyColors(color, type) {
-        const baseColor = chroma(color);
-        const baseHue = baseColor.get('hsl.h');
-        const baseSaturation = baseColor.get('hsl.s');
-        const baseLightness = baseColor.get('hsl.l');
-        let hues;
-
-        switch (type) {
-            case 'complementary':
-                hues = [baseHue, (baseHue + 180) % 360];
-                break;
-            case 'analogous':
-                hues = [(baseHue - 30 + 360) % 360, baseHue, (baseHue + 30) % 360];
-                break;
-            case 'triadic':
-                hues = [baseHue, (baseHue + 120) % 360, (baseHue + 240) % 360];
-                break;
-            case 'square':
-                hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
-                break;
-        }
-
-        return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
-    }
-
-    function displayColors(colors) {
-        const harmonyColors = document.getElementById('harmonyColors');
-        harmonyColors.innerHTML = '';
-        colors.forEach(color => {
-            const colorDiv = document.createElement('div');
-            colorDiv.style.backgroundColor = color;
-            harmonyColors.appendChild(colorDiv);
-        });
-    }
-
-    function updateColorIndicators(colors) {
-        colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
-
-        const wheelRadius = colorWheelContainer.offsetWidth / 2;
-        const centerX = wheelRadius;
-        const centerY = wheelRadius;
-
-        colors.forEach((color, index) => {
-            if (index === 0) return;
-
-            const hue = chroma(color).get('hsl.h');
-            const angleRadians = (hue * Math.PI / 180);
-            const indicatorX = centerX + wheelRadius * Math.cos(angleRadians);
-            const indicatorY = centerY - wheelRadius * Math.sin(angleRadians);
-
-            const indicator = document.createElement('div');
-            indicator.classList.add('colorIndicator');
-            indicator.style.position = 'absolute';
-            indicator.style.left = `${indicatorX}px`;
-            indicator.style.top = `${indicatorY}px`;
-            indicator.style.transform = 'translate(-50%, -50%)';
-            indicator.style.backgroundColor = color;
-
-            colorWheelContainer.appendChild(indicator);
-        });
-    }
-
-    
-    
-    //COPY 
-/* Function to copy the color to clipboard
 function copyToClipboard(colorHex) {
     const el = document.createElement('textarea');
     el.value = colorHex;
@@ -250,89 +202,54 @@ function copyToClipboard(colorHex) {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    alert('Color ' + colorHex + ' copied to clipboard!');
-}*/
-// Function to show the custom alert
-function showAlert(message) {
-  const alertBox = document.getElementById('custom-alert');
-  const alertMessage = document.getElementById('alert-message');
-
- // Set the message in the alert box
-alertMessage.textContent = message;
-alertBox.style.display = 'flex';  // Show the alert box
-alertBox.style.flexDirection = 'column';  // Set flex direction to column
-alertBox.style.alignItems = 'center';  // Align items to stretch
-alertBox.style.gap = '24px';  // Set gap between elements
-
-
-  // Close the alert when the user clicks the button
-  const alertOkButton = document.getElementById('alert-ok');
-  alertOkButton.onclick = function() {
-    alertBox.style.display = 'none';  // Hide the alert box
-  };
+    showAlert('Color ' + colorHex + ' copied to clipboard!');
 }
 
-  // Function to copy the color to clipboard
-function copyToClipboard(colorHex) {
-  const el = document.createElement('textarea');
-  el.value = colorHex;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-  showAlert('Color ' + colorHex + ' copied to clipboard!');
-}
-    
-    function generateColorPalettes(baseColors, selectedColor) {
-        const paletteContainer = document.createElement('div');
-        paletteContainer.id = 'paletteContainer';
-       /* paletteContainer.style.display = 'flex';
-        paletteContainer.style.flexDirection = 'column';
-        paletteContainer.style.gap = '20px';
-        paletteContainer.style.width = '100%';*/
+function generateColorPalettes(baseColors, selectedColor) {
+    const paletteContainer = document.createElement('div');
+    paletteContainer.id = 'paletteContainer';
 
-        baseColors.forEach(color => {
-            let colorName = ntc.name(color)[1];
-            colorName = colorName.replace(/-color.*$/i, '').trim();
+    baseColors.forEach(color => {
+        let colorName = ntc.name(color)[1];
+        colorName = colorName.replace(/-color.*$/i, '').trim();
 
-            const palette = document.createElement('div');
-            palette.style.display = 'flex';
-            palette.style.flexDirection = 'row';
-            palette.style.gap = '10px';
-            palette.style.flexWrap = 'wrap';
+        const palette = document.createElement('div');
+        palette.style.display = 'flex';
+        palette.style.flexDirection = 'row';
+        palette.style.gap = '10px';
+        palette.style.flexWrap = 'wrap';
 
-            // Create the lightest value (50)
-            let paletteColor = chroma(color).set('hsl.l', 0.95).hex();
-            let hexColor = paletteColor.toUpperCase();
-            let card = createColorCard('50', hexColor, paletteColor, selectedColor);
+        let paletteColor = chroma(color).set('hsl.l', 0.95).hex();
+        let hexColor = paletteColor.toUpperCase();
+        let card = createColorCard('50', hexColor, paletteColor, selectedColor);
+        palette.appendChild(card);
+
+        for (let i = 1; i <= 9; i++) {
+            const lightness = 1 - (i * 0.1);
+            paletteColor = chroma(color).set('hsl.l', lightness).hex();
+            hexColor = paletteColor.toUpperCase();
+            card = createColorCard(`${i * 100}`, hexColor, paletteColor, selectedColor);
             palette.appendChild(card);
+        }
 
-            for (let i = 1; i <= 9; i++) {  // Light to dark (100 to 900)
-                const lightness = 1 - (i * 0.1);
-                paletteColor = chroma(color).set('hsl.l', lightness).hex();
-                hexColor = paletteColor.toUpperCase();
-                card = createColorCard(`${i * 100}`, hexColor, paletteColor, selectedColor);
-                palette.appendChild(card);
-            }
+        const paletteTitle = document.createElement('h4');
+        paletteTitle.textContent = colorName;
+        paletteContainer.appendChild(paletteTitle);
+        paletteContainer.appendChild(palette);
+    });
 
-            const paletteTitle = document.createElement('h4');
-            paletteTitle.textContent = colorName;
-            paletteContainer.appendChild(paletteTitle);
-            paletteContainer.appendChild(palette);
-        });
+    const colorCardsContainer = document.getElementById('colorCards');
+    colorCardsContainer.appendChild(paletteContainer);
+}
 
-        const colorCardsContainer = document.getElementById('colorCards');
-        colorCardsContainer.appendChild(paletteContainer);
-    }
-
-    function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
+function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
     const card = document.createElement('div');
     card.classList.add('colorCard', 'gradientCard');
     card.style.backgroundColor = paletteColor;
     card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
     card.style.width = '80px';
-    card.style.height = '80px'; 
-    card.style.borderRadius = '8px'; 
+    card.style.height = '80px';
+    card.style.borderRadius = '8px';
     card.style.display = 'flex';
     card.style.flexDirection = 'column';
     card.style.justifyContent = 'center';
@@ -340,12 +257,10 @@ function copyToClipboard(colorHex) {
     card.style.fontFamily = 'Arial, sans-serif';
     card.style.fontSize = '14px';
 
-    // Highlight the matching color
     if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
         card.style.border = '3px solid #000000';
     }
 
-    // Add a button to copy the hex color
     const copyButton = document.createElement('button');
     copyButton.textContent = 'Copy';
     copyButton.style.marginTop = '8px';
@@ -368,58 +283,65 @@ function copyToClipboard(colorHex) {
     return card;
 }
 
-  
-      function updateDisplayedPalettes(baseColors) {
-        const colorPalette = generatePaletteJSON(baseColors); // Genera el colorPalette
+function generatePaletteJSON(baseColors) {
+    const palettes = {};
 
-        applyDynamicStyles(colorPalette); // Aplica los estilos dinámicos utilizando el colorPalette generado
-    }
+    baseColors.forEach(color => {
+        let colorName = ntc.name(color)[1];
+        colorName = colorName.replace(/-color.*$/i, '').trim().toLowerCase().replace(/\s+/g, '-');
 
+        const palette = {};
+        const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
 
-
-    function displayColorCards(colors) {
-        const colorCardsContainer = document.getElementById('colorCards');
-        colorCardsContainer.innerHTML = '';
-
-        colors.forEach(color => {
-            const rgbColor = chroma(color).rgb();
-            const [r, g, b] = rgbColor;
-            let colorName = ntc.name(color)[1];
-
-            colorName = colorName.replace(/ Color RGB.*/, '');
-
-            const hexColor = chroma(color).hex();
-            const hslColor = chroma(color).hsl().map(value => value.toFixed(2));
-
-            const textColor = chroma(color).luminance() > 0.5 ? '#000000' : '#ffffff';
-
-            const cardDiv = document.createElement('div');
-            cardDiv.classList.add('colorCard');
-            cardDiv.style.backgroundColor = color;
-            cardDiv.style.color = textColor;
-            cardDiv.innerHTML = `
-                <p>${colorName}</p>
-                <p>RGB: ${r} ${g} ${b}</p>
-                <p>HEX: ${hexColor}</p>
-                <p>HSL: ${hslColor[0]} ${hslColor[1]} ${hslColor[2]}</p>
-            `;
-            colorCardsContainer.appendChild(cardDiv);
+        shades.forEach((shade, i) => {
+            const lightness = 1 - (i * 0.1);
+            const paletteColor = chroma(color).set('hsl.l', i === 0 ? 0.95 : lightness).hex();
+            palette[shade] = paletteColor.toLowerCase();
         });
 
-        generateColorPalettes(colors);
-        updateDisplayedPalettes(colors); // Store the currently displayed palettes
-    }
+        palettes[colorName] = palette;
+    });
 
-    function updateDisplayedPalettes(baseColors) {
-    currentPalettes = generatePaletteJSON(baseColors); // Almacenar las paletas generadas para exportación
-    
-    applyDynamicStyles(currentPalettes); // Aplicar los estilos dinámicos utilizando el colorPalette generado
+    return palettes;
 }
 
+// Evento principal
+document.addEventListener('DOMContentLoaded', function() {
+    colorWheelContainer = document.getElementById('colorWheelContainer');
+    hexInput = document.getElementById('hexInput');
+    
+    const toggleSwitch = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+    toggleSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    colorWheel = new iro.ColorPicker(colorWheelContainer, {
+        width: 200,
+        color: "#a2c299"
+    });
 
     colorWheel.on(['color:init', 'color:change'], function(color) {
         updateHarmonyColors(color.hexString);
-        hexInput.value = color.hexString; // Update the hex input field when the color changes
+        hexInput.value = color.hexString;
+        
+        const colors = getHarmonyColors(color.hexString, document.getElementById('harmonyType').value);
+        const colorPalette = generatePaletteJSON(colors);
+        applyDynamicStyles(colorPalette);
     });
 
     document.getElementById('harmonyType').addEventListener('change', function() {
@@ -428,179 +350,106 @@ function copyToClipboard(colorHex) {
 
     hexInput.addEventListener('input', function() {
         const hexValue = hexInput.value.trim();
-        if (chroma.valid(hexValue)) {
-            colorWheel.color.hexString = hexValue; // Update the color wheel's position and harmony colors
-        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            if (chroma.valid(hexValue)) {
+                colorWheel.color.hexString = hexValue;
+            }
+        }, 300);
     });
 
-    updateHarmonyColors(colorWheel.color.hexString);
-
-    // Export functions
     document.getElementById('exportSvgButton').addEventListener('click', exportPalettesAsSVG);
     document.getElementById('exportJsonButton').addEventListener('click', exportPalettesAsJSON);
 
-    function generatePaletteJSON(baseColors) {
-        const palettes = {};
-
-        baseColors.forEach(color => {
-            let colorName = ntc.name(color)[1];
-            colorName = colorName.replace(/-color.*$/i, '').trim().toLowerCase().replace(/\s+/g, '-'); // Format color name for JSON key
-
-            const palette = {};
-            const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
-
-            shades.forEach((shade, i) => {
-                const lightness = 1 - (i * 0.1);
-                const paletteColor = chroma(color).set('hsl.l', i === 0 ? 0.95 : lightness).hex();
-                palette[shade] = paletteColor.toLowerCase();
-            });
-
-            palettes[colorName] = palette;
-        });
-
-        return palettes;
-    }
-
-    function exportPalettesAsJSON() {
-        if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
-            alert("No palettes to export.");
-            return;
-        }
-
-        const jsonBlob = new Blob([JSON.stringify(currentPalettes, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(jsonBlob);
-
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "color_palettes.json";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
-    function createSVGPaletteFromCurrent() {
-        if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
-            alert("No palettes to export.");
-            return null;
-        }
-
-        const svgNS = "http://www.w3.org/2000/svg"; 
-        const svg = document.createElementNS(svgNS, "svg");
-        const totalHeight = Object.keys(currentPalettes).length * 120 + 20; // Calculate height based on number of palettes
-        svg.setAttribute("width", "810");
-        svg.setAttribute("height", `${totalHeight}`);
-
-        Object.keys(currentPalettes).forEach((colorName, index) => {
-            const palette = currentPalettes[colorName];
-
-            // Create a group element for each color's palette
-            const group = document.createElementNS(svgNS, "g");
-            group.setAttribute("transform", `translate(0, ${index * 120 + 20})`);
-
-            // Add the color name as a text element
-            const text = document.createElementNS(svgNS, "text");
-            text.setAttribute("x", "10");
-            text.setAttribute("y", "30");
-            text.setAttribute("font-size", "20");
-            text.setAttribute("font-family", "Arial");
-            text.textContent = colorName.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-            group.appendChild(text);
-
-            // Create rectangles for the color shades
-            Object.keys(palette).forEach((shade, i) => {
-                const rect = document.createElementNS(svgNS, "rect");
-                rect.setAttribute("x", `${80 * i + 10}`);
-                rect.setAttribute("y", "40");
-                rect.setAttribute("width", "70");
-                rect.setAttribute("height", "70");
-                rect.setAttribute("fill", palette[shade]);
-                group.appendChild(rect);
-
-                // Add the shade number as a text element on each rectangle
-                const shadeText = document.createElementNS(svgNS, "text");
-                shadeText.setAttribute("x", `${80 * i + 45}`);
-                shadeText.setAttribute("y", "90");
-                shadeText.setAttribute("font-size", "14");
-                shadeText.setAttribute("font-family", "Arial");
-                shadeText.setAttribute("text-anchor", "middle");
-                shadeText.setAttribute("fill", chroma(palette[shade]).luminance() > 0.5 ? '#333' : '#fff');
-                shadeText.textContent = shade;
-                group.appendChild(shadeText);
-            });
-
-            svg.appendChild(group);
-        });
-
-        return svg;
-    }
-
-    function exportPalettesAsSVG() {
-        const svg = createSVGPaletteFromCurrent();
-        if (!svg) return;
-
-        const serializer = new XMLSerializer();
-        const svgString = serializer.serializeToString(svg);
-
-        const svgBlob = new Blob([svgString], { type: "image/svg+xml" });
-        const url = URL.createObjectURL(svgBlob);
-
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "color_palettes.svg";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
-
-let debounceTimer;
-
-hexInput.addEventListener('input', function () {
-    const hexValue = hexInput.value.trim();
-
-    // Clear previous debounce timer if still running
-    clearTimeout(debounceTimer);
-
-    // Set a debounce timer to update the color after a delay
-    debounceTimer = setTimeout(() => {
-        if (chroma.valid(hexValue)) {
-            colorWheel.color.hexString = hexValue; // Update the color wheel
-        }
-    }, 300); // Delay in milliseconds (300ms)
-});
-    
-    
-    
-    
-  // Mover la inicialización del colorWheel aquí
-    colorWheel = new iro.ColorPicker(colorWheelContainer, {
-        width: 200,
-        color: "#a2c299"
-    });
-
-    // Mover el evento on aquí también
-    colorWheel.on(['color:init', 'color:change'], function(color) {
-        updateHarmonyColors(color.hexString);
-        hexInput.value = color.hexString;
-        
-        // Actualizar la previsualización UI cuando cambie el color
-        const colors = getHarmonyColors(color.hexString, document.getElementById('harmonyType').value);
-        const colorPalette = generatePaletteJSON(colors);
-        applyDynamicStyles(colorPalette);
-    });
-
-    // Inicializar los colores
-    updateHarmonyColors(colorWheel.color.hexString);  
-
-    
+    updateHarmonyColors(colorWheel.color.hexString);
 });
 
 
+function exportPalettesAsJSON() {
+    if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
+        alert("No palettes to export.");
+        return;
+    }
 
+    const jsonBlob = new Blob([JSON.stringify(currentPalettes, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(jsonBlob);
 
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "color_palettes.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
 
+function createSVGPaletteFromCurrent() {
+    if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
+        alert("No palettes to export.");
+        return null;
+    }
 
+    const svgNS = "http://www.w3.org/2000/svg"; 
+    const svg = document.createElementNS(svgNS, "svg");
+    const totalHeight = Object.keys(currentPalettes).length * 120 + 20;
+    svg.setAttribute("width", "810");
+    svg.setAttribute("height", `${totalHeight}`);
 
+    Object.keys(currentPalettes).forEach((colorName, index) => {
+        const palette = currentPalettes[colorName];
 
+        const group = document.createElementNS(svgNS, "g");
+        group.setAttribute("transform", `translate(0, ${index * 120 + 20})`);
+
+        const text = document.createElementNS(svgNS, "text");
+        text.setAttribute("x", "10");
+        text.setAttribute("y", "30");
+        text.setAttribute("font-size", "20");
+        text.setAttribute("font-family", "Arial");
+        text.textContent = colorName.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+        group.appendChild(text);
+
+        Object.keys(palette).forEach((shade, i) => {
+            const rect = document.createElementNS(svgNS, "rect");
+            rect.setAttribute("x", `${80 * i + 10}`);
+            rect.setAttribute("y", "40");
+            rect.setAttribute("width", "70");
+            rect.setAttribute("height", "70");
+            rect.setAttribute("fill", palette[shade]);
+            group.appendChild(rect);
+
+            const shadeText = document.createElementNS(svgNS, "text");
+            shadeText.setAttribute("x", `${80 * i + 45}`);
+            shadeText.setAttribute("y", "90");
+            shadeText.setAttribute("font-size", "14");
+            shadeText.setAttribute("font-family", "Arial");
+            shadeText.setAttribute("text-anchor", "middle");
+            shadeText.setAttribute("fill", chroma(palette[shade]).luminance() > 0.5 ? '#333' : '#fff');
+            shadeText.textContent = shade;
+            group.appendChild(shadeText);
+        });
+
+        svg.appendChild(group);
+    });
+
+    return svg;
+}
+
+function exportPalettesAsSVG() {
+    const svg = createSVGPaletteFromCurrent();
+    if (!svg) return;
+
+    const serializer = new XMLSerializer();
+    const svgString = serializer.serializeToString(svg);
+
+    const svgBlob = new Blob([svgString], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(svgBlob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "color_palettes.svg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
