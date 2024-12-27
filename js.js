@@ -485,3 +485,4 @@ function applyDynamicStyles(colorPalette) {
 }
 
 
+
