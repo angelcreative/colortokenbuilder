@@ -376,6 +376,44 @@ textarea {
 
 /*end reset =================================== 🔴 */
 
+
+
+/* new css for tailwind ======================= 🐒 */
+
+
+/* Agregar al inicio del archivo, después del reset */
+
+:root {
+  /* Variables de color base */
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-tertiary: #808080;
+  --color-quaternary: #404040;
+
+  /* Variables para fondos con opacidad */
+  --background-color-1: rgba(var(--color-primary-rgb), 1);
+  --background-color-1-50: rgba(var(--color-primary-rgb), 0.5);
+  --background-color-1-100: rgba(var(--color-primary-rgb), 0.1);
+  
+  --background-color-2: rgba(var(--color-secondary-rgb), 1);
+  --background-color-2-50: rgba(var(--color-secondary-rgb), 0.5);
+  --background-color-2-100: rgba(var(--color-secondary-rgb), 0.1);
+  
+  /* Variables para botones */
+  --button-primary: var(--color-primary);
+  --button-secondary: var(--color-secondary);
+  
+  /* Variables para estados */
+  --hover-opacity: 0.8;
+  --disabled-opacity: 0.5;
+}
+
+
+
+
+
+/* end css for tailwind */
+
 html {
     background: #f7f7f7;
 }
@@ -2053,6 +2091,71 @@ font-size: 1.4rem;
 }
 
 
+
+
+
+/*update */
+/* Actualizar los selectores existentes para usar las nuevas variables */
+.custom-card-primary {
+    background-color: var(--background-color-1);
+    color: var(--color-secondary);
+}
+
+.custom-card-secondary {
+    background-color: var(--background-color-2);
+    color: var(--color-primary);
+}
+
+/* Agregar nuevos estilos para los componentes UI */
+.ui-preview {
+    padding: 2rem;
+    border-radius: 12px;
+    background: var(--background-color-1-50);
+    margin: 2rem 0;
+}
+
+.color-preview {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.color-swatch {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+}
+
+/* Actualizar los botones existentes */
+.primary-button {
+    background-color: var(--button-primary);
+    color: var(--color-secondary);
+}
+
+
+.secondary-button {
+    background-color: var(--button-secondary);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+/* Actualizar inputs */
+.input-field {
+    border-color: var(--color-primary);
+    background-color: var(--background-color-1-50);
+    color: var(--color-primary);
+}
+
+/* Actualizar los componentes de la tarjeta */
+.custom-card {
+    border-color: var(--color-primary);
+    background-color: var(--background-color-1-50);
+}
 
 
 /*======================================___=========================================RESPONSIVE 🔴*/
