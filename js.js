@@ -1,3 +1,6 @@
+// Declarar colorWheel en el scope global
+let colorWheel;
+
 document.addEventListener('DOMContentLoaded', function() {
 
 const toggleSwitch = document.getElementById('theme-toggle');
@@ -443,11 +446,10 @@ hexInput.addEventListener('input', function () {
 });
 
 
-
+// Mover las funciones de UI fuera del DOMContentLoaded
 function applyDynamicStyles(colorPalette) {
     const root = document.documentElement;
 
-    // Convertir los colores RGB a variables CSS con opacidad
     function getRGBValues(hex) {
         const rgb = chroma(hex).rgb();
         return `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
@@ -462,79 +464,91 @@ function applyDynamicStyles(colorPalette) {
         // Establecer variables RGB para usar con opacidad
         root.style.setProperty(`--${colorName}-rgb`, getRGBValues(palette["500"]));
         
-        // Establecer variables de color existentes
+        // Establecer variables de color
         root.style.setProperty(`--background-${colorName}-50`, palette["50"]);
         root.style.setProperty(`--background-${colorName}-100`, palette["100"]);
         root.style.setProperty(`--color-${colorName}`, palette["800"]);
         root.style.setProperty(`--button-${colorName}`, palette["600"]);
 
-        // Agregar variables para estados de hover y disabled
+        // Variables para estados
         root.style.setProperty(`--${colorName}-hover`, palette["700"]);
         root.style.setProperty(`--${colorName}-disabled`, palette["300"]);
     });
 
-    // Actualizar los componentes UI
+    // Actualizar componentes UI
     updateUIComponents(colorPalette);
 }
 
-
-
-// Agregar nueva función para actualizar componentes UI
 function updateUIComponents(colorPalette) {
-    // Actualizar botones
     updateButtons(colorPalette);
-    
-    // Actualizar inputs
     updateInputs(colorPalette);
-    
-    // Actualizar cards
     updateCards(colorPalette);
 }
 
 function updateButtons(colorPalette) {
-    const primaryButtons = document.querySelectorAll('.primary-button');
-    const secondaryButtons = document.querySelectorAll('.secondary-button');
+    const primaryButtons = document.querySelectorAll('#uiPreview .primary-button');
+    const secondaryButtons = document.querySelectorAll('#uiPreview .secondary-button');
+    const tertiaryButtons = document.querySelectorAll('#uiPreview .tertiary-button');
     
-    primaryButtons.forEach(button => {
-        button.style.backgroundColor = colorPalette[Object.keys(colorPalette)[0]]["600"];
-        button.style.color = colorPalette[Object.keys(colorPalette)[0]]["50"];
-    });
-    
-    secondaryButtons.forEach(button => {
-        button.style.backgroundColor = 'transparent';
-        button.style.color = colorPalette[Object.keys(colorPalette)[0]]["600"];
-        button.style.border = `2px solid ${colorPalette[Object.keys(colorPalette)[0]]["600"]}`;
-    });
+    if (Object.keys(colorPalette).length > 0) {
+        const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
+        const secondaryColor = colorPalette[Object.keys(colorPalette)[1]] || primaryColor;
+        
+        primaryButtons.forEach(button => {
+            button.style.backgroundColor = primaryColor["600"];
+            button.style.color = primaryColor["50"];
+        });
+        
+        secondaryButtons.forEach(button => {
+            button.style.backgroundColor = 'transparent';
+            button.style.color = secondaryColor["600"];
+            button.style.border = `2px solid ${secondaryColor["600"]}`;
+        });
+
+        tertiaryButtons.forEach(button => {
+            button.style.backgroundColor = 'transparent';
+            button.style.color = primaryColor["600"];
+            button.style.border = `1px solid ${primaryColor["200"]}`;
+        });
+    }
 }
 
 function updateInputs(colorPalette) {
-    const inputs = document.querySelectorAll('.input-field');
-    const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
+    const inputs = document.querySelectorAll('#uiPreview .input-field');
     
-    inputs.forEach(input => {
-        input.style.borderColor = primaryColor["200"];
-        input.style.backgroundColor = primaryColor["50"];
-        input.style.color = primaryColor["900"];
+    if (Object.keys(colorPalette).length > 0) {
+        const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
         
-        // Actualizar placeholder
-        input.style.setProperty('--placeholder-color', primaryColor["400"]);
-    });
+        inputs.forEach(input => {
+            input.style.borderColor = primaryColor["200"];
+            input.style.backgroundColor = primaryColor["50"];
+            input.style.color = primaryColor["900"];
+            input.style.setProperty('--placeholder-color', primaryColor["400"]);
+        });
+    }
 }
 
 function updateCards(colorPalette) {
-    const cards = document.querySelectorAll('.custom-card');
-    const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
-    const secondaryColor = colorPalette[Object.keys(colorPalette)[1]] || primaryColor;
+    const cards = document.querySelectorAll('#uiPreview .card');
     
-    cards.forEach(card => {
-        card.style.backgroundColor = primaryColor["50"];
-        card.style.borderColor = primaryColor["200"];
-        card.style.color = primaryColor["900"];
+    if (Object.keys(colorPalette).length > 0) {
+        const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
         
-        // Actualizar sombras
-        card.style.boxShadow = `0 4px 6px rgba(${getRGBValues(primaryColor["900"])}, 0.1)`;
-    });
+        cards.forEach(card => {
+            card.style.backgroundColor = primaryColor["50"];
+            card.style.borderColor = primaryColor["200"];
+            card.style.color = primaryColor["900"];
+            card.style.boxShadow = `0 4px 6px rgba(${getRGBValues(primaryColor["900"])}, 0.1)`;
+        });
+    }
 }
+
+function getRGBValues(hex) {
+    const rgb = chroma(hex).rgb();
+    return `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
+}
+
+
 
 // Agregar evento para actualizar la previsualización cuando cambie el color
 colorWheel.on(['color:init', 'color:change'], function(color) {
@@ -546,5 +560,10 @@ colorWheel.on(['color:init', 'color:change'], function(color) {
     const colorPalette = generatePaletteJSON(colors);
     applyDynamicStyles(colorPalette);
 });
+
+
+
+
+
 
 
