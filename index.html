@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="css.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
+  <script src="https://cdn.tailwindcss.com"></script>
     <meta name="description" content="ColorToken allows you to generate, customize, and export color tokens from palettes in SVG and JSON formats. Easily copy tokens for seamless integration into your design projects.">
     
     <!-- Open Graph / Facebook -->
@@ -23,7 +23,8 @@
     <meta property="twitter:description" content="Easily generate, customize, and export color tokens in SVG and JSON formats. Integrate tokens into your projects seamlessly.">
     <meta property="twitter:image" content="https://i.postimg.cc/cHdNk3Kx/Captura-de-pantalla-2024-09-03-a-las-20-46-55.png">
 
-
+    <!-- Tailwind --> 
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -65,7 +66,71 @@ content_copy
  
   
   
-    <h1 style="margin:40px;font-size: 2rem;text-align:center;">UI demos</h1>     
+    <h1 style="margin:40px;font-size: 2rem;text-align:center;">UI demos</h1>  
+
+
+<!-- new section -->
+
+<!-- Agregar esta nueva sección -->
+<div id="uiPreview" class="mt-8">
+    <h2 class="text-2xl font-bold text-center mb-8">UI Components Preview</h2>
+    
+    <!-- Contenedor de Botones -->
+    <div class="space-y-4 mb-8">
+        <h3 class="text-xl font-semibold mb-4">Buttons</h3>
+        <div class="flex flex-wrap gap-4">
+            <button id="primaryBtn" class="px-4 py-2 rounded-md">
+                Primary Button
+            </button>
+            <button id="secondaryBtn" class="px-4 py-2 rounded-md border-2">
+                Secondary Button
+            </button>
+            <button id="tertiaryBtn" class="px-4 py-2">
+                Tertiary Button
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor de Inputs -->
+    <div class="space-y-4 mb-8">
+        <h3 class="text-xl font-semibold mb-4">Input Fields</h3>
+        <input type="text" 
+               id="primaryInput"
+               class="w-full max-w-md px-4 py-2 rounded-md border-2"
+               placeholder="Enter text here...">
+    </div>
+
+    <!-- Contenedor de Cards -->
+    <div class="space-y-4 mb-8">
+        <h3 class="text-xl font-semibold mb-4">Cards</h3>
+        <div class="flex flex-wrap gap-8">
+            <!-- Card con imagen -->
+            <div id="imageCard" class="w-full max-w-sm rounded-lg overflow-hidden shadow-lg">
+                <div class="h-48 bg-gray-200"></div>
+                <div class="p-6">
+                    <h4 class="text-xl font-bold mb-2">Card Title</h4>
+                    <p class="text-gray-600 mb-4">Card description goes here. This is a sample text.</p>
+                    <button class="px-4 py-2 rounded-md">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Card sin imagen -->
+            <div id="textCard" class="w-full max-w-sm rounded-lg overflow-hidden shadow-lg p-6">
+                <h4 class="text-xl font-bold mb-2">Simple Card</h4>
+                <p class="text-gray-600 mb-4">A simpler card version with just text content.</p>
+                <div class="flex gap-3">
+                    <button class="px-4 py-2 rounded-md">Action</button>
+                    <button class="px-4 py-2 rounded-md border-2">Secondary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//new section -->
+
+
+	
   
 
 <div id="dynamicColorPalette" class="color-palette">
