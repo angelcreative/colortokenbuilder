@@ -447,42 +447,104 @@ hexInput.addEventListener('input', function () {
 function applyDynamicStyles(colorPalette) {
     const root = document.documentElement;
 
+    // Convertir los colores RGB a variables CSS con opacidad
+    function getRGBValues(hex) {
+        const rgb = chroma(hex).rgb();
+        return `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`;
+    }
+
     Object.keys(colorPalette).forEach((colorKey, index) => {
-        if (index >= 4) return;  // Solo aplica un máximo de 4 colores
+        if (index >= 4) return;
 
         const palette = colorPalette[colorKey];
-        const colorName = `color-${index + 1}`; // Crear un nombre dinámico basado en el índice
+        const colorName = `color-${index + 1}`;
 
-        // Asigna las variables CSS dinámicamente
+        // Establecer variables RGB para usar con opacidad
+        root.style.setProperty(`--${colorName}-rgb`, getRGBValues(palette["500"]));
+        
+        // Establecer variables de color existentes
         root.style.setProperty(`--background-${colorName}-50`, palette["50"]);
         root.style.setProperty(`--background-${colorName}-100`, palette["100"]);
         root.style.setProperty(`--color-${colorName}`, palette["800"]);
         root.style.setProperty(`--button-${colorName}`, palette["600"]);
 
-        // Log para verificar que las variables están siendo asignadas
-        console.log(`--background-${colorName}-50: ${palette["50"]}`);
-        console.log(`--background-${colorName}-100: ${palette["100"]}`);
-        console.log(`--color-${colorName}: ${palette["800"]}`);
-        console.log(`--button-${colorName}: ${palette["600"]}`);
+        // Agregar variables para estados de hover y disabled
+        root.style.setProperty(`--${colorName}-hover`, palette["700"]);
+        root.style.setProperty(`--${colorName}-disabled`, palette["300"]);
     });
 
-    // Asignar las variables CSS estáticas a las dinámicas usando las variables con el valor de "50"
-    root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
-    root.style.setProperty('--color-primary', 'var(--color-color-1)');
-    root.style.setProperty('--button-primary', 'var(--button-color-1)');
-
-    root.style.setProperty('--background-secondary', 'var(--background-color-2-50)');
-    root.style.setProperty('--color-secondary', 'var(--color-color-2)');
-    root.style.setProperty('--button-secondary', 'var(--button-color-2)');
-
-    root.style.setProperty('--background-tertiary', 'var(--background-color-3-50)');
-    root.style.setProperty('--color-tertiary', 'var(--color-color-3)');
-    root.style.setProperty('--button-tertiary', 'var(--button-color-3)');
-
-    root.style.setProperty('--background-quaternary', 'var(--background-color-4-50)');
-    root.style.setProperty('--color-quaternary', 'var(--color-color-4)');
-    root.style.setProperty('--button-quaternary', 'var(--button-color-4)');
+    // Actualizar los componentes UI
+    updateUIComponents(colorPalette);
 }
 
+
+
+// Agregar nueva función para actualizar componentes UI
+function updateUIComponents(colorPalette) {
+    // Actualizar botones
+    updateButtons(colorPalette);
+    
+    // Actualizar inputs
+    updateInputs(colorPalette);
+    
+    // Actualizar cards
+    updateCards(colorPalette);
+}
+
+function updateButtons(colorPalette) {
+    const primaryButtons = document.querySelectorAll('.primary-button');
+    const secondaryButtons = document.querySelectorAll('.secondary-button');
+    
+    primaryButtons.forEach(button => {
+        button.style.backgroundColor = colorPalette[Object.keys(colorPalette)[0]]["600"];
+        button.style.color = colorPalette[Object.keys(colorPalette)[0]]["50"];
+    });
+    
+    secondaryButtons.forEach(button => {
+        button.style.backgroundColor = 'transparent';
+        button.style.color = colorPalette[Object.keys(colorPalette)[0]]["600"];
+        button.style.border = `2px solid ${colorPalette[Object.keys(colorPalette)[0]]["600"]}`;
+    });
+}
+
+function updateInputs(colorPalette) {
+    const inputs = document.querySelectorAll('.input-field');
+    const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
+    
+    inputs.forEach(input => {
+        input.style.borderColor = primaryColor["200"];
+        input.style.backgroundColor = primaryColor["50"];
+        input.style.color = primaryColor["900"];
+        
+        // Actualizar placeholder
+        input.style.setProperty('--placeholder-color', primaryColor["400"]);
+    });
+}
+
+function updateCards(colorPalette) {
+    const cards = document.querySelectorAll('.custom-card');
+    const primaryColor = colorPalette[Object.keys(colorPalette)[0]];
+    const secondaryColor = colorPalette[Object.keys(colorPalette)[1]] || primaryColor;
+    
+    cards.forEach(card => {
+        card.style.backgroundColor = primaryColor["50"];
+        card.style.borderColor = primaryColor["200"];
+        card.style.color = primaryColor["900"];
+        
+        // Actualizar sombras
+        card.style.boxShadow = `0 4px 6px rgba(${getRGBValues(primaryColor["900"])}, 0.1)`;
+    });
+}
+
+// Agregar evento para actualizar la previsualización cuando cambie el color
+colorWheel.on(['color:init', 'color:change'], function(color) {
+    updateHarmonyColors(color.hexString);
+    hexInput.value = color.hexString;
+    
+    // Actualizar la previsualización UI cuando cambie el color
+    const colors = getHarmonyColors(color.hexString, document.getElementById('harmonyType').value);
+    const colorPalette = generatePaletteJSON(colors);
+    applyDynamicStyles(colorPalette);
+});
 
 
