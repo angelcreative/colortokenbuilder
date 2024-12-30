@@ -527,19 +527,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Cascade Dropdown
-    document.querySelectorAll('.ui-cascade-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const submenu = item.querySelector('.ui-cascade-submenu');
-            if (submenu) {
-                submenu.style.display = 'block';
-            }
+    document.querySelectorAll('.ui-cascade-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = button.nextElementSibling;
+            const isOpen = menu.style.display === 'block';
+            
+            // Cerrar todos los menús primero
+            document.querySelectorAll('.ui-cascade-menu, .ui-cascade-submenu').forEach(m => {
+                m.style.display = 'none';
+            });
+
+            // Abrir/cerrar el menú actual
+            menu.style.display = isOpen ? 'none' : 'block';
         });
-        
-        item.addEventListener('mouseleave', () => {
-            const submenu = item.querySelector('.ui-cascade-submenu');
-            if (submenu) {
+    });
+
+    document.querySelectorAll('.ui-cascade-item').forEach(item => {
+        const submenu = item.querySelector('.ui-cascade-submenu');
+        if (submenu) {
+            item.addEventListener('mouseenter', () => {
+                submenu.style.display = 'block';
+            });
+            
+            item.addEventListener('mouseleave', () => {
                 submenu.style.display = 'none';
-            }
+            });
+        }
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.ui-cascade-menu, .ui-cascade-submenu').forEach(menu => {
+            menu.style.display = 'none';
         });
     });
     
