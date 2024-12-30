@@ -159,19 +159,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const color = chroma(selectedColor);
             const hue = color.get('hsl.h');
             const saturation = color.get('hsl.s');
-            
-            // Ajustar la luminancia para cada nivel y devolver objetos chroma
+            const lightness = color.get('hsl.l');
+
+            // Calcular incrementos de luminosidad más suaves
             return {
-                '50': chroma.hsl(hue, Math.max(0, saturation - 0.4), 0.97).hex(),
-                '100': chroma.hsl(hue, Math.max(0, saturation - 0.3), 0.94).hex(),
-                '200': chroma.hsl(hue, Math.max(0, saturation - 0.2), 0.88).hex(),
-                '300': chroma.hsl(hue, Math.max(0, saturation - 0.1), 0.80).hex(),
-                '400': chroma.hsl(hue, saturation, 0.72).hex(),
-                '500': chroma.hsl(hue, saturation, 0.64).hex(),
-                '600': selectedColor, // Color seleccionado
-                '700': chroma.hsl(hue, Math.min(1, saturation + 0.05), 0.48).hex(),
-                '800': chroma.hsl(hue, Math.min(1, saturation + 0.1), 0.36).hex(),
-                '900': chroma.hsl(hue, Math.min(1, saturation + 0.15), 0.24).hex()
+                // Del 50 al 500 (más claros que el color seleccionado)
+                '50':  chroma.hsl(hue, Math.max(0.1, saturation * 0.3), 0.97).hex(),
+                '100': chroma.hsl(hue, Math.max(0.15, saturation * 0.4), 0.94).hex(),
+                '200': chroma.hsl(hue, Math.max(0.2, saturation * 0.5), 0.88).hex(),
+                '300': chroma.hsl(hue, Math.max(0.3, saturation * 0.6), 0.82).hex(),
+                '400': chroma.hsl(hue, Math.max(0.4, saturation * 0.7), 0.76).hex(),
+                '500': chroma.hsl(hue, Math.max(0.5, saturation * 0.8), 0.70).hex(),
+                
+                // Color seleccionado
+                '600': selectedColor,
+                
+                // Del 700 al 900 (más oscuros que el color seleccionado)
+                '700': chroma.hsl(hue, Math.min(1, saturation * 1.1), Math.max(0.25, lightness * 0.85)).hex(),
+                '800': chroma.hsl(hue, Math.min(1, saturation * 1.2), Math.max(0.2, lightness * 0.68)).hex(),
+                '900': chroma.hsl(hue, Math.min(1, saturation * 1.3), Math.max(0.15, lightness * 0.5)).hex()
             };
         }
     
