@@ -159,25 +159,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const color = chroma(selectedColor);
             const hue = color.get('hsl.h');
             const saturation = color.get('hsl.s');
-            const lightness = color.get('hsl.l');
 
-            // Calcular incrementos de luminosidad más suaves
+            // Crear una escala más suave usando luminancia
             return {
-                // Del 50 al 500 (más claros que el color seleccionado)
-                '50':  chroma.hsl(hue, Math.max(0.1, saturation * 0.3), 0.97).hex(),
-                '100': chroma.hsl(hue, Math.max(0.15, saturation * 0.4), 0.94).hex(),
-                '200': chroma.hsl(hue, Math.max(0.2, saturation * 0.5), 0.88).hex(),
-                '300': chroma.hsl(hue, Math.max(0.3, saturation * 0.6), 0.82).hex(),
-                '400': chroma.hsl(hue, Math.max(0.4, saturation * 0.7), 0.76).hex(),
-                '500': chroma.hsl(hue, Math.max(0.5, saturation * 0.8), 0.70).hex(),
-                
+                // Colores más claros (50-500)
+                '50':  chroma.hsl(hue, Math.min(0.85, saturation), 0.97).hex(),
+                '100': chroma.hsl(hue, Math.min(0.85, saturation), 0.92).hex(),
+                '200': chroma.hsl(hue, Math.min(0.85, saturation), 0.85).hex(),
+                '300': chroma.hsl(hue, saturation, 0.78).hex(),
+                '400': chroma.hsl(hue, saturation, 0.71).hex(),
+                '500': chroma.hsl(hue, saturation, 0.64).hex(),
                 // Color seleccionado
                 '600': selectedColor,
-                
-                // Del 700 al 900 (más oscuros que el color seleccionado)
-                '700': chroma.hsl(hue, Math.min(1, saturation * 1.1), Math.max(0.25, lightness * 0.85)).hex(),
-                '800': chroma.hsl(hue, Math.min(1, saturation * 1.2), Math.max(0.2, lightness * 0.68)).hex(),
-                '900': chroma.hsl(hue, Math.min(1, saturation * 1.3), Math.max(0.15, lightness * 0.5)).hex()
+                // Colores más oscuros (700-900)
+                '700': chroma(selectedColor).darken(0.7).hex(),
+                '800': chroma(selectedColor).darken(1.4).hex(),
+                '900': chroma(selectedColor).darken(2.1).hex()
             };
         }
     
@@ -351,10 +348,35 @@ document.addEventListener('DOMContentLoaded', function() {
             updateHarmonyColors(colorWheel.color.hexString);
         });
     
-        hexInput.addEventListener('input', function() {
-            const hexValue = hexInput.value.trim();
-            if (chroma.valid(hexValue)) {
-                colorWheel.color.hexString = hexValue; // Update the color wheel's position and harmony colors
+        hexInput.addEventListener('input', function(e) {
+            const hexValue = this.value.trim();
+            
+            // Permitir pegar y editar
+            if (e.inputType === 'insertFromPaste') {
+                setTimeout(() => {
+                    if (chroma.valid(hexValue)) {
+                        colorWheel.color.hexString = hexValue;
+                        this.value = hexValue;
+                    }
+                }, 0);
+                return;
+            }
+
+            // Validar entrada manual
+            if (hexValue.length === 7 && chroma.valid(hexValue)) {
+                colorWheel.color.hexString = hexValue;
+            }
+        });
+
+        // Agregar evento de pegado específico
+        hexInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const cleanHex = pastedText.trim();
+            
+            if (chroma.valid(cleanHex)) {
+                this.value = cleanHex;
+                colorWheel.color.hexString = cleanHex;
             }
         });
     
