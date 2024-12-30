@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crear cards para cada shade
                 Object.entries(scale).forEach(([shade, shadeColor]) => {
-                    let hexColor = shade === '600' ? color : shadeColor.hex();
+                    let hexColor = shade === '600' ? color : shadeColor;
                     let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, selectedColor);
                     palette.appendChild(card);
                 });
