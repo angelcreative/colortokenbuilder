@@ -2348,7 +2348,8 @@ font-size: 1.4rem;
 /* UI Components Section */
 .ui-components {
     padding: 2rem;
-    font-family: system-ui;
+    background: var(--color-primary-50);
+    border-radius: 16px;
 }
 
 .component-group {
@@ -2374,18 +2375,18 @@ font-size: 1.4rem;
 
 /* Buttons */
 .ui-button {
-    padding: 0.75rem 1.5rem;
+    padding: 12px 24px;
     border-radius: 8px;
-    border: none;
     font-weight: 500;
-    cursor: pointer;
+    font-size: 14px;
     transition: all 0.2s ease;
 }
 
 /* Primary Button */
 .ui-button.primary {
     background: var(--color-primary-600);
-    color: var(--color-primary-50);
+    color: white;
+    border: none;
 }
 
 .ui-button.primary:hover {
@@ -2400,160 +2401,213 @@ font-size: 1.4rem;
 .ui-button.secondary {
     background: var(--color-primary-200);
     color: var(--color-primary-700);
-    box-shadow: 0 2px 4px var(--color-primary-100);
+    border: none;
 }
 
 .ui-button.secondary:hover {
-    background: var(--color-primary-500);
-    color: var(--color-primary-50);
+    background: var(--color-primary-100);
 }
 
 .ui-button.secondary:active {
-    background: var(--color-primary-700);
-    color: white;
+    background: var(--color-primary-300);
 }
 
 /* Tertiary Button (Link) */
 .ui-button.tertiary {
     background: transparent;
     color: var(--color-primary-700);
+    padding: 0;
+    border: none;
 }
 
 .ui-button.tertiary:hover {
     color: var(--color-primary-500);
-}
-
-.ui-button.tertiary:active {
-    color: var(--color-primary-700);
-}
-
-/* Contrast Button */
-.ui-button.contrast {
-    background: var(--button-color-2);
-    color: var(--background-color-2-50);
-}
-
-.ui-button.contrast:hover {
-    background: var(--background-color-2-500);
-}
-
-.ui-button.contrast:active {
-    background: var(--background-color-2-700);
-}
-
-/* Form Controls Base Styles */
-.form-control-base {
-    --primary-600: var(--button-color-1); /* Color base - Norway 600 */
-    --primary-700: #426039; /* Norway 700 para estados pressed */
-    --primary-500: #8BB37F; /* Norway 500 para estados hover */
-    --primary-200: #C5D9BF; /* Norway 200 para secondary button */
-    --primary-100: var(--background-color-1-100); /* Norway 100 para backgrounds suaves */
-    --primary-50: var(--background-color-1-50); /* Norway 50 para backgrounds muy suaves */
-}
-
-/* Primary Button - Usando el color 600 como base */
-.ui-button.primary {
-    background: var(--color-primary-600);
-    color: var(--color-primary-50);
-}
-
-.ui-button.primary:hover {
-    background: var(--color-primary-500);
-}
-
-.ui-button.primary:active {
-    background: var(--color-primary-700);
-}
-
-/* Secondary Button - Usando el color 200 como base */
-.ui-button.secondary {
-    background: var(--color-primary-200);
-    color: var(--color-primary-700);
-    box-shadow: 0 2px 4px var(--color-primary-100);
-}
-
-.ui-button.secondary:hover {
-    background: var(--color-primary-500);
-    color: var(--color-primary-50);
-}
-
-.ui-button.secondary:active {
-    background: var(--color-primary-700);
-    color: white;
-}
-
-/* Tertiary Button - Transparente con color 700 */
-.ui-button.tertiary {
-    background: transparent;
-    color: var(--color-primary-700);
-}
-
-.ui-button.tertiary:hover {
-    color: var(--color-primary-500);
-}
-
-.ui-button.tertiary:active {
-    color: var(--color-primary-700);
+    text-decoration: underline;
 }
 
 /* Form Controls */
-.ui-input, .ui-select {
-    border: 2px solid var(--color-primary-600);
+.ui-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ui-input-group label {
+    color: var(--color-primary-700);
+    font-size: 14px;
+}
+
+.ui-input {
+    padding: 12px;
+    border: 2px solid var(--color-primary-200);
+    border-radius: 8px;
+    background: white;
     color: var(--color-primary-700);
 }
 
-.ui-input:focus, .ui-select:focus {
-    border-color: var(--color-primary-500);
+.ui-input:focus {
+    border-color: var(--color-primary-600);
+    outline: none;
 }
 
-/* Dropdown y Cascading Menu */
-.ui-dropdown-menu, .ui-cascade-menu {
-    border: 2px solid var(--color-primary-600);
+/* Custom Select */
+.ui-select-wrapper {
+    position: relative;
 }
 
-.ui-dropdown-item:hover, .ui-cascade-item:hover {
-    background: var(--color-primary-100);
-    color: var(--color-primary-700);
+.ui-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--color-primary-200);
+    border-radius: 8px;
+    background: white;
+    appearance: none;
+    cursor: pointer;
 }
 
-/* Checkbox y Radio */
-.ui-checkbox .checkmark, .ui-radio .radiomark {
-    border: 2px solid var(--color-primary-600);
+.ui-select-wrapper::after {
+    content: "▾";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-primary-600);
+    pointer-events: none;
+}
+
+/* Dropdown */
+.ui-dropdown {
+    position: relative;
+}
+
+.ui-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: white;
+    border: 1px solid var(--color-primary-200);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.ui-dropdown-item {
+    padding: 12px;
+    cursor: pointer;
+}
+
+.ui-dropdown-item:hover {
+    background: var(--color-primary-50);
+}
+
+/* Checkbox */
+.ui-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary-200);
+    border-radius: 4px;
+    position: relative;
+    background: white;
+}
+
+.ui-checkbox input:checked + .checkmark {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
 }
 
 .ui-checkbox input:checked + .checkmark::after {
-    color: var(--color-primary-600);
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Radio */
+.ui-radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.radiomark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary-200);
+    border-radius: 50%;
+    position: relative;
+    background: white;
 }
 
 .ui-radio input:checked + .radiomark::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
     background: var(--color-primary-600);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/* Switch/Toggle */
+/* Toggle Switch */
+.ui-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .ui-switch .slider {
+    width: 36px;
+    height: 20px;
     background: var(--color-primary-200);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.ui-switch .slider::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
 }
 
 .ui-switch input:checked + .slider {
     background: var(--color-primary-600);
 }
 
-/* Slider */
-.ui-slider {
-    background: var(--color-primary-100);
+.ui-switch input:checked + .slider::before {
+    transform: translateX(16px);
 }
 
-.ui-slider::-webkit-slider-thumb {
-    background: var(--color-primary-600);
+/* Tags & Pills */
+.ui-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
 }
 
-/* Spinner */
-.ui-spinner {
-    border-color: var(--color-primary-100);
-    border-top-color: var(--color-primary-600);
-}
-
-/* Tags & Pills - Estos pueden usar colores secundarios */
 .ui-tag.primary {
     background: var(--color-primary-100);
     color: var(--color-primary-700);
@@ -2564,29 +2618,38 @@ font-size: 1.4rem;
     color: var(--button-color-2);
 }
 
-/* Estados disabled */
-.ui-button:disabled,
-.ui-input:disabled,
-.ui-select:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* Slider */
+.ui-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-primary-200);
 }
 
-/* Focus states */
-.ui-button:focus,
-.ui-input:focus,
-.ui-select:focus {
-    outline: 2px solid var(--color-primary-500);
-    outline-offset: 2px;
+.ui-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-primary-600);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Variables de control para el primer color seleccionado */
-:root {
-    /* Estas variables se actualizan dinámicamente con el primer color seleccionado */
-    --color-primary-50: var(--background-color-1-50);
-    --color-primary-100: var(--background-color-1-100);
-    --color-primary-200: var(--background-color-1-200);
-    --color-primary-500: var(--background-color-1-500);
-    --color-primary-600: var(--button-color-1);
-    --color-primary-700: var(--color-color-1);
+/* Spinner */
+.ui-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--color-primary-100);
+    border-top-color: var(--color-primary-600);
+    border-radius: 50%;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
 }
