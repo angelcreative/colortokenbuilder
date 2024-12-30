@@ -500,5 +500,30 @@ document.addEventListener('click', () => {
     });
 });
 
+// Cascade Dropdown
+document.querySelectorAll('.ui-cascade-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const submenu = item.querySelector('.ui-cascade-submenu');
+        if (submenu) {
+            submenu.style.display = 'block';
+        }
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        const submenu = item.querySelector('.ui-cascade-submenu');
+        if (submenu) {
+            submenu.style.display = 'none';
+        }
+    });
+});
+
+// Custom Select
+document.querySelectorAll('.ui-select').forEach(select => {
+    select.addEventListener('click', (e) => {
+        const options = select.nextElementSibling;
+        options.style.display = options.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
 
 
