@@ -271,6 +271,7 @@ input[type="radio"] {
     padding: 0; /* 2 */
     *height: 13px; /* 3 */
     *width: 13px; /* 3 */
+    display:none;
 }
 
 /**
@@ -2654,160 +2655,110 @@ font-size: 1.4rem;
     }
 }
 
-/* Estilos base para todos los botones */
-button, .cta-button, .custom-subscribe-btn, #exportSvgButton, #exportJsonButton {
+/* Estilos base unificados para todos los botones */
+button,
+.ui-button,
+.cta-button,
+#exportSvgButton,
+#exportJsonButton,
+.custom-subscribe-btn,
+.copyButton {
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 500;
     font-size: 14px;
+    border: none;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
-/* Estilo primario para botones */
+/* Estilo primario */
 button.primary,
+.ui-button.primary,
 .cta-button,
-.custom-subscribe-btn,
 #exportSvgButton,
 #exportJsonButton {
     background: var(--color-primary-600);
     color: white;
-    border: none;
 }
 
 button.primary:hover,
+.ui-button.primary:hover,
 .cta-button:hover,
-.custom-subscribe-btn:hover,
 #exportSvgButton:hover,
 #exportJsonButton:hover {
     background: var(--color-primary-500);
 }
 
 button.primary:active,
+.ui-button.primary:active,
 .cta-button:active,
-.custom-subscribe-btn:active,
 #exportSvgButton:active,
 #exportJsonButton:active {
     background: var(--color-primary-700);
 }
 
-/* Estilo secundario para botones */
+/* Estilo secundario */
 button.secondary,
-.secondary-button {
+.ui-button.secondary,
+.copyButton {
     background: var(--color-primary-200);
     color: var(--color-primary-700);
-    border: none;
 }
 
 button.secondary:hover,
-.secondary-button:hover {
+.ui-button.secondary:hover,
+.copyButton:hover {
     background: var(--color-primary-100);
 }
 
 button.secondary:active,
-.secondary-button:active {
+.ui-button.secondary:active,
+.copyButton:active {
     background: var(--color-primary-300);
 }
 
-/* Contenedores y Cards */
-.component-group,
-.custom-card,
-.pricing-card,
-.dashboard-card,
-.overview-card,
-.portfolio-card,
-.assets-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+/* Estilo terciario */
+button.tertiary,
+.ui-button.tertiary {
+    background: transparent;
+    color: var(--color-primary-700);
+    padding: 8px 16px;
 }
 
-/* Headers de contenedores */
-.component-group h3,
-.custom-header,
-.pricing-header,
-.dashboard-header {
-    background: #f7f7f7;
-    border-radius: 8px 8px 0 0;
-    padding: 16px;
-    margin: -16px -16px 16px -16px;
+button.tertiary:hover,
+.ui-button.tertiary:hover {
+    color: var(--color-primary-500);
+    text-decoration: underline;
 }
 
-/* Contenedor principal de componentes */
-.ui-components {
-    background: #f7f7f7;
-    padding: 24px;
-    border-radius: 16px;
-}
-
-.component-demo {
-    background: #fff;
-    padding: 24px;
-    border-radius: 8px;
-}
-
-/* Ajustes para el pricing table */
-.pricing-table {
-    display: flex;
-    gap: 24px;
-    padding: 24px;
-    background: #f7f7f7;
-    border-radius: 16px;
-}
-
-.pricing-card {
-    flex: 1;
-    padding: 0;
-    overflow: hidden;
-}
-
-.pricing-card.popular {
-    border: 2px solid var(--color-primary-600);
-}
-
-/* Dashboard sections */
-.dashboard-main,
-.overview-section,
-.portfolio-section {
-    background: #f7f7f7;
-    padding: 24px;
-    border-radius: 16px;
-}
-
-/* Color palette section */
-.color-palette {
-    background: #f7f7f7;
-    padding: 24px;
-    border-radius: 16px;
-}
-
-/* Mobile app demo */
-.custom-iphone-x {
-    background: #fff;
-    border-radius: 40px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.custom-screen-content {
-    background: #f7f7f7;
-    border-radius: 32px;
-    overflow: hidden;
-}
-
-/* Botones de exportación */
-.buttons {
-    background: #f7f7f7;
-    padding: 24px;
-    border-radius: 16px;
-    margin-top: 24px;
-}
-
-/* Estados disabled para todos los botones */
+/* Estados disabled */
 button:disabled,
+.ui-button:disabled,
 .cta-button:disabled,
-.custom-subscribe-btn:disabled {
+#exportSvgButton:disabled,
+#exportJsonButton:disabled,
+.copyButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     background: var(--color-primary-200);
+    color: var(--color-primary-600);
+}
+
+/* Ajustes específicos para botones de copia en las cards */
+.colorCard .copyButton {
+    margin-top: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
+}
+
+/* Contenedor de botones de exportación */
+.buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    margin-top: 24px;
 }
