@@ -1,3 +1,6 @@
+// Declarar colorWheel globalmente
+let colorWheel;
+
 document.addEventListener('DOMContentLoaded', function() {
 
     const toggleSwitch = document.getElementById('theme-toggle');
@@ -31,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var hexInput = document.getElementById('hexInput');
         var currentPalettes = [];  // Store currently displayed palettes
     
-        var colorWheel = new iro.ColorPicker(colorWheelContainer, {
+        // Inicializar colorWheel
+        colorWheel = new iro.ColorPicker(colorWheelContainer, {
             width: 200,
             color: "#a2c299"
         });
@@ -446,7 +450,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function applyDynamicStyles(colorPalette) {
         const root = document.documentElement;
-        const selectedColor = colorWheel.color.hexString; // Color actual del colorWheel
+        
+        // Verificar si colorWheel está definido
+        if (!colorWheel) {
+            console.warn('ColorWheel no está inicializado');
+            return;
+        }
+
+        const selectedColor = colorWheel.color.hexString;
         const color = chroma(selectedColor);
 
         // Generar escala de colores desde más claro a más oscuro
@@ -470,31 +481,28 @@ document.addEventListener('DOMContentLoaded', function() {
         root.style.setProperty('--color-primary-300', scale[3]);
         root.style.setProperty('--color-primary-400', scale[4]);
         root.style.setProperty('--color-primary-500', scale[5]);
-        root.style.setProperty('--color-primary-600', selectedColor); // El color seleccionado es el 600
+        root.style.setProperty('--color-primary-600', selectedColor);
         root.style.setProperty('--color-primary-700', scale[7]);
         root.style.setProperty('--color-primary-800', scale[8]);
         root.style.setProperty('--color-primary-900', scale[9]);
 
         // Asignar las variables CSS dinámicamente para los otros colores
         Object.keys(colorPalette).forEach((colorKey, index) => {
-            if (index >= 4) return;  // Solo aplica un máximo de 4 colores
+            if (index >= 4) return;
 
             const palette = colorPalette[colorKey];
             const colorName = `color-${index + 1}`;
 
-            // Asigna las variables CSS dinámicamente
             root.style.setProperty(`--background-${colorName}-50`, palette["50"]);
             root.style.setProperty(`--background-${colorName}-100`, palette["100"]);
             root.style.setProperty(`--color-${colorName}`, palette["800"]);
-            root.style.setProperty(`--button-${colorName}`, index === 0 ? selectedColor : palette["600"]); // Para el primer color usa el seleccionado
+            root.style.setProperty(`--button-${colorName}`, index === 0 ? selectedColor : palette["600"]);
         });
 
         // Asignar las variables CSS estáticas
         root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
         root.style.setProperty('--color-primary', 'var(--color-color-1)');
-        root.style.setProperty('--button-primary', selectedColor); // Usar el color seleccionado directamente
-
-        // El resto de las asignaciones permanecen igual...
+        root.style.setProperty('--button-primary', selectedColor);
     }
     
     // Dropdown functionality
