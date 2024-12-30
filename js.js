@@ -446,6 +446,15 @@ hexInput.addEventListener('input', function () {
 
 function applyDynamicStyles(colorPalette) {
     const root = document.documentElement;
+    const firstColor = Object.values(colorPalette)[0]; // Toma el primer color de la paleta
+
+    // Establecer variables del color primario
+    root.style.setProperty('--color-primary-50', firstColor['50']);
+    root.style.setProperty('--color-primary-100', firstColor['100']);
+    root.style.setProperty('--color-primary-200', firstColor['200']);
+    root.style.setProperty('--color-primary-500', firstColor['500']);
+    root.style.setProperty('--color-primary-600', firstColor['600']);
+    root.style.setProperty('--color-primary-700', firstColor['700']);
 
     Object.keys(colorPalette).forEach((colorKey, index) => {
         if (index >= 4) return;  // Solo aplica un máximo de 4 colores
