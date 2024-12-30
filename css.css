@@ -678,11 +678,10 @@ input#hexInput {
 #colorCards {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; /* Esto permitirá que las tarjetas se ajusten en varias filas si hay demasiadas */
-  justify-content: flex-start; /* Alinea las tarjetas al principio del contenedor */
-  gap: 10px; /* Espacio entre las tarjetas */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
-
 .colorCard {
     padding: 0 30px;
     border-radius: 10px;
