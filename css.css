@@ -37,6 +37,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+    color: var(--color-primary-600); /* Texto normal */
 }
 
 ol, ul {
@@ -442,7 +443,7 @@ body {
   margin: 0;
   align-items: center;
   background: var(--background-light);
-  color: var(--text-color);
+  color: var(--color-primary-600);
 }
 
 [data-theme="dark"] body {
@@ -515,7 +516,8 @@ sub, a {
 }
 
 h1,h2 {
-  color: var(--text-color);
+  color: var(--color-primary-900);
+  font-weight: 700;
 }
 
 h1 {
@@ -552,6 +554,7 @@ input#hexInput {
     position: absolute;
     top: -10px;
     left: -10px;
+    color: var(--color-primary-600);
 }
 #harmonyType, select, input {
     padding: 12px;
@@ -2761,4 +2764,75 @@ button:disabled,
     background: #fff;
     border-radius: 8px;
     margin-top: 24px;
+}
+
+/* Jerarquía tipográfica base */
+body {
+    color: var(--color-primary-600); /* Texto normal */
+}
+
+/* Títulos principales */
+h1, h2, .title-main {
+    color: var(--color-primary-900);
+    font-weight: 700;
+}
+
+/* Subtítulos */
+h3, h4, .subtitle {
+    color: var(--color-primary-800);
+    font-weight: 600;
+}
+
+/* Textos de apoyo, descripciones, captions */
+.text-support, 
+.description, 
+figcaption, 
+.caption,
+.helper-text {
+    color: var(--color-primary-500);
+}
+
+/* Labels y textos de formulario */
+label, 
+.form-label {
+    color: var(--color-primary-600);
+    font-weight: 500;
+}
+
+/* Links */
+a {
+    color: var(--color-primary-600);
+}
+
+a:hover {
+    color: var(--color-primary-700);
+}
+
+/* Textos en cards */
+.colorCard {
+    /* El color del texto se mantiene contrastante con el fondo */
+}
+
+/* Mantener los colores de los botones como están */
+button,
+.ui-button,
+.cta-button {
+    /* Los estilos existentes se mantienen */
+}
+
+/* Textos en el color picker */
+.color-info,
+#hexInput {
+    color: var(--color-primary-600);
+}
+
+/* Nombres de las paletas */
+.palette-name {
+    color: var(--color-primary-900);
+    font-weight: 700;
+}
+
+/* Valores hex en las cards */
+.hex-value {
+    color: var(--color-primary-600);
 }
