@@ -155,6 +155,45 @@ document.addEventListener('DOMContentLoaded', function() {
       showAlert('Color ' + colorHex + ' copied to clipboard!');
     }
         
+        function generateColorScale(selectedColor) {
+            const color = chroma(selectedColor);
+            const hue = color.get('hsl.h');
+            const saturation = color.get('hsl.s');
+            
+            // Ajustar la luminancia para cada nivel
+            return {
+                '50': chroma.hsl(hue, Math.max(0, saturation - 0.4), 0.97),
+                '100': chroma.hsl(hue, Math.max(0, saturation - 0.3), 0.94),
+                '200': chroma.hsl(hue, Math.max(0, saturation - 0.2), 0.88),
+                '300': chroma.hsl(hue, Math.max(0, saturation - 0.1), 0.80),
+                '400': chroma.hsl(hue, saturation, 0.72),
+                '500': chroma.hsl(hue, saturation, 0.64),
+                '600': selectedColor, // Color seleccionado
+                '700': chroma.hsl(hue, Math.min(1, saturation + 0.05), 0.48),
+                '800': chroma.hsl(hue, Math.min(1, saturation + 0.1), 0.36),
+                '900': chroma.hsl(hue, Math.min(1, saturation + 0.15), 0.24)
+            };
+        }
+    
+        function applyDynamicStyles(colorPalette) {
+            const root = document.documentElement;
+            
+            if (!colorWheel) {
+                console.warn('ColorWheel no está inicializado');
+                return;
+            }
+
+            const selectedColor = colorWheel.color.hexString;
+            const scale = generateColorScale(selectedColor);
+
+            // Establecer variables del color primario
+            Object.entries(scale).forEach(([shade, color]) => {
+                root.style.setProperty(`--color-primary-${shade}`, color.hex());
+            });
+
+            // El resto de la función permanece igual...
+        }
+        
         function generateColorPalettes(baseColors, selectedColor) {
             const paletteContainer = document.createElement('div');
             paletteContainer.id = 'paletteContainer';
@@ -169,25 +208,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 palette.style.gap = '10px';
                 palette.style.flexWrap = 'wrap';
 
-                // Generar escala usando chroma.js
-                const baseChroma = chroma(color);
-                const scale = chroma.scale([
-                    baseChroma.luminance(0.95),  // 50
-                    baseChroma.luminance(0.9),   // 100
-                    baseChroma.luminance(0.8),   // 200
-                    baseChroma.luminance(0.7),   // 300
-                    baseChroma.luminance(0.6),   // 400
-                    baseChroma.luminance(0.5),   // 500
-                    color,                       // 600 (color seleccionado)
-                    baseChroma.luminance(0.3),   // 700
-                    baseChroma.luminance(0.2),   // 800
-                    baseChroma.luminance(0.1)    // 900
-                ]).colors(10);
-
+                const scale = generateColorScale(color);
+                
                 // Crear cards para cada shade
-                const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"];
-                shades.forEach((shade, index) => {
-                    let hexColor = index === 6 ? color : scale[index];
+                Object.entries(scale).forEach(([shade, shadeColor]) => {
+                    let hexColor = shade === '600' ? color : shadeColor.hex();
                     let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, selectedColor);
                     palette.appendChild(card);
                 });
@@ -225,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add a button to copy the hex color
         const copyButton = document.createElement('button');
         copyButton.textContent = 'Copy';
+        copyButton.classList.add('copyButton');
         copyButton.style.marginTop = '8px';
         copyButton.style.fontSize = '10px';
         copyButton.style.padding = '4px';
