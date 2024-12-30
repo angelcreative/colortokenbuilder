@@ -160,18 +160,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const hue = color.get('hsl.h');
             const saturation = color.get('hsl.s');
             
-            // Ajustar la luminancia para cada nivel
+            // Ajustar la luminancia para cada nivel y devolver objetos chroma
             return {
-                '50': chroma.hsl(hue, Math.max(0, saturation - 0.4), 0.97),
-                '100': chroma.hsl(hue, Math.max(0, saturation - 0.3), 0.94),
-                '200': chroma.hsl(hue, Math.max(0, saturation - 0.2), 0.88),
-                '300': chroma.hsl(hue, Math.max(0, saturation - 0.1), 0.80),
-                '400': chroma.hsl(hue, saturation, 0.72),
-                '500': chroma.hsl(hue, saturation, 0.64),
+                '50': chroma.hsl(hue, Math.max(0, saturation - 0.4), 0.97).hex(),
+                '100': chroma.hsl(hue, Math.max(0, saturation - 0.3), 0.94).hex(),
+                '200': chroma.hsl(hue, Math.max(0, saturation - 0.2), 0.88).hex(),
+                '300': chroma.hsl(hue, Math.max(0, saturation - 0.1), 0.80).hex(),
+                '400': chroma.hsl(hue, saturation, 0.72).hex(),
+                '500': chroma.hsl(hue, saturation, 0.64).hex(),
                 '600': selectedColor, // Color seleccionado
-                '700': chroma.hsl(hue, Math.min(1, saturation + 0.05), 0.48),
-                '800': chroma.hsl(hue, Math.min(1, saturation + 0.1), 0.36),
-                '900': chroma.hsl(hue, Math.min(1, saturation + 0.15), 0.24)
+                '700': chroma.hsl(hue, Math.min(1, saturation + 0.05), 0.48).hex(),
+                '800': chroma.hsl(hue, Math.min(1, saturation + 0.1), 0.36).hex(),
+                '900': chroma.hsl(hue, Math.min(1, saturation + 0.15), 0.24).hex()
             };
         }
     
@@ -188,10 +188,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Establecer variables del color primario
             Object.entries(scale).forEach(([shade, color]) => {
-                root.style.setProperty(`--color-primary-${shade}`, color.hex());
+                root.style.setProperty(`--color-primary-${shade}`, color);
             });
 
-            // El resto de la función permanece igual...
+            // Asignar las variables CSS dinámicamente para los otros colores
+            Object.keys(colorPalette).forEach((colorKey, index) => {
+                if (index >= 4) return;
+
+                const palette = colorPalette[colorKey];
+                const colorName = `color-${index + 1}`;
+
+                root.style.setProperty(`--background-${colorName}-50`, palette["50"]);
+                root.style.setProperty(`--background-${colorName}-100`, palette["100"]);
+                root.style.setProperty(`--color-${colorName}`, palette["800"]);
+                root.style.setProperty(`--button-${colorName}`, index === 0 ? selectedColor : palette["600"]);
+            });
+
+            // Asignar las variables CSS estáticas
+            root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
+            root.style.setProperty('--color-primary', 'var(--color-color-1)');
+            root.style.setProperty('--button-primary', selectedColor);
         }
         
         function generateColorPalettes(baseColors, selectedColor) {
