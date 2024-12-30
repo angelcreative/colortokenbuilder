@@ -645,5 +645,95 @@ content_copy
     <script src="https://roomdesaigner.onrender.com/static/ntc.js"></script>
     <script src="js.js"></script> <!-- Tu propio archivo de script -->
 
+<!-- Después de la sección "Components" -->
+<section class="ui-components">
+    <h2 style="margin:40px;font-size: 2rem;text-align:center;">UI Components</h2>
+    
+    <!-- Buttons -->
+    <div class="component-group">
+        <h3>Buttons</h3>
+        <div class="component-demo">
+            <button class="ui-button primary">Primary Button</button>
+            <button class="ui-button secondary">Secondary Button</button>
+            <button class="ui-button tertiary">Tertiary Button</button>
+            <button class="ui-button primary" disabled>Disabled Button</button>
+        </div>
+    </div>
+
+    <!-- Form Controls -->
+    <div class="component-group">
+        <h3>Form Controls</h3>
+        <div class="component-demo">
+            <!-- Input -->
+            <div class="ui-input-group">
+                <label>Custom Input</label>
+                <input type="text" class="ui-input" placeholder="Type something...">
+            </div>
+
+            <!-- Select -->
+            <div class="ui-input-group">
+                <label>Custom Select</label>
+                <div class="ui-select-wrapper">
+                    <select class="ui-select">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Cascading Menu -->
+            <div class="ui-dropdown">
+                <button class="ui-dropdown-toggle">Dropdown Menu</button>
+                <div class="ui-dropdown-menu">
+                    <div class="ui-dropdown-item">
+                        Item 1
+                        <div class="ui-dropdown-submenu">
+                            <div class="ui-dropdown-item">Subitem 1.1</div>
+                            <div class="ui-dropdown-item">Subitem 1.2</div>
+                        </div>
+                    </div>
+                    <div class="ui-dropdown-item">Item 2</div>
+                    <div class="ui-dropdown-item">Item 3</div>
+                </div>
+            </div>
+
+            <!-- Checkbox -->
+            <label class="ui-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                Custom Checkbox
+            </label>
+
+            <!-- Radio -->
+            <div class="ui-radio-group">
+                <label class="ui-radio">
+                    <input type="radio" name="radio-group">
+                    <span class="radiomark"></span>
+                    Option 1
+                </label>
+                <label class="ui-radio">
+                    <input type="radio" name="radio-group">
+                    <span class="radiomark"></span>
+                    Option 2
+                </label>
+            </div>
+
+            <!-- Toggle Switch -->
+            <label class="ui-switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+                Toggle Switch
+            </label>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
 </body>
 </html>
