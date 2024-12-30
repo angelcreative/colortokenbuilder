@@ -159,22 +159,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const color = chroma(selectedColor);
             const hue = color.get('hsl.h');
             const saturation = color.get('hsl.s');
+            const lightness = color.get('hsl.l'); // Este es el 50% (color 600)
 
-            // Crear una escala más suave usando luminancia
+            // Calcular incrementos proporcionalmente desde el color 600
             return {
-                // Colores más claros (50-500)
-                '50':  chroma.hsl(hue, Math.min(0.85, saturation), 0.97).hex(),
-                '100': chroma.hsl(hue, Math.min(0.85, saturation), 0.92).hex(),
-                '200': chroma.hsl(hue, Math.min(0.85, saturation), 0.85).hex(),
-                '300': chroma.hsl(hue, saturation, 0.78).hex(),
-                '400': chroma.hsl(hue, saturation, 0.71).hex(),
-                '500': chroma.hsl(hue, saturation, 0.64).hex(),
-                // Color seleccionado
+                // Del 50 al 500: del 95% al 55% de luminosidad
+                '50':  chroma.hsl(hue, saturation, 0.95).hex(),  // 95%
+                '100': chroma.hsl(hue, saturation, 0.85).hex(),  // 85%
+                '200': chroma.hsl(hue, saturation, 0.75).hex(),  // 75%
+                '300': chroma.hsl(hue, saturation, 0.65).hex(),  // 65%
+                '400': chroma.hsl(hue, saturation, 0.60).hex(),  // 60%
+                '500': chroma.hsl(hue, saturation, 0.55).hex(),  // 55%
+                
+                // Color seleccionado (punto medio - 50%)
                 '600': selectedColor,
-                // Colores más oscuros (700-900)
-                '700': chroma(selectedColor).darken(0.7).hex(),
-                '800': chroma(selectedColor).darken(1.4).hex(),
-                '900': chroma(selectedColor).darken(2.1).hex()
+                
+                // Del 700 al 900: del 45% al 5% de luminosidad
+                '700': chroma.hsl(hue, saturation, 0.45).hex(),  // 45%
+                '800': chroma.hsl(hue, saturation, 0.25).hex(),  // 25%
+                '900': chroma.hsl(hue, saturation, 0.05).hex()   // 5%
             };
         }
     
