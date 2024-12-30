@@ -484,5 +484,21 @@ function applyDynamicStyles(colorPalette) {
     root.style.setProperty('--button-quaternary', 'var(--button-color-4)');
 }
 
+// Dropdown functionality
+document.querySelectorAll('.ui-dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = toggle.nextElementSibling;
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.ui-dropdown-menu').forEach(menu => {
+        menu.style.display = 'none';
+    });
+});
+
 
 
