@@ -158,41 +158,46 @@ document.addEventListener('DOMContentLoaded', function() {
         function generateColorPalettes(baseColors, selectedColor) {
             const paletteContainer = document.createElement('div');
             paletteContainer.id = 'paletteContainer';
-           /* paletteContainer.style.display = 'flex';
-            paletteContainer.style.flexDirection = 'column';
-            paletteContainer.style.gap = '20px';
-            paletteContainer.style.width = '100%';*/
-    
+
             baseColors.forEach(color => {
                 let colorName = ntc.name(color)[1];
                 colorName = colorName.replace(/-color.*$/i, '').trim();
-    
+
                 const palette = document.createElement('div');
                 palette.style.display = 'flex';
                 palette.style.flexDirection = 'row';
                 palette.style.gap = '10px';
                 palette.style.flexWrap = 'wrap';
-    
-                // Create the lightest value (50)
-                let paletteColor = chroma(color).set('hsl.l', 0.95).hex();
-                let hexColor = paletteColor.toUpperCase();
-                let card = createColorCard('50', hexColor, paletteColor, selectedColor);
-                palette.appendChild(card);
-    
-                for (let i = 1; i <= 9; i++) {  // Light to dark (100 to 900)
-                    const lightness = 1 - (i * 0.1);
-                    paletteColor = chroma(color).set('hsl.l', lightness).hex();
-                    hexColor = paletteColor.toUpperCase();
-                    card = createColorCard(`${i * 100}`, hexColor, paletteColor, selectedColor);
+
+                // Generar escala usando chroma.js
+                const baseChroma = chroma(color);
+                const scale = chroma.scale([
+                    baseChroma.luminance(0.95),  // 50
+                    baseChroma.luminance(0.9),   // 100
+                    baseChroma.luminance(0.8),   // 200
+                    baseChroma.luminance(0.7),   // 300
+                    baseChroma.luminance(0.6),   // 400
+                    baseChroma.luminance(0.5),   // 500
+                    color,                       // 600 (color seleccionado)
+                    baseChroma.luminance(0.3),   // 700
+                    baseChroma.luminance(0.2),   // 800
+                    baseChroma.luminance(0.1)    // 900
+                ]).colors(10);
+
+                // Crear cards para cada shade
+                const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"];
+                shades.forEach((shade, index) => {
+                    let hexColor = index === 6 ? color : scale[index];
+                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, selectedColor);
                     palette.appendChild(card);
-                }
-    
+                });
+
                 const paletteTitle = document.createElement('h4');
                 paletteTitle.textContent = colorName;
                 paletteContainer.appendChild(paletteTitle);
                 paletteContainer.appendChild(palette);
             });
-    
+
             const colorCardsContainer = document.getElementById('colorCards');
             colorCardsContainer.appendChild(paletteContainer);
         }
