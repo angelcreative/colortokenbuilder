@@ -24,9 +24,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div#dynamicColorPalette {
-    padding: 0 0 2rem 0;
-}
 /* Enlaces */
 a {
   color: var(--color-primary-600);
@@ -366,7 +363,15 @@ height: 20px;
 opacity: 0.7;
 }
 
-.custom-search-item span {flex-grow: 1;font-size: 1em;color: var(--color-secondary); /* color-color-2 */background: none;text-align: left;display: flex;justify-content: flex-start;}
+.custom-search-item span {
+flex-grow: 1;
+font-size: 1em;
+color: var(--color-secondary); /* color-color-2 */
+background: none;
+text-align: left;
+display: flex;
+justify-content: flex-start;
+}
 
 .custom-more-options {
 font-size: 1.2em;
@@ -2199,7 +2204,7 @@ background: white;
 
 .custom-greeting h1 {color: #232a31;font-size: 24px;font-weight: 700;margin-bottom: 4px;}
 
-.custom-greeting p {color: #4C5D6B;font-size: 14px;margin: 0;}
+.custom-greeting p {color: #4C5D6B;font-size: 14px;}
 
 /* Cards */
 .custom-card {
@@ -2220,7 +2225,9 @@ color: var(--color-primary-600);
 font-size: 14px;
 }
 
-.custom-card-primary {background: var(--color-primary-50);background-image: url(https://raw.githubusercontent.com/angelcreative/colortokenbuilder/refs/heads/main/1-022053b3-d677-4212-a8f3-2745ad61ea6f.png);background-size: contain;}
+.custom-card-primary {
+background: var(--color-primary-50);
+}
 
 .custom-card-secondary {
 background: var(--color-primary-100);
@@ -2303,7 +2310,9 @@ background: var(--color-primary-600);
 color: white;
 }
 
-.icon-tag .material-symbols-outlined {font-size: 20px;margin: 0;text-align: center;display: flex;align-items: center;justify-content: center;}
+.icon-tag .material-symbols-outlined {
+font-size: 20px;
+}
 
 /* Tipografía y Colores Base */
 body {
@@ -3147,14 +3156,14 @@ label,
   margin: 0 auto;
   background: var(--background-primary);
   border-radius: 40px;
-  overflow: auto;
+  overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* UI Components container */
 .ui-components {
   max-width: 1280px;
-  margin: 40px auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
 }
 
@@ -3418,16 +3427,33 @@ label,
     margin-bottom: 20px;
 }
 
-
-.custom-user-avatar {
-    border-radius: 900rem;
-    overflow: hidden;
-    max-width: 64px;
+.shades-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    margin-top: 16px;
 }
 
-.custom-header {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 24px;
+.shade-item {
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.shade-item:hover {
+    transform: scale(1.05);
+}
+
+.shade-label {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: var(--color-primary-600);
+}
+
+.shade-hex {
+    font-size: 10px;
+    font-family: monospace;
+    color: var(--color-primary-600);
 }
