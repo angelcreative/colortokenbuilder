@@ -671,6 +671,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
     function generateShades(baseColor) {
         const color = chroma(baseColor);
         const shades = {};
