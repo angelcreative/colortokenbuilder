@@ -187,6 +187,14 @@ justify-content: center;
 align-items: center;
 }
 
+.custom-card.custom-card-primary > h2 {
+    color: var(--color-primary-50);
+}
+
+.custom-card.custom-card-primary > p {
+    color: var(--color-primary-200);
+}
+
 .custom-greeting {
   display: flex;
   flex-direction: column;
