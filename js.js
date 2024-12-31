@@ -34,11 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var hexInput = document.getElementById('hexInput');
         var currentPalettes = [];  // Store currently displayed palettes
     
-        // Inicializar colorWheel
+        // Inicializar colorWheel con Purple Heart y actualizar a square
         colorWheel = new iro.ColorPicker(colorWheelContainer, {
             width: 200,
-            color: "#a2c299"
+            color: "#5036C2"
         });
+    
+        document.getElementById('harmonyType').value = 'square';
+        updateHarmonyColors("#5036C2");
     
         function updateHarmonyColors(baseColor) {
             const harmonyType = document.getElementById('harmonyType').value;
@@ -665,6 +668,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
     function generateShades(baseColor) {
         const color = chroma(baseColor);
         const shades = {};
@@ -699,6 +703,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return shades;
     }
+    
+    
+    
+    
+    // Establecer Square como valor por defecto en el select
+    document.addEventListener('DOMContentLoaded', function() {
+        const harmonySelect = document.getElementById('harmonyType');
+        harmonySelect.value = 'square';
+        // Disparar el evento de cambio para actualizar los colores
+        updateHarmonyColors("#5036C2");
+    });
+    
     
     
     
