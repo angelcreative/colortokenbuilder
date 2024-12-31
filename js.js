@@ -265,47 +265,78 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     
-        function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
+        function createColorCard(palette, colorName) {
             const card = document.createElement('div');
-            card.classList.add('colorCard', 'gradientCard');
-            card.style.backgroundColor = paletteColor;
-            card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
-            card.style.width = '80px';
-            card.style.height = '80px'; 
-            card.style.borderRadius = '8px'; 
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
-            card.style.justifyContent = 'center';
-            card.style.alignItems = 'center';
-            card.style.fontFamily = 'Arial, sans-serif';
-            card.style.fontSize = '14px';
-        
-            // Highlight the matching color
-            if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
-                card.style.border = '3px solid #000000';
-            }
-        
-            // Add a button to copy the hex color
-            const copyButton = document.createElement('button');
-            copyButton.textContent = 'Copy';
-            copyButton.classList.add('copyButton');
-            copyButton.style.marginTop = '8px';
-            copyButton.style.fontSize = '10px';
-            copyButton.style.padding = '4px';
-            copyButton.style.borderRadius = '4px';
-            copyButton.style.cursor = 'pointer';
-            copyButton.style.background = '#000';
-            copyButton.style.color = '#fff';
-            copyButton.addEventListener('click', function() {
-                copyToClipboard(hexColor);
+            card.className = 'color-card';
+
+            // Crear el preview del color base (600)
+            const colorPreview = document.createElement('div');
+            colorPreview.className = 'color-preview';
+            colorPreview.style.backgroundColor = palette['600'];
+
+            // Crear el contenedor de información
+            const colorInfo = document.createElement('div');
+            colorInfo.className = 'color-info';
+
+            // Añadir nombre del color
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'color-name';
+            nameDiv.textContent = colorName;
+
+            // Añadir valor RGB
+            const rgbColor = chroma(palette['600']).rgb();
+            const rgbDiv = document.createElement('div');
+            rgbDiv.className = 'color-rgb';
+            rgbDiv.textContent = `RGB ${rgbColor.join(' ')}`;
+
+            // Añadir valor HEX
+            const hexDiv = document.createElement('div');
+            hexDiv.className = 'color-hex';
+            hexDiv.textContent = palette['600'].toUpperCase();
+
+            // Añadir valor 600
+            const valueDiv = document.createElement('div');
+            valueDiv.className = 'color-value';
+            valueDiv.textContent = '600';
+
+            // Ensamblar la tarjeta
+            colorInfo.appendChild(nameDiv);
+            colorInfo.appendChild(rgbDiv);
+            colorInfo.appendChild(hexDiv);
+            colorInfo.appendChild(valueDiv);
+
+            card.appendChild(colorPreview);
+            card.appendChild(colorInfo);
+
+            // Añadir los shades
+            const shadesContainer = document.createElement('div');
+            shadesContainer.className = 'shades-container';
+
+            // Crear elementos para cada shade
+            ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'].forEach(shade => {
+                const shadeElement = document.createElement('div');
+                shadeElement.className = 'shade-item';
+                shadeElement.style.backgroundColor = palette[shade];
+                
+                const shadeLabel = document.createElement('div');
+                shadeLabel.className = 'shade-label';
+                shadeLabel.textContent = shade;
+                
+                const shadeHex = document.createElement('div');
+                shadeHex.className = 'shade-hex';
+                shadeHex.textContent = palette[shade].toUpperCase();
+
+                shadeElement.appendChild(shadeLabel);
+                shadeElement.appendChild(shadeHex);
+                shadesContainer.appendChild(shadeElement);
+
+                // Añadir funcionalidad de copia al hacer clic
+                shadeElement.addEventListener('click', () => {
+                    copyToClipboard(palette[shade].toUpperCase());
+                });
             });
-        
-            card.innerHTML = `
-                <div style="font-size: 14px; font-weight: bold;">${tokenName}</div>
-                <div style="font-size: 14px; margin-top: 4px;">${hexColor}</div>
-            `;
-            card.appendChild(copyButton);
-        
+
+            card.appendChild(shadesContainer);
             return card;
         }
         
