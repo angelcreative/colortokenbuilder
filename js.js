@@ -177,35 +177,43 @@ document.addEventListener('DOMContentLoaded', function() {
             const color = chroma(baseColor);
             const shades = {};
             
-            // Generar tonos desde 300 hasta 900 (más oscuros)
-            for(let i = 3; i <= 9; i++) {
+            // El 600 es el color base seleccionado
+            shades[600] = baseColor;
+            
+            // Generar tonos desde 700 hasta 900 (más oscuros)
+            for(let i = 7; i <= 9; i++) {
                 const shade = i * 100;
-                shades[shade] = color.darken((i-3) * 0.3).hex();
+                shades[shade] = color.darken((i-6) * 0.3).hex();
             }
             
-            // Generar tonos más claros (50, 100, 200) con una degradación muy sutil desde el 300
-            const baseLight = chroma(shades[300]);
-            const baseLightness = baseLight.get('hsl.l');
-            const baseSaturation = baseLight.get('hsl.s');
-            const baseHue = baseLight.get('hsl.h');
+            // Generar tonos desde 500 hasta 300 (más claros)
+            for(let i = 5; i >= 3; i--) {
+                const shade = i * 100;
+                shades[shade] = color.brighten((6-i) * 0.2).hex();
+            }
+            
+            // Generar tonos más claros (50, 100, 200) con una degradación muy sutil
+            const baseLightness = color.get('hsl.l');
+            const baseSaturation = color.get('hsl.s');
+            const baseHue = color.get('hsl.h');
 
             // Calcular incrementos sutiles de luminosidad y desaturación
             shades[200] = chroma.hsl(
                 baseHue,
-                Math.max(0, baseSaturation * 0.95),
-                Math.min(0.97, baseLightness + 0.1)
+                Math.max(0, baseSaturation * 0.85),
+                Math.min(0.95, baseLightness + 0.25)
             ).hex();
             
             shades[100] = chroma.hsl(
                 baseHue,
-                Math.max(0, baseSaturation * 0.9),
-                Math.min(0.98, baseLightness + 0.15)
+                Math.max(0, baseSaturation * 0.75),
+                Math.min(0.97, baseLightness + 0.35)
             ).hex();
             
             shades[50] = chroma.hsl(
                 baseHue,
-                Math.max(0, baseSaturation * 0.85),
-                Math.min(0.99, baseLightness + 0.18)
+                Math.max(0, baseSaturation * 0.65),
+                Math.min(0.98, baseLightness + 0.4)
             ).hex();
             
             return shades;
@@ -666,39 +674,48 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
     function generateShades(baseColor) {
         const color = chroma(baseColor);
         const shades = {};
         
-        // Generar tonos desde 300 hasta 900 (más oscuros)
-        for(let i = 3; i <= 9; i++) {
+        // El 600 es el color base seleccionado
+        shades[600] = baseColor;
+        
+        // Generar tonos desde 700 hasta 900 (más oscuros)
+        for(let i = 7; i <= 9; i++) {
             const shade = i * 100;
-            shades[shade] = color.darken((i-3) * 0.3).hex();
+            shades[shade] = color.darken((i-6) * 0.3).hex();
         }
         
-        // Generar tonos más claros (50, 100, 200) con una degradación muy sutil desde el 300
-        const baseLight = chroma(shades[300]);
-        const baseLightness = baseLight.get('hsl.l');
-        const baseSaturation = baseLight.get('hsl.s');
-        const baseHue = baseLight.get('hsl.h');
+        // Generar tonos desde 500 hasta 300 (más claros)
+        for(let i = 5; i >= 3; i--) {
+            const shade = i * 100;
+            shades[shade] = color.brighten((6-i) * 0.2).hex();
+        }
+        
+        // Generar tonos más claros (50, 100, 200) con una degradación muy sutil
+        const baseLightness = color.get('hsl.l');
+        const baseSaturation = color.get('hsl.s');
+        const baseHue = color.get('hsl.h');
 
         // Calcular incrementos sutiles de luminosidad y desaturación
         shades[200] = chroma.hsl(
             baseHue,
-            Math.max(0, baseSaturation * 0.95),
-            Math.min(0.97, baseLightness + 0.1)
+            Math.max(0, baseSaturation * 0.85),
+            Math.min(0.95, baseLightness + 0.25)
         ).hex();
         
         shades[100] = chroma.hsl(
             baseHue,
-            Math.max(0, baseSaturation * 0.9),
-            Math.min(0.98, baseLightness + 0.15)
+            Math.max(0, baseSaturation * 0.75),
+            Math.min(0.97, baseLightness + 0.35)
         ).hex();
         
         shades[50] = chroma.hsl(
             baseHue,
-            Math.max(0, baseSaturation * 0.85),
-            Math.min(0.99, baseLightness + 0.18)
+            Math.max(0, baseSaturation * 0.65),
+            Math.min(0.98, baseLightness + 0.4)
         ).hex();
         
         return shades;
