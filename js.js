@@ -186,35 +186,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 shades[shade] = color.darken((i-6) * 0.3).hex();
             }
             
-            // Generar tonos desde 500 hasta 300 (más claros)
-            for(let i = 5; i >= 3; i--) {
-                const shade = i * 100;
-                shades[shade] = color.brighten((6-i) * 0.2).hex();
-            }
-            
-            // Generar tonos más claros (50, 100, 200) con una degradación muy sutil
-            const baseLightness = color.get('hsl.l');
-            const baseSaturation = color.get('hsl.s');
+            // Generar todos los tonos más claros desde 500 hasta 50 con una degradación constante
+            const steps = [500, 400, 300, 200, 100, 50];
             const baseHue = color.get('hsl.h');
-
-            // Calcular incrementos sutiles de luminosidad y desaturación
-            shades[200] = chroma.hsl(
-                baseHue,
-                Math.max(0, baseSaturation * 0.85),
-                Math.min(0.95, baseLightness + 0.25)
-            ).hex();
+            const baseSaturation = color.get('hsl.s');
+            const baseLightness = color.get('hsl.l');
             
-            shades[100] = chroma.hsl(
-                baseHue,
-                Math.max(0, baseSaturation * 0.75),
-                Math.min(0.97, baseLightness + 0.35)
-            ).hex();
-            
-            shades[50] = chroma.hsl(
-                baseHue,
-                Math.max(0, baseSaturation * 0.65),
-                Math.min(0.98, baseLightness + 0.4)
-            ).hex();
+            steps.forEach((step, index) => {
+                // Calcular el incremento gradual de luminosidad
+                const luminosityIncrease = (index + 1) * 0.08;
+                // Reducir gradualmente la saturación
+                const saturationDecrease = 1 - (index * 0.1);
+                
+                shades[step] = chroma.hsl(
+                    baseHue,
+                    Math.max(0, baseSaturation * saturationDecrease),
+                    Math.min(0.98, baseLightness + luminosityIncrease)
+                ).hex();
+            });
             
             return shades;
         }
@@ -675,6 +664,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
     function generateShades(baseColor) {
         const color = chroma(baseColor);
         const shades = {};
@@ -688,35 +678,24 @@ document.addEventListener('DOMContentLoaded', function() {
             shades[shade] = color.darken((i-6) * 0.3).hex();
         }
         
-        // Generar tonos desde 500 hasta 300 (más claros)
-        for(let i = 5; i >= 3; i--) {
-            const shade = i * 100;
-            shades[shade] = color.brighten((6-i) * 0.2).hex();
-        }
-        
-        // Generar tonos más claros (50, 100, 200) con una degradación muy sutil
-        const baseLightness = color.get('hsl.l');
-        const baseSaturation = color.get('hsl.s');
+        // Generar todos los tonos más claros desde 500 hasta 50 con una degradación constante
+        const steps = [500, 400, 300, 200, 100, 50];
         const baseHue = color.get('hsl.h');
-
-        // Calcular incrementos sutiles de luminosidad y desaturación
-        shades[200] = chroma.hsl(
-            baseHue,
-            Math.max(0, baseSaturation * 0.85),
-            Math.min(0.95, baseLightness + 0.25)
-        ).hex();
+        const baseSaturation = color.get('hsl.s');
+        const baseLightness = color.get('hsl.l');
         
-        shades[100] = chroma.hsl(
-            baseHue,
-            Math.max(0, baseSaturation * 0.75),
-            Math.min(0.97, baseLightness + 0.35)
-        ).hex();
-        
-        shades[50] = chroma.hsl(
-            baseHue,
-            Math.max(0, baseSaturation * 0.65),
-            Math.min(0.98, baseLightness + 0.4)
-        ).hex();
+        steps.forEach((step, index) => {
+            // Calcular el incremento gradual de luminosidad
+            const luminosityIncrease = (index + 1) * 0.08;
+            // Reducir gradualmente la saturación
+            const saturationDecrease = 1 - (index * 0.1);
+            
+            shades[step] = chroma.hsl(
+                baseHue,
+                Math.max(0, baseSaturation * saturationDecrease),
+                Math.min(0.98, baseLightness + luminosityIncrease)
+            ).hex();
+        });
         
         return shades;
     }
