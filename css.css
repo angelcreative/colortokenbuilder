@@ -963,6 +963,7 @@ background: #ffffff9c;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 
@@ -3136,7 +3137,7 @@ label,
 
 /* Contenedor principal */
 .container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -3144,8 +3145,8 @@ label,
 /* Color wheel y shades container */
 .color-wheel-container {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: 30px  auto 0;
+  padding: 0 3rem;
 }
 
 /* Mockup móvil */
@@ -3168,12 +3169,16 @@ label,
 
 /* Contenedor de shades */
 .shades-container {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 /* Media queries para responsividad */
@@ -3334,8 +3339,8 @@ label,
 
 #colorWheelContainer {
     position: relative;
-    margin: 0 auto;
-    width: fit-content;
+    /* margin: 0 auto; */
+    /* width: fit-content; */
 }
 
 .colorIndicator {
