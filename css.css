@@ -1561,6 +1561,8 @@ display:block; cursor:pointer
   padding: 1rem;
   background: var(--background-secondary);
   border-radius: 8px;
+  align-content: flex-start;
+  justify-content: flex-start;
 }
 
 /* Buttons */
@@ -3446,6 +3448,7 @@ label,
     margin-top: 32px;
     padding-top: 24px;
     border-top: 1px solid rgba(0,0,0,0.1);
+    min-width: 60%;
 }
 
 .gradient-cards .color-card {
