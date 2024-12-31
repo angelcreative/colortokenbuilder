@@ -100,6 +100,75 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     
+        function displayGradientCards(colors) {
+            // Limpiar gradientes anteriores si existen
+            const existingGradients = document.querySelector('.gradient-cards');
+            if (existingGradients) {
+                existingGradients.remove();
+            }
+
+            const harmonyType = document.getElementById('harmonyType').value;
+            const harmonyColors = document.getElementById('harmonyColors');
+            
+            // Crear contenedor para gradientes
+            const gradientContainer = document.createElement('div');
+            gradientContainer.className = 'gradient-cards';
+            
+            // Definir los pares según el tipo de armonía
+            let colorPairs = [];
+            switch(harmonyType) {
+                case 'complementary':
+                    colorPairs = [[colors[0], colors[1]]];
+                    break;
+                case 'triadic':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
+                        [colors[2], colors[0]]
+                    ];
+                    break;
+                case 'square':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
+                        [colors[2], colors[3]],
+                        [colors[3], colors[0]]
+                    ];
+                    break;
+                case 'analogous':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
+                        [colors[2], colors[0]]
+                    ];
+                    break;
+            }
+            
+            // Crear tarjetas de gradiente
+            colorPairs.forEach(pair => {
+                const card = document.createElement('div');
+                card.className = 'color-card';
+                
+                const preview = document.createElement('div');
+                preview.className = 'color-preview';
+                preview.style.backgroundImage = `linear-gradient(45deg, ${pair[0]} 0%, ${pair[1]} 100%)`;
+                
+                const info = document.createElement('div');
+                info.className = 'color-info';
+                info.innerHTML = `
+                    <div class="color-name">Gradient</div>
+                    <div class="color-hex">${pair[0]} → ${pair[1]}</div>
+                `;
+                
+                card.appendChild(preview);
+                card.appendChild(info);
+                gradientContainer.appendChild(card);
+            });
+            
+            // Añadir después de las tarjetas de colores sólidos
+            harmonyColors.appendChild(gradientContainer);
+        }
+    
         function updateColorIndicators(colors) {
             // Primero eliminar los indicadores existentes
             colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
@@ -663,6 +732,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options.style.display = options.style.display === 'block' ? 'none' : 'block';
         });
     });
+    
     
     
     
