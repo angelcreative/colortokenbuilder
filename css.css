@@ -3486,15 +3486,15 @@ label,
 }
 
 .stats-header h3 {
-    color: var(--color-primary-800);
+    color: var(--color-primary);
     font-size: 24px;
     font-weight: 500;
     margin: 0;
 }
 
 .stats-tag {
-    color: var(--color-primary-400);
-    background: var(--color-primary-200);
+    color: var(--background-color-2-100);
+    background: var(--background-color-2-50);
     padding: 4px 12px;
     border-radius: 100px;
     font-size: 16px;
@@ -3509,13 +3509,13 @@ label,
 }
 
 .current-amount {
-    color: var(--color-primary-600);
+    color: var(--color-primary-700);
     font-size: 32px;
     font-weight: 600;
 }
 
 .previous-amount {
-    color: var(--color-primary-400);
+    color: #4C5D6B;
     font-size: 16px;
 }
 
@@ -3535,7 +3535,7 @@ label,
 .chart-labels {
     display: flex;
     justify-content: space-between;
-    color: var(--color-primary-400);
+    color: #4C5D6B;
     font-size: 14px;
     margin-top: 8px;
 }
@@ -3555,6 +3555,6 @@ label,
 }
 
 .stats-update {
-    color: var(--color-primary-400);
+    color: #4C5D6B;
     font-size: 14px;
 }
