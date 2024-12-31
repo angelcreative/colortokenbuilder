@@ -80,12 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             colors.forEach(color => {
                 const colorName = ntc.name(color)[1].replace(/-color.*$/i, '').trim();
+                const rgbColor = chroma(color).rgb();
                 const cardHTML = `
                     <div class="color-card">
                         <div class="color-preview" style="background-color: ${color};"></div>
                         <div class="color-info">
                             <div class="color-name">${colorName}</div>
-                            <div class="color-hex">${color}</div>
+                            <div class="color-rgb">RGB ${rgbColor.join(' ')}</div>
+                            <div class="color-hex">${color.toUpperCase()}</div>
                             <div class="color-value">600</div>
                         </div>
                     </div>
