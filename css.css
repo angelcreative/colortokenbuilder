@@ -3372,3 +3372,75 @@ label,
     min-width: 120px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Contenedor del input de color */
+.hexInputcontainer {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Input de color */
+#hexInput {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Quitar el borde del input de color */
+#hexInput::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+#hexInput::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+/* Estilo para Firefox */
+#hexInput::-moz-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+/* Select de armonía */
+#harmonyType {
+    appearance: none;
+    background: var(--background-primary);
+    border: 1px solid var(--color-primary-200);
+    border-radius: 8px;
+    padding: 8px 36px 8px 12px;
+    font-size: 14px;
+    color: var(--color-primary-600);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+#harmonyType:hover {
+    border-color: var(--color-primary-300);
+}
+
+#harmonyType:focus {
+    outline: none;
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-200), 0.2);
+}
+
+/* Ajustar el contenedor flex */
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
