@@ -2217,7 +2217,7 @@ color: var(--color-primary-600);
 font-size: 14px;
 }
 
-.custom-card-primary {background: var(--color-primary-50);background-image: url(https://raw.githubusercontent.com/angelcreative/colortokenbuilder/refs/heads/main/0-a51e8ff3-2eb9-4a7e-8f4b-d730baba2470.png);background-size: contain;}
+.custom-card-primary {background: var(--color-primary-50);background-image: url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
 
 .custom-card-secondary {
 background: var(--color-primary-100);
