@@ -2217,7 +2217,7 @@ color: var(--color-primary-600);
 font-size: 14px;
 }
 
-.custom-card-primary {background: var(--color-primary-50);background-image: url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
+.custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-primary-500) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
 
 .custom-card-secondary {
 background: var(--color-primary-100);
