@@ -363,15 +363,7 @@ height: 20px;
 opacity: 0.7;
 }
 
-.custom-search-item span {
-flex-grow: 1;
-font-size: 1em;
-color: var(--color-secondary); /* color-color-2 */
-background: none;
-text-align: left;
-display: flex;
-justify-content: flex-start;
-}
+.custom-search-item span {flex-grow: 1;font-size: 1em;color: var(--color-secondary); /* color-color-2 */background: none;text-align: left;display: flex;justify-content: flex-start;}
 
 .custom-more-options {
 font-size: 1.2em;
@@ -2308,9 +2300,7 @@ background: var(--color-primary-600);
 color: white;
 }
 
-.icon-tag .material-symbols-outlined {
-font-size: 20px;
-}
+.icon-tag .material-symbols-outlined {font-size: 20px;margin: 0;text-align: center;display: flex;align-items: center;justify-content: center;}
 
 /* Tipografía y Colores Base */
 body {
