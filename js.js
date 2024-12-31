@@ -98,7 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Primero eliminar los indicadores existentes
             colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
 
-            const wheelRadius = colorWheel.width / 2;
+            // Obtener las dimensiones reales del color wheel
+            const wheelElement = colorWheelContainer.querySelector('canvas');
+            const wheelRadius = wheelElement.width / 2;
             const centerX = wheelRadius;
             const centerY = wheelRadius;
 
@@ -107,11 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (index === 0) return; // Saltar el color principal
 
                 const hue = chroma(color).get('hsl.h');
-                const angleRadians = (hue * Math.PI / 180);
+                const angleRadians = ((hue - 90) * Math.PI / 180); // Restamos 90 para alinear correctamente
                 
                 // Calcular la posición en el círculo
-                const indicatorX = centerX + (wheelRadius - 20) * Math.cos(angleRadians);
-                const indicatorY = centerY - (wheelRadius - 20) * Math.sin(angleRadians);
+                const distance = wheelRadius * 0.8; // 80% del radio para que quede dentro del wheel
+                const indicatorX = centerX + distance * Math.cos(angleRadians);
+                const indicatorY = centerY + distance * Math.sin(angleRadians);
 
                 // Crear el indicador
                 const indicator = document.createElement('div');
@@ -121,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 indicator.style.top = `${indicatorY}px`;
                 indicator.style.transform = 'translate(-50%, -50%)';
                 indicator.style.backgroundColor = color;
+                indicator.style.zIndex = '1000'; // Asegurar que esté por encima del wheel
 
                 colorWheelContainer.appendChild(indicator);
             });
