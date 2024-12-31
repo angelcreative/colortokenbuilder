@@ -201,12 +201,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const selectedColor = colorWheel.color.hexString;
-            const scale = generateColorScale(selectedColor);
+            // Usar generateShades en lugar de la escala manual
+            const shades = generateShades(selectedColor);
 
             // Establecer variables del color primario
-            Object.entries(scale).forEach(([shade, color]) => {
-                root.style.setProperty(`--color-primary-${shade}`, color);
-            });
+            root.style.setProperty('--color-primary-50', shades[50]);
+            root.style.setProperty('--color-primary-100', shades[100]);
+            root.style.setProperty('--color-primary-200', shades[200]);
+            root.style.setProperty('--color-primary-300', shades[300]);
+            root.style.setProperty('--color-primary-400', shades[400]);
+            root.style.setProperty('--color-primary-500', shades[500]);
+            root.style.setProperty('--color-primary-600', selectedColor);
+            root.style.setProperty('--color-primary-700', shades[700]);
+            root.style.setProperty('--color-primary-800', shades[800]);
+            root.style.setProperty('--color-primary-900', shades[900]);
 
             // Asignar las variables CSS dinámicamente para los otros colores
             Object.keys(colorPalette).forEach((colorKey, index) => {
@@ -525,40 +533,26 @@ document.addEventListener('DOMContentLoaded', function() {
     function applyDynamicStyles(colorPalette) {
         const root = document.documentElement;
         
-        // Verificar si colorWheel está definido
         if (!colorWheel) {
             console.warn('ColorWheel no está inicializado');
             return;
         }
 
         const selectedColor = colorWheel.color.hexString;
-        const color = chroma(selectedColor);
-
-        // Generar escala de colores desde más claro a más oscuro
-        const scale = chroma.scale([
-            color.luminance(0.95),  // 50
-            color.luminance(0.9),   // 100
-            color.luminance(0.8),   // 200
-            color.luminance(0.7),   // 300
-            color.luminance(0.6),   // 400
-            color.luminance(0.5),   // 500
-            selectedColor,          // 600 (color seleccionado)
-            color.luminance(0.3),   // 700
-            color.luminance(0.2),   // 800
-            color.luminance(0.1)    // 900
-        ]).colors(10);
+        // Usar generateShades en lugar de la escala manual
+        const shades = generateShades(selectedColor);
 
         // Establecer variables del color primario
-        root.style.setProperty('--color-primary-50', scale[0]);
-        root.style.setProperty('--color-primary-100', scale[1]);
-        root.style.setProperty('--color-primary-200', scale[2]);
-        root.style.setProperty('--color-primary-300', scale[3]);
-        root.style.setProperty('--color-primary-400', scale[4]);
-        root.style.setProperty('--color-primary-500', scale[5]);
+        root.style.setProperty('--color-primary-50', shades[50]);
+        root.style.setProperty('--color-primary-100', shades[100]);
+        root.style.setProperty('--color-primary-200', shades[200]);
+        root.style.setProperty('--color-primary-300', shades[300]);
+        root.style.setProperty('--color-primary-400', shades[400]);
+        root.style.setProperty('--color-primary-500', shades[500]);
         root.style.setProperty('--color-primary-600', selectedColor);
-        root.style.setProperty('--color-primary-700', scale[7]);
-        root.style.setProperty('--color-primary-800', scale[8]);
-        root.style.setProperty('--color-primary-900', scale[9]);
+        root.style.setProperty('--color-primary-700', shades[700]);
+        root.style.setProperty('--color-primary-800', shades[800]);
+        root.style.setProperty('--color-primary-900', shades[900]);
 
         // Asignar las variables CSS dinámicamente para los otros colores
         Object.keys(colorPalette).forEach((colorKey, index) => {
