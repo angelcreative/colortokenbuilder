@@ -1,7 +1,7 @@
 // Declarar colorWheel globalmente
 let colorWheel;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { 
 
     const toggleSwitch = document.getElementById('theme-toggle');
     
