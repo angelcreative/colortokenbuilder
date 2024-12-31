@@ -2008,7 +2008,7 @@ button,
 /* Textos en el color picker */
 .color-info,
 #hexInput {
-  color: var(--color-primary-600);
+  color: #4C5D6B;
 }
 
 /* Nombres de las paletas */
@@ -2200,17 +2200,9 @@ padding: 24px;
 background: white;
 }
 
-.custom-greeting h1 {
-color: var(--color-primary-900);
-font-size: 24px;
-font-weight: 700;
-margin-bottom: 4px;
-}
+.custom-greeting h1 {color: #232a31;font-size: 24px;font-weight: 700;margin-bottom: 4px;}
 
-.custom-greeting p {
-color: var(--color-primary-600);
-font-size: 14px;
-}
+.custom-greeting p {color: #4C5D6B;font-size: 14px;}
 
 /* Cards */
 .custom-card {
@@ -2329,7 +2321,7 @@ body {
 
 /* Títulos principales */
 h1, h2, .title-main {
-  color: var(--color-primary-900);
+  color: #4C5D6B;
   font-weight: 700;
 }
 
@@ -2345,7 +2337,7 @@ h2 {
 
 /* Subtítulos */
 h3, h4, .subtitle {
-  color: var(--color-primary-800);
+  color: #4C5D6B;
   font-weight: 600;
 }
 
@@ -2381,7 +2373,7 @@ figcaption,
 /* Labels y textos de formulario */
 label, 
 .form-label {
-  color: var(--color-primary-600);
+  color: #4C5D6B;
   font-weight: 500;
   font-size: 0.875rem;
 }
@@ -3283,21 +3275,21 @@ label,
 /* Nombre del color */
 .color-name {
     font-size: 14px;
-    color: var(--color-primary-600);
+    color: #4C5D6B;
     margin-bottom: 4px;
 }
 
 /* Valor hexadecimal */
 .color-hex {
     font-size: 12px;
-    color: var(--color-primary-400);
+    color: #4C5D6B;
     font-family: monospace;
 }
 
 /* Etiqueta de valor 600 */
 .color-value {
     font-size: 12px;
-    color: var(--color-primary-500);
+    color: #4C5D6B;
     margin-top: 4px;
 }
 
