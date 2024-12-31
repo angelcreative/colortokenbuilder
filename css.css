@@ -3257,3 +3257,68 @@ label,
     background: var(--color-primary-700);
     transform: translateY(-1px);
 }
+
+/* Estilos para las cards de colores */
+.color-card {
+    width: 200px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+/* Color preview */
+.color-preview {
+    height: 120px;
+    width: 100%;
+}
+
+/* Contenedor de información del color */
+.color-info {
+    padding: 16px;
+    background: white;
+}
+
+/* Nombre del color */
+.color-name {
+    font-size: 14px;
+    color: var(--color-primary-600);
+    margin-bottom: 4px;
+}
+
+/* Valor hexadecimal */
+.color-hex {
+    font-size: 12px;
+    color: var(--color-primary-400);
+    font-family: monospace;
+}
+
+/* Etiqueta de valor 600 */
+.color-value {
+    font-size: 12px;
+    color: var(--color-primary-500);
+    margin-top: 4px;
+}
+
+/* Contenedor de las cards */
+#harmonyColors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .color-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .color-card {
+        width: 100%;
+    }
+}
