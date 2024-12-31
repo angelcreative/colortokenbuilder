@@ -1,7 +1,7 @@
 // Declarar colorWheel globalmente
 let colorWheel;
 
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
 
     const toggleSwitch = document.getElementById('theme-toggle');
     
@@ -173,23 +173,29 @@ document.addEventListener('DOMContentLoaded', function() {
       showAlert('Color ' + colorHex + ' copied to clipboard!');
     }
         
-        function generateShades(baseColor) {
-            const color = chroma(baseColor);
-            const shades = {};
-            
-            // Generar tonos desde 300 hasta 900 (más oscuros)
-            for(let i = 3; i <= 9; i++) {
-                const shade = i * 100;
-                shades[shade] = color.darken((i-3) * 0.3).hex();
-            }
-            
-            // Generar tonos más claros (50, 100, 200) con una degradación extremadamente sutil hacia blanco
-            const baseLight = chroma(shades[300]);
-            shades[200] = baseLight.luminance(0.95).hex();  // Muy cercano al blanco pero mantiene un toque del color
-            shades[100] = baseLight.luminance(0.97).hex();  // Aún más cercano al blanco
-            shades[50] = baseLight.luminance(0.98).hex();   // Prácticamente blanco con un toque imperceptible del color
-            
-            return shades;
+        function generateColorScale(selectedColor) {
+            const color = chroma(selectedColor);
+            const hue = color.get('hsl.h');
+            const saturation = color.get('hsl.s');
+            const baseLight = color.get('hsl.l'); // Luminosidad del color seleccionado
+
+            // Calcular incrementos de 10% desde el color base
+            return {
+                // Más claros: incrementar luminosidad en 10% cada vez desde el color base
+                '50':  chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.5)).hex(),  // +50%
+                '100': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.4)).hex(),  // +40%
+                '200': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.3)).hex(),  // +30%
+                '300': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.2)).hex(),  // +20%
+                '400': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.1)).hex(),  // +10%
+                '500': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.05)).hex(), // +5%
+                
+                '600': selectedColor, // Color seleccionado exacto
+                
+                // Más oscuros: reducir luminosidad en 10% cada vez desde el color base
+                '700': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.1)).hex(),  // -10%
+                '800': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.2)).hex(),  // -20%
+                '900': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.3)).hex()   // -30%
+            };
         }
     
         function applyDynamicStyles(colorPalette) {
@@ -201,20 +207,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const selectedColor = colorWheel.color.hexString;
-            // Usar generateShades en lugar de la escala manual
-            const shades = generateShades(selectedColor);
+            const scale = generateColorScale(selectedColor);
 
             // Establecer variables del color primario
-            root.style.setProperty('--color-primary-50', shades[50]);
-            root.style.setProperty('--color-primary-100', shades[100]);
-            root.style.setProperty('--color-primary-200', shades[200]);
-            root.style.setProperty('--color-primary-300', shades[300]);
-            root.style.setProperty('--color-primary-400', shades[400]);
-            root.style.setProperty('--color-primary-500', shades[500]);
-            root.style.setProperty('--color-primary-600', selectedColor);
-            root.style.setProperty('--color-primary-700', shades[700]);
-            root.style.setProperty('--color-primary-800', shades[800]);
-            root.style.setProperty('--color-primary-900', shades[900]);
+            Object.entries(scale).forEach(([shade, color]) => {
+                root.style.setProperty(`--color-primary-${shade}`, color);
+            });
 
             // Asignar las variables CSS dinámicamente para los otros colores
             Object.keys(colorPalette).forEach((colorKey, index) => {
@@ -235,108 +233,82 @@ document.addEventListener('DOMContentLoaded', function() {
             root.style.setProperty('--button-primary', selectedColor);
         }
         
-        function generateColorPalettes(colors) {
-            return colors.map(color => {
-                const shades = generateShades(color);
-                return {
-                    '50': shades[50],
-                    '100': shades[100],
-                    '200': shades[200],
-                    '300': shades[300],
-                    '400': shades[400],
-                    '500': shades[500],
-                    '600': color,         // Color base
-                    '700': shades[700],
-                    '800': shades[800],
-                    '900': shades[900]
-                };
-            });
-        }
-    
-        function displayColorCards(colors, baseColor) {
-            const palettes = generateColorPalettes(colors);
-            const container = document.getElementById('colorPalettes');
-            container.innerHTML = '';
+        function generateColorPalettes(baseColors, selectedColor) {
+            const paletteContainer = document.createElement('div');
+            paletteContainer.id = 'paletteContainer';
 
-            palettes.forEach((palette, index) => {
-                const colorName = ntc.name(colors[index])[1].replace(/-color.*$/i, '').trim();
-                const card = createColorCard(palette, colorName);
-                container.appendChild(card);
-            });
-        }
-    
-        function createColorCard(palette, colorName) {
-            const card = document.createElement('div');
-            card.className = 'color-card';
+            baseColors.forEach(color => {
+                let colorName = ntc.name(color)[1];
+                colorName = colorName.replace(/-color.*$/i, '').trim();
 
-            // Crear el preview del color base (600)
-            const colorPreview = document.createElement('div');
-            colorPreview.className = 'color-preview';
-            colorPreview.style.backgroundColor = palette['600'];
+                const palette = document.createElement('div');
+                palette.style.display = 'flex';
+                palette.style.flexDirection = 'row';
+                palette.style.gap = '10px';
+                palette.style.flexWrap = 'wrap';
+                palette.style.marginBottom = '20px'; // Añadir espacio entre paletas
 
-            // Crear el contenedor de información
-            const colorInfo = document.createElement('div');
-            colorInfo.className = 'color-info';
-
-            // Añadir nombre del color
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'color-name';
-            nameDiv.textContent = colorName;
-
-            // Añadir valor RGB
-            const rgbColor = chroma(palette['600']).rgb();
-            const rgbDiv = document.createElement('div');
-            rgbDiv.className = 'color-rgb';
-            rgbDiv.textContent = `RGB ${rgbColor.join(' ')}`;
-
-            // Añadir valor HEX
-            const hexDiv = document.createElement('div');
-            hexDiv.className = 'color-hex';
-            hexDiv.textContent = palette['600'].toUpperCase();
-
-            // Añadir valor 600
-            const valueDiv = document.createElement('div');
-            valueDiv.className = 'color-value';
-            valueDiv.textContent = '600';
-
-            // Ensamblar la tarjeta
-            colorInfo.appendChild(nameDiv);
-            colorInfo.appendChild(rgbDiv);
-            colorInfo.appendChild(hexDiv);
-            colorInfo.appendChild(valueDiv);
-
-            card.appendChild(colorPreview);
-            card.appendChild(colorInfo);
-
-            // Añadir los shades
-            const shadesContainer = document.createElement('div');
-            shadesContainer.className = 'shades-container';
-
-            // Crear elementos para cada shade
-            ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'].forEach(shade => {
-                const shadeElement = document.createElement('div');
-                shadeElement.className = 'shade-item';
-                shadeElement.style.backgroundColor = palette[shade];
+                const scale = generateColorScale(color);
                 
-                const shadeLabel = document.createElement('div');
-                shadeLabel.className = 'shade-label';
-                shadeLabel.textContent = shade;
-                
-                const shadeHex = document.createElement('div');
-                shadeHex.className = 'shade-hex';
-                shadeHex.textContent = palette[shade].toUpperCase();
-
-                shadeElement.appendChild(shadeLabel);
-                shadeElement.appendChild(shadeHex);
-                shadesContainer.appendChild(shadeElement);
-
-                // Añadir funcionalidad de copia al hacer clic
-                shadeElement.addEventListener('click', () => {
-                    copyToClipboard(palette[shade].toUpperCase());
+                // Crear cards para cada shade
+                Object.entries(scale).forEach(([shade, shadeColor]) => {
+                    let hexColor = shade === '600' ? color : shadeColor;
+                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, color);
+                    palette.appendChild(card);
                 });
+
+                const paletteTitle = document.createElement('h4');
+                paletteTitle.textContent = colorName;
+                paletteTitle.style.marginBottom = '10px'; // Espacio después del título
+                paletteContainer.appendChild(paletteTitle);
+                paletteContainer.appendChild(palette);
             });
 
-            card.appendChild(shadesContainer);
+            const colorCardsContainer = document.getElementById('colorCards');
+            colorCardsContainer.appendChild(paletteContainer);
+        }
+    
+        function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
+            const card = document.createElement('div');
+            card.classList.add('colorCard', 'gradientCard');
+            card.style.backgroundColor = paletteColor;
+            card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
+            card.style.width = '80px';
+            card.style.height = '80px'; 
+            card.style.borderRadius = '8px'; 
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+            card.style.justifyContent = 'center';
+            card.style.alignItems = 'center';
+            card.style.fontFamily = 'Arial, sans-serif';
+            card.style.fontSize = '14px';
+        
+            // Highlight the matching color
+            if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
+                card.style.border = '3px solid #000000';
+            }
+        
+            // Add a button to copy the hex color
+            const copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('copyButton');
+            copyButton.style.marginTop = '8px';
+            copyButton.style.fontSize = '10px';
+            copyButton.style.padding = '4px';
+            copyButton.style.borderRadius = '4px';
+            copyButton.style.cursor = 'pointer';
+            copyButton.style.background = '#000';
+            copyButton.style.color = '#fff';
+            copyButton.addEventListener('click', function() {
+                copyToClipboard(hexColor);
+            });
+        
+            card.innerHTML = `
+                <div style="font-size: 14px; font-weight: bold;">${tokenName}</div>
+                <div style="font-size: 14px; margin-top: 4px;">${hexColor}</div>
+            `;
+            card.appendChild(copyButton);
+        
             return card;
         }
         
@@ -559,26 +531,40 @@ document.addEventListener('DOMContentLoaded', function() {
     function applyDynamicStyles(colorPalette) {
         const root = document.documentElement;
         
+        // Verificar si colorWheel está definido
         if (!colorWheel) {
             console.warn('ColorWheel no está inicializado');
             return;
         }
 
         const selectedColor = colorWheel.color.hexString;
-        // Usar generateShades en lugar de la escala manual
-        const shades = generateShades(selectedColor);
+        const color = chroma(selectedColor);
+
+        // Generar escala de colores desde más claro a más oscuro
+        const scale = chroma.scale([
+            color.luminance(0.95),  // 50
+            color.luminance(0.9),   // 100
+            color.luminance(0.8),   // 200
+            color.luminance(0.7),   // 300
+            color.luminance(0.6),   // 400
+            color.luminance(0.5),   // 500
+            selectedColor,          // 600 (color seleccionado)
+            color.luminance(0.3),   // 700
+            color.luminance(0.2),   // 800
+            color.luminance(0.1)    // 900
+        ]).colors(10);
 
         // Establecer variables del color primario
-        root.style.setProperty('--color-primary-50', shades[50]);
-        root.style.setProperty('--color-primary-100', shades[100]);
-        root.style.setProperty('--color-primary-200', shades[200]);
-        root.style.setProperty('--color-primary-300', shades[300]);
-        root.style.setProperty('--color-primary-400', shades[400]);
-        root.style.setProperty('--color-primary-500', shades[500]);
+        root.style.setProperty('--color-primary-50', scale[0]);
+        root.style.setProperty('--color-primary-100', scale[1]);
+        root.style.setProperty('--color-primary-200', scale[2]);
+        root.style.setProperty('--color-primary-300', scale[3]);
+        root.style.setProperty('--color-primary-400', scale[4]);
+        root.style.setProperty('--color-primary-500', scale[5]);
         root.style.setProperty('--color-primary-600', selectedColor);
-        root.style.setProperty('--color-primary-700', shades[700]);
-        root.style.setProperty('--color-primary-800', shades[800]);
-        root.style.setProperty('--color-primary-900', shades[900]);
+        root.style.setProperty('--color-primary-700', scale[7]);
+        root.style.setProperty('--color-primary-800', scale[8]);
+        root.style.setProperty('--color-primary-900', scale[9]);
 
         // Asignar las variables CSS dinámicamente para los otros colores
         Object.keys(colorPalette).forEach((colorKey, index) => {
