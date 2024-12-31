@@ -3426,34 +3426,3 @@ label,
     gap: 16px;
     margin-bottom: 20px;
 }
-
-.shades-container {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 2px;
-    margin-top: 16px;
-}
-
-.shade-item {
-    padding: 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-    position: relative;
-}
-
-.shade-item:hover {
-    transform: scale(1.05);
-}
-
-.shade-label {
-    font-size: 12px;
-    margin-bottom: 4px;
-    color: var(--color-primary-600);
-}
-
-.shade-hex {
-    font-size: 10px;
-    font-family: monospace;
-    color: var(--color-primary-600);
-}
