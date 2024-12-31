@@ -3322,3 +3322,13 @@ label,
         width: 100%;
     }
 }
+
+/* Añade estos estilos para los indicadores de color */
+.colorIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
