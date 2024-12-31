@@ -95,20 +95,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         function updateColorIndicators(colors) {
+            // Primero eliminar los indicadores existentes
             colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
-    
-            const wheelRadius = colorWheelContainer.offsetWidth / 2;
+
+            const wheelRadius = colorWheel.width / 2;
             const centerX = wheelRadius;
             const centerY = wheelRadius;
-    
+
+            // Crear indicadores para todos los colores excepto el principal
             colors.forEach((color, index) => {
-                if (index === 0) return;
-    
+                if (index === 0) return; // Saltar el color principal
+
                 const hue = chroma(color).get('hsl.h');
                 const angleRadians = (hue * Math.PI / 180);
-                const indicatorX = centerX + wheelRadius * Math.cos(angleRadians);
-                const indicatorY = centerY - wheelRadius * Math.sin(angleRadians);
-    
+                
+                // Calcular la posición en el círculo
+                const indicatorX = centerX + (wheelRadius - 20) * Math.cos(angleRadians);
+                const indicatorY = centerY - (wheelRadius - 20) * Math.sin(angleRadians);
+
+                // Crear el indicador
                 const indicator = document.createElement('div');
                 indicator.classList.add('colorIndicator');
                 indicator.style.position = 'absolute';
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 indicator.style.top = `${indicatorY}px`;
                 indicator.style.transform = 'translate(-50%, -50%)';
                 indicator.style.backgroundColor = color;
-    
+
                 colorWheelContainer.appendChild(indicator);
             });
         }
@@ -238,18 +243,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 palette.style.flexDirection = 'row';
                 palette.style.gap = '10px';
                 palette.style.flexWrap = 'wrap';
+                palette.style.marginBottom = '20px'; // Añadir espacio entre paletas
 
                 const scale = generateColorScale(color);
                 
                 // Crear cards para cada shade
                 Object.entries(scale).forEach(([shade, shadeColor]) => {
                     let hexColor = shade === '600' ? color : shadeColor;
-                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, selectedColor);
+                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, color);
                     palette.appendChild(card);
                 });
 
                 const paletteTitle = document.createElement('h4');
                 paletteTitle.textContent = colorName;
+                paletteTitle.style.marginBottom = '10px'; // Espacio después del título
                 paletteContainer.appendChild(paletteTitle);
                 paletteContainer.appendChild(palette);
             });
@@ -313,35 +320,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
         function displayColorCards(colors) {
             const colorCardsContainer = document.getElementById('colorCards');
-            colorCardsContainer.innerHTML = '';
-    
-            colors.forEach(color => {
-                const rgbColor = chroma(color).rgb();
-                const [r, g, b] = rgbColor;
-                let colorName = ntc.name(color)[1];
-    
-                colorName = colorName.replace(/ Color RGB.*/, '');
-    
-                const hexColor = chroma(color).hex();
-                const hslColor = chroma(color).hsl().map(value => value.toFixed(2));
-    
-                const textColor = chroma(color).luminance() > 0.5 ? '#000000' : '#ffffff';
-    
-                const cardDiv = document.createElement('div');
-                cardDiv.classList.add('colorCard');
-                cardDiv.style.backgroundColor = color;
-                cardDiv.style.color = textColor;
-                cardDiv.innerHTML = `
-                    <p>${colorName}</p>
-                    <p>RGB: ${r} ${g} ${b}</p>
-                    <p>HEX: ${hexColor}</p>
-                    <p>HSL: ${hslColor[0]} ${hslColor[1]} ${hslColor[2]}</p>
-                `;
-                colorCardsContainer.appendChild(cardDiv);
-            });
-    
+            
+            // Limpiar solo el contenedor de paletas si existe
+            const existingPaletteContainer = document.getElementById('paletteContainer');
+            if (existingPaletteContainer) {
+                existingPaletteContainer.remove();
+            }
+
+            // Generar las nuevas paletas
             generateColorPalettes(colors);
-            updateDisplayedPalettes(colors); // Store the currently displayed palettes
+            
+            // Actualizar los estilos dinámicos
+            updateDisplayedPalettes(colors);
         }
     
         function updateDisplayedPalettes(baseColors) {
