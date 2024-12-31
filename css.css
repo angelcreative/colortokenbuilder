@@ -282,13 +282,7 @@ color: var(--color-primary); /* color-color-1 */
 margin-bottom: 20px;
 }
 
-.custom-plan {
-background-color: var(--background-primary); /* background-color-1 */
-padding: 15px;
-border-radius: 15px;
-margin-bottom: 15px;
-color: var(--color-secondary); /* color-color-2 */
-}
+.custom-plan {background-color: var(--color-primary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
 
 .custom-plan h3 {
 margin: 0 0 10px 0;
@@ -1546,7 +1540,7 @@ display:block; cursor:pointer
   margin-bottom: 2rem;
   padding: 1rem;
   border-radius: 8px;
-  background: var(--background-primary);
+  background: var(--color-primary-100);
 }
 
 .component-group h3 {
@@ -1655,6 +1649,7 @@ display:block; cursor:pointer
   background: white;
   appearance: none;
   cursor: pointer;
+  color: var(--color-primary-600);
 }
 
 .ui-select-wrapper::after {
@@ -1704,7 +1699,7 @@ display:block; cursor:pointer
 .checkmark {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--color-primary-200);
+  border: 2px solid var(--color-primary-300);
   border-radius: 4px;
   position: relative;
   background: white;
@@ -1736,7 +1731,7 @@ display:block; cursor:pointer
 .radiomark {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--color-primary-200);
+  border: 2px solid var(--color-primary-300);
   border-radius: 50%;
   position: relative;
   background: white;
@@ -1764,7 +1759,7 @@ display:block; cursor:pointer
 .ui-switch .slider {
   width: 36px;
   height: 20px;
-  background: var(--color-primary-200);
+  background: var(--color-primary-400);
   border-radius: 20px;
   position: relative;
   cursor: pointer;
@@ -1801,13 +1796,13 @@ display:block; cursor:pointer
 }
 
 .ui-tag.primary {
-  background: var(--color-primary-100);
-  color: var(--color-primary-700);
+  background: var(--color-primary-600);
+  color: var(--color-primary-100);
 }
 
 .ui-tag.secondary {
-  background: var(--background-color-2-100);
-  color: var(--button-color-2);
+  background: var(--color-secondary-600);
+  color: var(--color-secondary-100);
 }
 
 /* Slider */
@@ -2229,13 +2224,9 @@ font-size: 14px;
 
 .custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-primary-500) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
 
-.custom-card-secondary {
-background: var(--color-primary-100);
-}
+.custom-card-secondary {background: var(--color-secondary-100);}
 
-.custom-card-tertiary {
-background: var(--color-primary-200);
-}
+.custom-card-tertiary {background: var(--color-secondary-200);}
 
 /* Recent Search Section */
 .custom-recent-search-header {
@@ -2404,8 +2395,8 @@ label,
 }
 
 .ui-button.secondary {
-  background: var(--color-primary-200);
-  color: var(--color-primary-700);
+  background: var(--color-primary-400);
+  color: var(--color-primary-600);
 }
 
 .ui-button.secondary:hover {
@@ -3496,8 +3487,8 @@ label,
 }
 
 .stats-tag {
-    color: var(--background-color-2-100);
-    background: var(--background-color-2-50);
+    color: var(--color-secondary-800);
+    background: var(--color-secondary-300);
     padding: 4px 12px;
     border-radius: 100px;
     font-size: 16px;
@@ -3512,7 +3503,7 @@ label,
 }
 
 .current-amount {
-    color: var(--color-primary-700);
+    color: var(--color-secondary-800);
     font-size: 32px;
     font-weight: 600;
 }
