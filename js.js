@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateColorIndicators(colors);
             updateDisplayedPalettes(colors);
             displayColorCards(colors, baseColor);
+            displayGradientCards(colors);
         }
     
         function getHarmonyColors(color, type) {
@@ -662,6 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options.style.display = options.style.display === 'block' ? 'none' : 'block';
         });
     });
+    
     
     
     
