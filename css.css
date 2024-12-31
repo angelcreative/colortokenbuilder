@@ -3139,3 +3139,65 @@ label,
     --color-primary-50: #f0f9ff;
     --color-primary-100: #e0f2fe;
     --color-primary-200: #bae6fd;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Color wheel y shades container */
+.color-wheel-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Mockup móvil */
+.mobile-mockup {
+    max-width: 400px;
+    height: 956px;
+    margin: 0 auto;
+    background: var(--background-primary);
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* UI Components container */
+.ui-components {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Contenedor de shades */
+.shades-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1300px) {
+    .container,
+    .color-wheel-container,
+    .ui-components,
+    .shades-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .mobile-mockup {
+        max-width: 100%;
+        height: auto;
+        min-height: 956px;
+        border-radius: 20px;
+    }
+}
