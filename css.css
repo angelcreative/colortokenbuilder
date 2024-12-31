@@ -24,6 +24,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+div#dynamicColorPalette {
+    padding: 0 0 2rem 0;
+}
 /* Enlaces */
 a {
   color: var(--color-primary-600);
