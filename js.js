@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateDisplayedPalettes(colors);
             displayColorCards(colors, baseColor);
             displayGradientCards(colors);
+            updateCSSVariables(baseColor, colors);
         }
     
         function getHarmonyColors(color, type) {
@@ -787,6 +788,69 @@ document.addEventListener('DOMContentLoaded', function() {
         // Disparar el evento de cambio para actualizar los colores
         updateHarmonyColors("#5036C2");
     });
+    
+    
+    
+    
+    
+    function updateCSSVariables(selectedColor, colors) {
+        const root = document.documentElement;
+        
+        // Generar escala para color primario (existente)
+        const primaryScale = chroma.scale([
+            chroma(selectedColor).luminance(0.95),
+            chroma(selectedColor).luminance(0.9),
+            chroma(selectedColor).luminance(0.8),
+            chroma(selectedColor).luminance(0.7),
+            chroma(selectedColor).luminance(0.6),
+            chroma(selectedColor).luminance(0.5),
+            selectedColor,
+            chroma(selectedColor).darken(0.5),
+            chroma(selectedColor).darken(1),
+            chroma(selectedColor).darken(1.5)
+        ]).colors(10);
+
+        // Generar escala para color secundario (nuevo)
+        const secondaryColor = colors[1]; // Tomar el segundo color de la armonía
+        const secondaryScale = chroma.scale([
+            chroma(secondaryColor).luminance(0.95),
+            chroma(secondaryColor).luminance(0.9),
+            chroma(secondaryColor).luminance(0.8),
+            chroma(secondaryColor).luminance(0.7),
+            chroma(secondaryColor).luminance(0.6),
+            chroma(secondaryColor).luminance(0.5),
+            secondaryColor,
+            chroma(secondaryColor).darken(0.5),
+            chroma(secondaryColor).darken(1),
+            chroma(secondaryColor).darken(1.5)
+        ]).colors(10);
+
+        // Establecer variables del color primario (existente)
+        root.style.setProperty('--color-primary-50', primaryScale[0]);
+        root.style.setProperty('--color-primary-100', primaryScale[1]);
+        root.style.setProperty('--color-primary-200', primaryScale[2]);
+        root.style.setProperty('--color-primary-300', primaryScale[3]);
+        root.style.setProperty('--color-primary-400', primaryScale[4]);
+        root.style.setProperty('--color-primary-500', primaryScale[5]);
+        root.style.setProperty('--color-primary-600', selectedColor);
+        root.style.setProperty('--color-primary-700', primaryScale[7]);
+        root.style.setProperty('--color-primary-800', primaryScale[8]);
+        root.style.setProperty('--color-primary-900', primaryScale[9]);
+
+        // Establecer variables del color secundario (nuevo)
+        root.style.setProperty('--color-secondary-50', secondaryScale[0]);
+        root.style.setProperty('--color-secondary-100', secondaryScale[1]);
+        root.style.setProperty('--color-secondary-200', secondaryScale[2]);
+        root.style.setProperty('--color-secondary-300', secondaryScale[3]);
+        root.style.setProperty('--color-secondary-400', secondaryScale[4]);
+        root.style.setProperty('--color-secondary-500', secondaryScale[5]);
+        root.style.setProperty('--color-secondary-600', secondaryColor);
+        root.style.setProperty('--color-secondary-700', secondaryScale[7]);
+        root.style.setProperty('--color-secondary-800', secondaryScale[8]);
+        root.style.setProperty('--color-secondary-900', secondaryScale[9]);
+
+        // ... resto del código existente
+    }
     
     
     
