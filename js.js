@@ -173,29 +173,23 @@ document.addEventListener('DOMContentLoaded', function() {
       showAlert('Color ' + colorHex + ' copied to clipboard!');
     }
         
-        function generateColorScale(selectedColor) {
-            const color = chroma(selectedColor);
-            const hue = color.get('hsl.h');
-            const saturation = color.get('hsl.s');
-            const baseLight = color.get('hsl.l'); // Luminosidad del color seleccionado
-
-            // Calcular incrementos de 10% desde el color base
-            return {
-                // Más claros: incrementar luminosidad en 10% cada vez desde el color base
-                '50':  chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.5)).hex(),  // +50%
-                '100': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.4)).hex(),  // +40%
-                '200': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.3)).hex(),  // +30%
-                '300': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.2)).hex(),  // +20%
-                '400': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.1)).hex(),  // +10%
-                '500': chroma.hsl(hue, saturation, Math.min(1, baseLight + 0.05)).hex(), // +5%
-                
-                '600': selectedColor, // Color seleccionado exacto
-                
-                // Más oscuros: reducir luminosidad en 10% cada vez desde el color base
-                '700': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.1)).hex(),  // -10%
-                '800': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.2)).hex(),  // -20%
-                '900': chroma.hsl(hue, saturation, Math.max(0, baseLight - 0.3)).hex()   // -30%
-            };
+        function generateShades(baseColor) {
+            const color = chroma(baseColor);
+            const shades = {};
+            
+            // Generar tonos desde 300 hasta 900 (más oscuros)
+            for(let i = 3; i <= 9; i++) {
+                const shade = i * 100;
+                shades[shade] = color.darken((i-3) * 0.3).hex();
+            }
+            
+            // Generar tonos más claros (50, 100, 200) con una degradación extremadamente sutil hacia blanco
+            const baseLight = chroma(shades[300]);
+            shades[200] = baseLight.luminance(0.95).hex();  // Muy cercano al blanco pero mantiene un toque del color
+            shades[100] = baseLight.luminance(0.97).hex();  // Aún más cercano al blanco
+            shades[50] = baseLight.luminance(0.98).hex();   // Prácticamente blanco con un toque imperceptible del color
+            
+            return shades;
         }
     
         function applyDynamicStyles(colorPalette) {
