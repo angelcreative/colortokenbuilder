@@ -3338,3 +3338,39 @@ label,
 #colorWheelContainer {
     position: relative; /* Asegurarse de que el contenedor sea relativo */
 }
+
+#colorWheelContainer {
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.colorIndicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Asegurarse de que el contenedor de colores armónicos tenga espacio */
+#harmonyColors {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Estilo para las cards de colores */
+.colorCard {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
