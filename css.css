@@ -3153,6 +3153,7 @@ label,
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  margin-top: 80px;
 }
 
 /* Contenedor de shades */
@@ -3437,8 +3438,6 @@ label,
     margin-top: 32px;
     padding-top: 24px;
     border-top: 1px solid rgba(0,0,0,0.1);
-    min-width: 64%;
-    justify-content: center;
 }
 
 .gradient-cards .color-card {
