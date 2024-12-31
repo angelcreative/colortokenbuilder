@@ -45,120 +45,26 @@ content_copy
 	<a style="position: absolute; right: 5%; top: 0; zoom: .5;" href="https://www.producthunt.com/posts/color-token-builder?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-color&#0045;token&#0045;builder" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=488816&theme=dark" alt="Color&#0032;Token&#0032;Builder - Generate&#0032;and&#0032;Export&#0032;Color&#0032;Tokens&#0032;Effortlessly | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
    <h1 style="margin-top:60px;font-size: 2rem; text-align:center;">Color Token Builder</h1>     
 
-<div class="coloresWheel">
-  <div class="flex">
-   <div class="hexInputcontainer"><input type="color" id="hexInput" placeholder="Enter HEX value (optional)"></div>
-   
-   <select id="harmonyType">
-        <option value="complementary">Complementary</option>
-        <option value="analogous">Analogous</option>
-        <option value="triadic" selected>Triadic</option>
-        <option value="square">Square</option>
-    </select>
-<div id="colorWheelContainer"></div>
-  </div>
-<div class="selectColores">
-   
-    <div id="harmonyColors"></div>
-  
-  <div id="colorCards" class="selectColores"></div>
- 
-  
-  
-    <h1 style="margin:40px;font-size: 2rem;text-align:center;">UI demos</h1>     
-  
-
-<div id="dynamicColorPalette" class="color-palette">
-  <!-- Colors from the wheel will be dynamically inserted here -->
-  
-  
-  <!-- iphone-->
-	 <h2 style="margin:40px;font-size: 2rem;text-align:center;">Mobile</h2>
-  <div class="custom-iphone-x">
-  <div class="custom-screen-content">
-    <div class="custom-app">
-        <div class="custom-header">
-            <div class="custom-user-info">
-                <div class="custom-user-avatar">
-                    <img src="https://i.postimg.cc/V65y59K3/Captura-de-pantalla-2024-09-01-a-las-13-21-30.png" alt="User Avatar">
-                </div>
-            </div>
-            <div class="custom-greeting">
-                <h1>Hello! 👋🏽</h1>
-                <p>Make your day easy with us</p>
-            </div>
-        </div>
-        
-       <div class="custom-main-content">
-            <div class="custom-card custom-card-primary">
-                <div class="custom-icon-wrapper icon-tag">
-                   <span class="material-symbols-outlined ">call</span>
-                </div>
-                <h2>Call Cooper</h2>
-                <p>Let's try it now</p>
-            </div>
-            <div class="custom-card custom-card-secondary">
-                <div class="custom-icon-wrapper icon-tag">
-                   <span class="material-symbols-outlined ">sms</span>
-                </div>
-                <h2>New Chat</h2>
-                <p>Start a conversation</p>
-            </div>
-            <div class="custom-card custom-card-tertiary">
-                <div class="custom-icon-wrapper  icon-tag">
-                   <span class="material-symbols-outlined ">center_focus_strong</span>
-                </div>
-               
-                <h2>Search by Image</h2>
-                <p>Find what you need</p>
-            </div>
-        </div>
-        
-       <div class="custom-recent-search">
-    <div class="custom-recent-search-header">
-        <h3>Recent Search</h3>
-        <a href="#" class="custom-see-all">See All</a>
+<div class="container">
+    <!-- Color wheel section -->
+    <div class="color-wheel-container">
+        <!-- Color wheel content -->
     </div>
-    <ul>
-        <li class="custom-search-item">
-            <div class="custom-search-icon-wrapper icon-tag">
-                   <span class="material-symbols-outlined ">help</span>
-            </div>
-            <span>What is a wild animal?</span>
-            <div class="custom-more-options">•••</div>
-        </li>
-        <li class="custom-search-item">
-            <div class="custom-search-icon-wrapper icon-tag">
-                   <span class="material-symbols-outlined ">settings_overscan</span>
-            </div>
-            <span>Scanning images</span>
-            <div class="custom-more-options">•••</div>
-        </li>
-        <li class="custom-search-item">
-            <div class="custom-search-icon-wrapper icon-tag">
-                   <span class="material-symbols-outlined ">grouped_bar_chart</span>
-            </div>
-            <span>Analysis my dribbble shot</span>
-            <div class="custom-more-options">•••</div>
-        </li>
-    </ul>
-</div>
 
-        
-        <div class="custom-subscription">
-            <h2>Subscription Plans</h2>
-            <div class="custom-plan">
-                <h3>Monthly Plan</h3>
-                <p>$8.99/month</p>
-            </div>
-            <div class="custom-plan">
-                <h3>Yearly Plan</h3>
-                <p>$99.99/year</p>
-            </div>
-            <button class="custom-subscribe-btn">Subscribe</button>
-        </div>
+    <!-- Mobile mockup -->
+    <div class="mobile-mockup">
+        <!-- Mobile content -->
     </div>
-  </div>
+
+    <!-- UI Components -->
+    <div class="ui-components">
+        <!-- Components content -->
+    </div>
+
+    <!-- Shades section -->
+    <div class="shades-container">
+        <!-- Shades content -->
+    </div>
 </div>
 
  
@@ -171,7 +77,8 @@ content_copy
 
 </div>
 
-   <!-- Después de la sección "Components" -->
+ 
+  <!-- Después de la sección "Components" -->
 <section class="ui-components">
     <h2 style="margin:40px;font-size: 2rem;text-align:center;">UI Components</h2>
     
@@ -300,7 +207,6 @@ content_copy
 </section>
 
 
-
    
 </div>
   
@@ -312,8 +218,8 @@ content_copy
   
   
 <div class="buttons">
- <button id="exportSvgButton">Export as SVG</button>
-<button id="exportJsonButton">Export as Tailwind HEX</button>
+ <button id="exportSvgButton" class="ui-button primary">Export as SVG</button>
+<button id="exportJsonButton" class="ui-button primary">Export as Tailwind HEX</button>
   </div>
 
 </div>
