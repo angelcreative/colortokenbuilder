@@ -235,39 +235,34 @@ document.addEventListener('DOMContentLoaded', function() {
             root.style.setProperty('--button-primary', selectedColor);
         }
         
-        function generateColorPalettes(baseColors, selectedColor) {
-            const paletteContainer = document.createElement('div');
-            paletteContainer.id = 'paletteContainer';
-
-            baseColors.forEach(color => {
-                let colorName = ntc.name(color)[1];
-                colorName = colorName.replace(/-color.*$/i, '').trim();
-
-                const palette = document.createElement('div');
-                palette.style.display = 'flex';
-                palette.style.flexDirection = 'row';
-                palette.style.gap = '10px';
-                palette.style.flexWrap = 'wrap';
-                palette.style.marginBottom = '20px'; // Añadir espacio entre paletas
-
-                const scale = generateColorScale(color);
-                
-                // Crear cards para cada shade
-                Object.entries(scale).forEach(([shade, shadeColor]) => {
-                    let hexColor = shade === '600' ? color : shadeColor;
-                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, color);
-                    palette.appendChild(card);
-                });
-
-                const paletteTitle = document.createElement('h4');
-                paletteTitle.textContent = colorName;
-                paletteTitle.style.marginBottom = '10px'; // Espacio después del título
-                paletteContainer.appendChild(paletteTitle);
-                paletteContainer.appendChild(palette);
+        function generateColorPalettes(colors) {
+            return colors.map(color => {
+                const shades = generateShades(color);
+                return {
+                    '50': shades[50],
+                    '100': shades[100],
+                    '200': shades[200],
+                    '300': shades[300],
+                    '400': shades[400],
+                    '500': shades[500],
+                    '600': color,         // Color base
+                    '700': shades[700],
+                    '800': shades[800],
+                    '900': shades[900]
+                };
             });
+        }
+    
+        function displayColorCards(colors, baseColor) {
+            const palettes = generateColorPalettes(colors);
+            const container = document.getElementById('colorPalettes');
+            container.innerHTML = '';
 
-            const colorCardsContainer = document.getElementById('colorCards');
-            colorCardsContainer.appendChild(paletteContainer);
+            palettes.forEach((palette, index) => {
+                const colorName = ntc.name(colors[index])[1].replace(/-color.*$/i, '').trim();
+                const card = createColorCard(palette, colorName);
+                container.appendChild(card);
+            });
         }
     
         function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
