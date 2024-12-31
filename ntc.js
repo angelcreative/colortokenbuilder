@@ -4,6 +4,8 @@
 |     Created by Chirag Mehta - http://chir.ag/projects/ntc       |
 |-----------------------------------------------------------------|
 |               ntc js (Name that Color JavaScript)               |
+|            MODIFIED BY ANGELCREATIVE                            |
++-----------------------------------------------------------------+
 +-----------------------------------------------------------------+
 
 All the functions, code, lists etc. have been written specifically
