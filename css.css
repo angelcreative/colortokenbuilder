@@ -1995,7 +1995,7 @@ a:hover {
 
 /* Textos en cards */
 .colorCard {
-  /* El color del texto se mantiene contrastante con el fondo */
+ display:none; /* El color del texto se mantiene contrastante con el fondo */
 }
 
 /* Mantener los colores de los botones como están */
