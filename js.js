@@ -74,28 +74,23 @@ document.addEventListener('DOMContentLoaded', function() {
             return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
         }
     
-        function createColorCard(color, name) {
-            return `
-                <div class="color-card">
-                    <div class="color-preview" style="background-color: ${color};"></div>
-                    <div class="color-info">
-                        <div class="color-name">${name}</div>
-                        <div class="color-hex">${color}</div>
-                        <div class="color-value">600</div>
-                    </div>
-                </div>
-            `;
-        }
-    
         function displayColors(colors) {
             const harmonyColors = document.getElementById('harmonyColors');
             harmonyColors.innerHTML = '';
             
             colors.forEach(color => {
-                // Obtener el nombre del color usando ntc.js
                 const colorName = ntc.name(color)[1].replace(/-color.*$/i, '').trim();
-                // Usar la nueva función createColorCard
-                harmonyColors.innerHTML += createColorCard(color, colorName);
+                const cardHTML = `
+                    <div class="color-card">
+                        <div class="color-preview" style="background-color: ${color};"></div>
+                        <div class="color-info">
+                            <div class="color-name">${colorName}</div>
+                            <div class="color-hex">${color}</div>
+                            <div class="color-value">600</div>
+                        </div>
+                    </div>
+                `;
+                harmonyColors.innerHTML += cardHTML;
             });
         }
     
@@ -264,49 +259,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
-        const card = document.createElement('div');
-        card.classList.add('colorCard', 'gradientCard');
-        card.style.backgroundColor = paletteColor;
-        card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
-        card.style.width = '80px';
-        card.style.height = '80px'; 
-        card.style.borderRadius = '8px'; 
-        card.style.display = 'flex';
-        card.style.flexDirection = 'column';
-        card.style.justifyContent = 'center';
-        card.style.alignItems = 'center';
-        card.style.fontFamily = 'Arial, sans-serif';
-        card.style.fontSize = '14px';
-    
-        // Highlight the matching color
-        if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
-            card.style.border = '3px solid #000000';
+            const card = document.createElement('div');
+            card.classList.add('colorCard', 'gradientCard');
+            card.style.backgroundColor = paletteColor;
+            card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
+            card.style.width = '80px';
+            card.style.height = '80px'; 
+            card.style.borderRadius = '8px'; 
+            card.style.display = 'flex';
+            card.style.flexDirection = 'column';
+            card.style.justifyContent = 'center';
+            card.style.alignItems = 'center';
+            card.style.fontFamily = 'Arial, sans-serif';
+            card.style.fontSize = '14px';
+        
+            // Highlight the matching color
+            if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
+                card.style.border = '3px solid #000000';
+            }
+        
+            // Add a button to copy the hex color
+            const copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('copyButton');
+            copyButton.style.marginTop = '8px';
+            copyButton.style.fontSize = '10px';
+            copyButton.style.padding = '4px';
+            copyButton.style.borderRadius = '4px';
+            copyButton.style.cursor = 'pointer';
+            copyButton.style.background = '#000';
+            copyButton.style.color = '#fff';
+            copyButton.addEventListener('click', function() {
+                copyToClipboard(hexColor);
+            });
+        
+            card.innerHTML = `
+                <div style="font-size: 14px; font-weight: bold;">${tokenName}</div>
+                <div style="font-size: 14px; margin-top: 4px;">${hexColor}</div>
+            `;
+            card.appendChild(copyButton);
+        
+            return card;
         }
-    
-        // Add a button to copy the hex color
-        const copyButton = document.createElement('button');
-        copyButton.textContent = 'Copy';
-        copyButton.classList.add('copyButton');
-        copyButton.style.marginTop = '8px';
-        copyButton.style.fontSize = '10px';
-        copyButton.style.padding = '4px';
-        copyButton.style.borderRadius = '4px';
-        copyButton.style.cursor = 'pointer';
-        copyButton.style.background = '#000';
-        copyButton.style.color = '#fff';
-        copyButton.addEventListener('click', function() {
-            copyToClipboard(hexColor);
-        });
-    
-        card.innerHTML = `
-            <div style="font-size: 14px; font-weight: bold;">${tokenName}</div>
-            <div style="font-size: 14px; margin-top: 4px;">${hexColor}</div>
-        `;
-        card.appendChild(copyButton);
-    
-        return card;
-    }
-    
+        
       
           function updateDisplayedPalettes(baseColors) {
             const colorPalette = generatePaletteJSON(baseColors); // Genera el colorPalette
