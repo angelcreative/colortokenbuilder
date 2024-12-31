@@ -74,13 +74,28 @@ document.addEventListener('DOMContentLoaded', function() {
             return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
         }
     
+        function createColorCard(color, name) {
+            return `
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: ${color};"></div>
+                    <div class="color-info">
+                        <div class="color-name">${name}</div>
+                        <div class="color-hex">${color}</div>
+                        <div class="color-value">600</div>
+                    </div>
+                </div>
+            `;
+        }
+    
         function displayColors(colors) {
             const harmonyColors = document.getElementById('harmonyColors');
             harmonyColors.innerHTML = '';
+            
             colors.forEach(color => {
-                const colorDiv = document.createElement('div');
-                colorDiv.style.backgroundColor = color;
-                harmonyColors.appendChild(colorDiv);
+                // Obtener el nombre del color usando ntc.js
+                const colorName = ntc.name(color)[1].replace(/-color.*$/i, '').trim();
+                // Usar la nueva función createColorCard
+                harmonyColors.innerHTML += createColorCard(color, colorName);
             });
         }
     
