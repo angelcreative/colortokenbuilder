@@ -3444,7 +3444,7 @@ label,
 }
 
 
-.stats-card, .form-card, .map-card {
+.stats-card, .form-card, .map-card, .credit-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
