@@ -3420,10 +3420,11 @@ label,
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    margin-top: 32px;
     padding-top: 24px;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     min-width: 60%;
+    margin: 20px auto 40px;
+    justify-content: center;
 }
 
 .gradient-cards .color-card {
