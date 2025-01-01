@@ -4046,3 +4046,97 @@ div#dynamicColorPalette {
     padding: 8px 16px;
     font-size: 14px;
 }
+
+
+/*map*/
+
+
+.map-card {
+  background: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+}
+
+.map-container {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.map-content {
+  padding: 20px;
+  background: white;
+  border-radius: 24px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 2;
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+
+.map-header h2 {
+  color: var(--color-primary-900);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.map-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-primary-600);
+}
+
+.map-rating .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.map-location {
+  color: var(--color-primary-400);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.map-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.map-actions .ui-button {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: auto;
+}
+
+
+.map-actions .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Ajuste para el botón de cierre */
+.map-header .ui-button.icon-only {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+}
