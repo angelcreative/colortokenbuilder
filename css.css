@@ -3436,7 +3436,7 @@ label,
     padding: 24px;
     width: 100%;
     max-width: 480px;
-    box-shadow: 0 8px 24px rgba(var(--color-primary-900), 0.4);
+    box-shadow: 0 8px 24px var(--color-primary-400);););););););););
     display: flex;
     flex-direction: column;
     gap: 8px;
