@@ -2595,8 +2595,8 @@ label,
 
 /* Header de la card */
 .card-header {
-  padding: 1.25rem;
-  border-bottom: 1px solid var(--color-primary-100);
+  padding: 16px 0 24px;
+  border-bottom: 1px solid var(--color-primary-500);
   background: var(--background-primary);
 }
 
@@ -3444,7 +3444,7 @@ label,
 }
 
 
-.stats-card, .form-card, .map-card, .credit-card {
+.stats-card, .form-card, .map-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
@@ -4191,6 +4191,7 @@ div#dynamicColorPalette {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 48px;
+    background: transparent;
 }
 
 .card-user {
@@ -4218,7 +4219,7 @@ div#dynamicColorPalette {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 48px;
+    margin-bottom: 38px;
 }
 
 .balance-label {
