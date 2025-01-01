@@ -4089,7 +4089,7 @@ div#dynamicColorPalette {
 
 
 .map-header h2 {
-  color: var(--color-primary-900);
+  color: #232a31;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
@@ -4107,7 +4107,7 @@ div#dynamicColorPalette {
 }
 
 .map-location {
-  color: var(--color-primary-400);
+  color: var(--color-primary-600);
   font-size: 14px;
   margin-bottom: 16px;
 }
