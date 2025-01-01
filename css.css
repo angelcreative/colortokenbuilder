@@ -507,11 +507,7 @@ border: none;
 cursor: pointer;
 }
 
-.chart-container {
-background-color: var(--background-quaternary);
-padding: 20px;
-border-radius: 20px;
-}
+.chart-container {background-color: var(--background-quaternary);/* padding: 20px; */border-radius: 20px;}
 
 .dashboard-actions {
   display: flex;
@@ -4423,7 +4419,7 @@ div#dynamicColorPalette {
 .chart-labels {
     display: flex;
     justify-content: space-between;
-    padding: 16px 0 0;
+    /* padding: 16px 0 0; */
     color: var(--color-primary-400);
     font-size: 14px;
 }
