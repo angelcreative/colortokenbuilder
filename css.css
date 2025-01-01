@@ -4387,3 +4387,51 @@ div#dynamicColorPalette {
 .product-content .ui-button .material-symbols-outlined {
     font-size: 20px;
 }
+
+/*spline*/
+
+.chart-container {
+    position: relative;
+}
+
+.chart {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilos para los puntos de datos */
+.data-point {
+    fill: white;
+    stroke: var(--color-primary-600);
+    stroke-width: 2;
+}
+
+/* Animación de la línea */
+.line {
+    animation: drawLine 2s ease-out forwards;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Etiquetas del eje X */
+.chart-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0 0;
+    color: var(--color-primary-400);
+    font-size: 14px;
+}
+
+/* Efecto hover en los puntos de datos */
+.data-point:hover {
+    fill: var(--color-primary-600);
+    r: 6;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
