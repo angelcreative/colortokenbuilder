@@ -1532,7 +1532,7 @@ display:block; cursor:pointer
   margin-bottom: 2rem;
   padding: 1rem;
   border-radius: 8px;
-  background: var(--color-primary-100);
+  background: #fff;
 }
 
 .component-group h3 {
@@ -2357,6 +2357,7 @@ label,
 
 .ui-button.primary:hover {
   background: var(--color-primary-500);
+  color: var(--color-primary-600);
 }
 
 .ui-button.primary:active {
@@ -2369,7 +2370,8 @@ label,
 }
 
 .ui-button.secondary:hover {
-  background: var(--color-primary-100);
+  background: var(--color-primary-500);
+  color: var(--color-primary-600);
 }
 
 .ui-button.secondary:active {
@@ -2383,15 +2385,15 @@ label,
 }
 
 .ui-button.tertiary:hover {
-  color: var(--color-primary-500);
-  text-decoration: underline;
+  color: var(--color-primary-600);
+  background: var(--color-primary-500);
 }
 
 /* Estados */
 .ui-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background: var(--color-primary-200);
+  background: var(--color-primary-500);
   color: var(--color-primary-600);
 }
 
@@ -3110,7 +3112,7 @@ label,
 /* Mockup móvil */
 .mobile-mockup {
   max-width: 400px;
-  height: 956px;
+  height: 700px;
   margin: 0 auto;
   background: var(--background-primary);
   border-radius: 40px;
