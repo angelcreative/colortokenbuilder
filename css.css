@@ -3769,7 +3769,7 @@ label,
 
 .fleet-title p {
     color: var(--color-primary-600);
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
 }
 
 .stats-grid {
@@ -3844,11 +3844,13 @@ label,
 .vehicle-name {
     font-weight: 500;
     color: var(--color-primary-900);
+    margin: 0;
 }
 
 .vehicle-schedule {
     font-size: 14px;
     color: var(--color-primary-600);
+    margin: 0;
 }
 
 .vehicle-price {
