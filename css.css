@@ -3999,7 +3999,7 @@ div#dynamicColorPalette {
 }
 
 .profile-name {
-    color: var(--color-primary-900);
+    color: var(--color-primary-50);
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
@@ -4027,8 +4027,9 @@ div#dynamicColorPalette {
 
 .user-meta {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
+    flex-direction: column;
 }
 
 .user-avatar {
@@ -4043,7 +4044,7 @@ div#dynamicColorPalette {
 }
 
 .post-time {
-    color: var(--color-primary-400);
+    color: var(--color-primary-50);
     font-size: 14px;
 }
 
