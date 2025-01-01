@@ -3450,7 +3450,7 @@ label,
     padding: 24px;
     width: 100%;
     max-width: 360px;
-    box-shadow: 0 8px 24px var(--color-primary-400);););););););););
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);););););););););
     display: flex;
     flex-direction: column;
     gap: 8px;
