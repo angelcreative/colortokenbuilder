@@ -4057,12 +4057,15 @@ div#dynamicColorPalette {
   width: 100%;
   max-width: 360px;
   overflow: hidden;
+  padding: 0;
 }
 
 .map-container {
   width: 100%;
-  height: 200px;
+  height: 260px;
   position: relative;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
 }
 
 .map-image {
@@ -4073,11 +4076,12 @@ div#dynamicColorPalette {
 
 .map-content {
   padding: 20px;
-  background: white;
+  background: #ffffff8c;
   border-radius: 24px;
   margin-top: -24px;
   position: relative;
   z-index: 2;
+  backdrop-filter: blur(8px);
 }
 
 .map-header {
