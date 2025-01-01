@@ -1600,7 +1600,7 @@ display:block; cursor:pointer
 
 .ui-button.tertiary:hover {
   color: var(--color-primary-500);
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 /* Form Controls */
@@ -1910,7 +1910,7 @@ button.tertiary,
 button.tertiary:hover,
 .ui-button.tertiary:hover {
   color: var(--color-primary-500);
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 /* Estados disabled */
@@ -2173,10 +2173,7 @@ color: var(--color-primary-700);
 padding: 8px 16px;
 }
 
-.ui-button.tertiary:hover {
-color: var(--color-primary-500);
-text-decoration: underline;
-}
+.ui-button.tertiary:hover {color: var(--color-primary-500);/* text-decoration: underline; */}
 
 /* Estados disabled */
 .ui-button:disabled {
@@ -2362,10 +2359,11 @@ label,
 
 .ui-button.primary:active {
   background: var(--color-primary-700);
+  color: #fff;
 }
 
 .ui-button.secondary {
-  background: var(--color-primary-400);
+  background: var(--color-primary-300);
   color: var(--color-primary-600);
 }
 
