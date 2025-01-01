@@ -3970,18 +3970,26 @@ div#dynamicColorPalette {
     justify-content: space-between;
 }
 
-/* Efecto de blur en gradiente */
+
 .profile-card::before {
     content: '';
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, rgb(var(--color-primary-50) / 0.9) 0%, rgb(var(--color-primary-50) / 0.7) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    height: 80%; /* Altura del efecto */
+    background: linear-gradient(
+        to top,
+        rgb(174 230 248) 0%,
+        rgb(140 215 248 / 77%) 50%,
+        rgb(146 218 248) 100%
+    );
+    mask-image: linear-gradient(to top, #ffffffe8, #ffffff00); /* Controla cómo se desvanece */
+    -webkit-mask-image: linear-gradient(to top, #ffffff, #ffffff00); /* Para Safari */
+    backdrop-filter: blur(40px); /* Intensidad del blur */
+    -webkit-backdrop-filter: blur(40px); /* Safari */
     z-index: 1;
+    pointer-events: none; /* No bloquea la interacción */
 }
 
 .profile-header {
