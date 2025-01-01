@@ -3444,7 +3444,7 @@ label,
 }
 
 
-.stats-card, .form-card {
+.stats-card, .form-card, .map-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
@@ -3964,7 +3964,7 @@ div#dynamicColorPalette {
 }
 
 
-.profile-card::before { 
+.profile-card::before {
     content: '';
     position: absolute;
     left: 0;
@@ -4057,7 +4057,6 @@ div#dynamicColorPalette {
   width: 100%;
   max-width: 360px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
 }
 
 .map-container {
