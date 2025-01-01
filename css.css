@@ -3874,3 +3874,13 @@ label,
 .details-button:hover {
     background: var(--color-primary-700);
 }
+
+
+div#dynamicColorPalette {
+    display: flex
+;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
