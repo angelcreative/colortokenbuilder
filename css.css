@@ -283,7 +283,7 @@ color: var(--color-primary); /* color-color-1 */
 margin-bottom: 20px;
 }
 
-.custom-plan {background-color: var(--color-secondary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
+.custom-plan {background-color: var(--color-primary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
 
 .custom-plan h3 {
 margin: 0 0 10px 0;
@@ -349,7 +349,7 @@ justify-content: space-between;
 color: var(--color-secondary); /* color-color-2 */
 }
 
-.custom-search-icon-wrapper {width: 40px;height: 40px;background-color: var(--color-secondary-100); /* background-color-1 */border-radius: 50%;display: flex;justify-content: center;align-items: center;margin-right: 0;}
+.custom-search-icon-wrapper {width: 40px;height: 40px;background-color: var(--color-primary-100); /* background-color-1 */border-radius: 50%;display: flex;justify-content: center;align-items: center;margin-right: 0;}
 
 .custom-search-icon-wrapper img {
 width: 20px;
@@ -2226,7 +2226,7 @@ margin-bottom: 16px;
 
 .custom-card p {color: #4C5D6B;font-size: 14px;}
 
-.custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-secondary-600) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
+.custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-primary-600) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
 
 .custom-card-secondary {background: #f7f7f7;}
 
@@ -2240,7 +2240,7 @@ align-items: center;
 margin-bottom: 16px;
 }
 
-.custom-recent-search-header h3 {color: var(--color-primary-800);font-size: 20px;font-weight: 600;}
+.custom-recent-search-header h3 {color: #232a31;font-size: 20px;font-weight: 600;}
 
 .custom-see-all {color: var(--color-primary-600);font-size: 16px;text-decoration: none;}
 
@@ -2258,13 +2258,13 @@ color: var(--color-primary-400);
 }
 
 /* Subscription Section */
-.custom-subscription h2 {color: var(--color-primary-900);font-size: 20px;font-weight: 700;margin-bottom: 16px;}
+.custom-subscription h2 {color: #232a31;font-size: 20px;font-weight: 700;margin-bottom: 16px;}
 
 .custom-plan {
 margin-bottom: 16px;
 }
 
-.custom-plan h3 {color: var(--color-secondary-800);font-size: 16px;font-weight: 600;margin-bottom: 4px;}
+.custom-plan h3 {color: var(--color-primary-800);font-size: 16px;font-weight: 600;margin-bottom: 4px;}
 
 .custom-plan p {color: #4C5D6B;font-size: 14px;}
 
@@ -2291,7 +2291,7 @@ body {
 
 /* Títulos principales */
 h1, h2, .title-main {
-  color: #4C5D6B;
+  color: #232a31;
   font-weight: 700;
 }
 
@@ -3463,7 +3463,7 @@ label,
 }
 
 .stats-header h3 {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 24px;
     font-weight: 500;
     margin: 0;
@@ -3594,7 +3594,7 @@ label,
 }
 
 .section-header h2 {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 20px;
     font-weight: 600;
     margin: 0;
@@ -3617,8 +3617,8 @@ label,
 .tag {
     padding: 8px 16px;
     border-radius: 100px;
-    background: var(--color-secondary-100);
-    color: var(--color-secondary-800);
+    background: var(--color-primary-100);
+    color: var(--color-primary-600);
     font-size: 14px;
 }
 
@@ -3768,7 +3768,7 @@ label,
 .fleet-title h2 {
     font-size: 24px;
     font-weight: 700;
-    color: var(--color-primary-900);
+    color: #232a31;
     margin-bottom: 8px;
 }
 
@@ -3816,7 +3816,7 @@ label,
 .vehicles-section h3 {
     font-size: 20px;
     font-weight: 600;
-    color: var(--color-primary-900);
+    color: #232a31;
     margin-bottom: 16px;
 }
 
@@ -3909,7 +3909,7 @@ div#dynamicColorPalette {
 
 .form-steps {
     font-size: 12px;
-    color: var(--color-secondary-600);
+    color: var(--color-primary-600);
     letter-spacing: 1px;
 }
 
@@ -3920,13 +3920,13 @@ div#dynamicColorPalette {
 .form-title {
     font-size: 24px;
     font-weight: 600;
-    color: var(--color-primary-900);
+    color: #232a31;
     margin-bottom: 8px;
 }
 
 .form-subtitle {
     font-size: 12px;
-    color: var(--color-secondary-500);
+    color: var(--color-primary-600);
     letter-spacing: 1px;
     margin-bottom: 24px;
 }
