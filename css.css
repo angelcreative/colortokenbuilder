@@ -3964,7 +3964,7 @@ div#dynamicColorPalette {
 }
 
 
-.profile-card::before {
+.profile-card::before { 
     content: '';
     position: absolute;
     left: 0;
