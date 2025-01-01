@@ -3454,6 +3454,7 @@ label,
     display: flex;
     flex-direction: column;
     gap: 8px;
+    height: 416px;
 }
 
 .stats-header {
@@ -3500,7 +3501,7 @@ label,
 
 .stats-chart {
     margin: 16px 0;
-    height: 120px;
+    height: 173px;
     position: relative;
 }
 
@@ -3904,7 +3905,7 @@ div#dynamicColorPalette {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .form-steps {
@@ -3914,7 +3915,7 @@ div#dynamicColorPalette {
 }
 
 .form-content {
-    margin-bottom: 32px;
+    /* margin-bottom: 32px; */
 }
 
 .form-title {
@@ -3941,7 +3942,7 @@ div#dynamicColorPalette {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    margin-top: 32px;
+    margin-top: 46px;
 }
 
 /* Removidos los estilos de radio y botones ya que usamos los componentes UI existentes */
@@ -3956,7 +3957,7 @@ div#dynamicColorPalette {
     overflow: hidden;
     box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
     background-size: cover;
-    height: 400px;
+    height: 416px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
