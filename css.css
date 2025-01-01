@@ -879,7 +879,7 @@ flex-direction: row;
 }
 
 .price {
-  font-size: 36px;
+  font-size: 16px;
   margin-top: 10px;
   color: var(--color-tertiary);
 }
@@ -3126,8 +3126,8 @@ label,
 .mobile-mockup {
   max-width: 400px;
   height: 700px;
-  margin: 0 auto;
-  background: var(--background-primary);
+  margin: 0 auto 40px;
+  background: #fff;
   border-radius: 40px;
   overflow: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -3566,15 +3566,15 @@ label,
     display: flex;
     gap: 12px;
     margin-bottom: 32px;
-    overflow-x: auto;
+    overflow-x: hidden;
     padding: 4px;
 }
 
 .tab-button {
-    padding: 12px 24px;
+    padding: 8px 12px;
     border-radius: 100px;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     transition: all 0.2s ease;
     background: var(--color-primary-50);
     color: var(--color-primary-600);
@@ -3598,6 +3598,7 @@ label,
     color: var(--color-primary-900);
     font-size: 20px;
     font-weight: 600;
+    margin: 0;
 }
 
 .price {
@@ -3609,7 +3610,7 @@ label,
 .history-tags {
     display: flex;
     gap: 8px;
-    overflow-x: auto;
+    overflow-x: hidden;
     padding: 4px;
     margin-bottom: 24px;
 }
@@ -3623,8 +3624,8 @@ label,
 }
 
 .tag.active {
-    background: var(--color-primary-100);
-    border-bottom: 2px solid var(--color-primary-600);
+    background: var(--color-primary-300);
+    /* border-bottom: 2px solid var(--color-primary-600); */
 }
 
 /* Reminder Card */
@@ -3649,8 +3650,9 @@ label,
 }
 
 .reminder-content p {
-    color: var(--color-primary-600);
-    font-size: 14px;
+    color: #4C5D6B;
+    font-size: 12px;
+    margin: 0;
 }
 
 .reminder-icons {
@@ -3689,8 +3691,8 @@ label,
 }
 
 .pet-card p {
-    color: var(--color-primary-600);
-    font-size: 14px;
+    color: #4C5D6B;
+    font-size: 12px;
     margin-bottom: 4px;
 }
 
