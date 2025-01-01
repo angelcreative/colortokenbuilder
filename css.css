@@ -3444,7 +3444,7 @@ label,
 }
 
 
-.stats-card, .form-card, .map-card {
+.stats-card, .form-card, .map-card, .product-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
@@ -4292,7 +4292,8 @@ div#dynamicColorPalette {
     width: 100%;
     max-width: 360px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+    /* box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1); */
+    padding: 0;
 }
 
 .product-image {
@@ -4303,13 +4304,14 @@ div#dynamicColorPalette {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 0;
+    overflow: hidden;
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
