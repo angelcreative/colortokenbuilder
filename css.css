@@ -283,7 +283,7 @@ color: var(--color-primary); /* color-color-1 */
 margin-bottom: 20px;
 }
 
-.custom-plan {background-color: var(--color-primary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
+.custom-plan {background-color: var(--color-secondary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
 
 .custom-plan h3 {
 margin: 0 0 10px 0;
@@ -349,7 +349,7 @@ justify-content: space-between;
 color: var(--color-secondary); /* color-color-2 */
 }
 
-.custom-search-icon-wrapper {width: 40px;height: 40px;background-color: var(--background-primary); /* background-color-1 */border-radius: 50%;display: flex;justify-content: center;align-items: center;margin-right: 0;}
+.custom-search-icon-wrapper {width: 40px;height: 40px;background-color: var(--color-secondary-100); /* background-color-1 */border-radius: 50%;display: flex;justify-content: center;align-items: center;margin-right: 0;}
 
 .custom-search-icon-wrapper img {
 width: 20px;
@@ -2226,11 +2226,11 @@ margin-bottom: 16px;
 
 .custom-card p {color: #4C5D6B;font-size: 14px;}
 
-.custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-primary-600) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
+.custom-card-primary {background: var(--color-primary-50);background-image: linear-gradient(180deg,transparent 30%, var(--color-secondary-600) 100%), url(https://i.postimg.cc/ZK9HnK16/3-eeaba2aa-a31d-4283-8eaa-11c9085ae0fb.png);background-size: cover;}
 
-.custom-card-secondary {background: var(--color-primary-100);}
+.custom-card-secondary {background: #f7f7f7;}
 
-.custom-card-tertiary {background: var(--color-primary-200);}
+.custom-card-tertiary {background: #f7f7f7;}
 
 /* Recent Search Section */
 .custom-recent-search-header {
@@ -2264,17 +2264,9 @@ color: var(--color-primary-400);
 margin-bottom: 16px;
 }
 
-.custom-plan h3 {
-color: var(--color-primary-800);
-font-size: 16px;
-font-weight: 600;
-margin-bottom: 4px;
-}
+.custom-plan h3 {color: var(--color-secondary-800);font-size: 16px;font-weight: 600;margin-bottom: 4px;}
 
-.custom-plan p {
-color: var(--color-primary-600);
-font-size: 14px;
-}
+.custom-plan p {color: #4C5D6B;font-size: 14px;}
 
 /* Icon wrapper */
 .custom-icon-wrapper {
@@ -3609,7 +3601,7 @@ label,
 }
 
 .price {
-    color: var(--color-primary-600);
+    color: #4C5D6B;
     font-weight: 600;
 }
 
@@ -3625,14 +3617,15 @@ label,
 .tag {
     padding: 8px 16px;
     border-radius: 100px;
-    background: var(--color-primary-50);
-    color: var(--color-primary-600);
+    background: var(--color-secondary-100);
+    color: var(--color-secondary-800);
     font-size: 14px;
 }
 
 .tag.active {
     background: var(--color-primary-300);
     /* border-bottom: 2px solid var(--color-primary-600); */
+    color: var(--color-primary-600);
 }
 
 /* Reminder Card */
@@ -3677,7 +3670,7 @@ label,
 }
 
 .pet-card {
-    background: var(--color-primary-50);
+    background: #f7f7f7;
     padding: 16px;
     border-radius: 16px;
 }
@@ -3780,7 +3773,7 @@ label,
 }
 
 .fleet-title p {
-    color: var(--color-primary-600);
+    color: #4C5D6B;
     /* margin-bottom: 24px; */
 }
 
@@ -3792,7 +3785,7 @@ label,
 }
 
 .stat-card {
-    background: var(--color-primary-50);
+    background: #f7f7f7;
     padding: 16px;
     border-radius: 16px;
 }
@@ -3855,19 +3848,19 @@ label,
 
 .vehicle-name {
     font-weight: 500;
-    color: var(--color-primary-900);
+    color: #4C5D6B;
     margin: 0;
 }
 
 .vehicle-schedule {
     font-size: 14px;
-    color: var(--color-primary-600);
+    color: #4C5D6B;
     margin: 0;
 }
 
 .vehicle-price {
     font-weight: 600;
-    color: var(--color-primary-900);
+    color: #4C5D6B;
 }
 
 .details-button {
@@ -3916,7 +3909,7 @@ div#dynamicColorPalette {
 
 .form-steps {
     font-size: 12px;
-    color: var(--color-primary-400);
+    color: var(--color-secondary-600);
     letter-spacing: 1px;
 }
 
@@ -3933,7 +3926,7 @@ div#dynamicColorPalette {
 
 .form-subtitle {
     font-size: 12px;
-    color: var(--color-primary-400);
+    color: var(--color-secondary-500);
     letter-spacing: 1px;
     margin-bottom: 24px;
 }
