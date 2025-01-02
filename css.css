@@ -4815,7 +4815,7 @@ input:checked + .switch-slider:before {
 
 /*walk*/
 .walk-card {
-    background: var(--color-primary-50);
+    background: var(--color-secondary-600);
     border-radius: 24px;
     width: 100%;
     max-width: 360px;
@@ -4830,7 +4830,7 @@ input:checked + .switch-slider:before {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-primary-100);
+    /* background: var(--color-primary-100); */
 }
 
 .illustration {
@@ -4845,14 +4845,14 @@ input:checked + .switch-slider:before {
 }
 
 .walk-content h2 {
-    color: var(--color-primary-900);
+    color: var(--color-secondary-50);
     font-size: 24px;
     font-weight: 600;
     margin: 0;
 }
 
 .walk-content p {
-    color: var(--color-primary-600);
+    color: var(--color-secondary-300);
     font-size: 14px;
     line-height: 1.6;
     margin: 0;
@@ -4872,7 +4872,7 @@ input:checked + .switch-slider:before {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-primary-400);
+    color: var(--color-secondary-400);
     font-size: 14px;
     margin-top: 8px;
 }
@@ -4885,7 +4885,7 @@ input:checked + .switch-slider:before {
 
 /* Opción 2: Para SVG como imagen */
 .walk-card  .svg-color {
-    filter: brightness(0) saturate(100%) invert(41%) sepia(97%) 
-            saturate(1265%) hue-rotate(210deg) brightness(96%) contrast(96%);
-    transition: filter 0.3s ease;
+    /* filter: brightness(0) saturate(100%) invert(41%) sepia(97%) 
+            saturate(1265%) hue-rotate(210deg) brightness(96%) contrast(96%); */
+    /* transition: filter 0.3s ease; */
 }
