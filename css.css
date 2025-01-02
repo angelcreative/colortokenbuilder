@@ -1561,7 +1561,7 @@ display:block; cursor:pointer
 }
 
 .component-group h3 {
-  color: #4C5D6B;
+  color: var(--color-primary-50);
   margin-bottom: 1rem;
 }
 
@@ -4989,20 +4989,17 @@ input:checked + .switch-slider:before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(.4);
 }
 
 .background-overlay {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
-    backdrop-filter: blur(8px);
+    height: 70%;
+    background: linear-gradient(180deg, transparent 0%, var(--color-primary-900) 100%);
+    backdrop-filter: blur(1px);
 }
 
 .player-content {
@@ -5043,6 +5040,7 @@ input:checked + .switch-slider:before {
     font-size: 16px;
     opacity: 0.8;
     margin: 0;
+    color: var(--color-primary-50);
 }
 
 .progress-container {
@@ -5067,7 +5065,7 @@ input:checked + .switch-slider:before {
     top: 0;
     height: 100%;
     width: 45%;
-    background: white;
+    background: var(--color-secondary-600);
     border-radius: 2px;
 }
 
@@ -5099,7 +5097,7 @@ input:checked + .switch-slider:before {
 .control-button {
     background: none;
     border: none;
-    color: white;
+    color: var(--color-primary-100);
     cursor: pointer;
     opacity: 0.8;
     transition: all 0.2s;
@@ -5114,6 +5112,7 @@ input:checked + .switch-slider:before {
 .play-button {
     font-size: 24px;
     opacity: 1;
+    color: var(--color-primary-50);
 }
 
 .play-button .material-symbols-outlined {
@@ -5124,13 +5123,14 @@ input:checked + .switch-slider:before {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--color-primary-50);
 }
 
 .volume-control {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: white;
+    color: var(--color-primary-50);
 }
 
 .volume-slider {
@@ -5148,7 +5148,7 @@ input:checked + .switch-slider:before {
     top: 0;
     height: 100%;
     width: 70%;
-    background: white;
+    background: var(--color-primary-500);
     border-radius: 2px;
 }
 
