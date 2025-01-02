@@ -4736,6 +4736,12 @@ input:checked + .switch-slider:before {
     color: var(--color-primary-400);
 }
 
+.path-line {
+    height: 1px;
+    width: 100%;
+    background: var(--color-primary-200);
+}
+
 
 .path-line::after {
     content: '';
@@ -4753,22 +4759,22 @@ input:checked + .switch-slider:before {
 
 @keyframes moveDot {
     0% {
-        left: 0;
+        left: 50px;
         opacity: 0;
     }
     10% {
         opacity: 1;
     }
     45% {
-        left: 50%;
+        left: 82%;
         opacity: 1;
     }
     50% {
-        left: 50%;
+        left: 50px;
         opacity: 0;
     }
     55% {
-        left: 50%;
+        left: 0;
         opacity: 0;
     }
     90% {
