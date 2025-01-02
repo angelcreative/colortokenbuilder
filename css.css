@@ -3951,6 +3951,12 @@ div#dynamicColorPalette {
     justify-content: space-between;
 }
 
+.profile-card video.video-background {
+    position: absolute;
+    left: -111px;
+    top: 0;
+    width: 760px;
+}
 
 .profile-card::before {
     content: '';
