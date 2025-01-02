@@ -4662,7 +4662,7 @@ input:checked + .switch-slider:before {
     padding: 24px;
     width: 100%;
     max-width: 360px;
-    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
 .boarding-header {
@@ -4679,7 +4679,7 @@ input:checked + .switch-slider:before {
 }
 
 .airline-name {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 20px;
     font-weight: 600;
 }
@@ -4785,13 +4785,13 @@ input:checked + .switch-slider:before {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     font-size: 14px;
 }
 
 .data-item .material-symbols-outlined {
     font-size: 20px;
-    color: var(--color-primary-400);
+    color: #4c5d6b;
 }
 
 .qr-code {
