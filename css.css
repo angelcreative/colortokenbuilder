@@ -3431,7 +3431,7 @@ label,
 }
 
 
-.stats-card, .form-card, .map-card, .product-card {
+.stats-card, .form-card, .map-card, .product-card, .alarm-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
