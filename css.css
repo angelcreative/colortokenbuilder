@@ -4311,7 +4311,7 @@ div#dynamicColorPalette {
     top: 16px;
     right: 16px;
     background: white !important;
-    color: var(--color-primary-400) !important;
+    color: #e1058a !important;
     transition: all 0.2s ease;
 }
 
@@ -4695,7 +4695,7 @@ input:checked + .switch-slider:before {
 }
 
 .flight-info {
-    background: var(--color-primary-50);
+    background: var(--color-secondary-50);
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
@@ -4852,7 +4852,7 @@ input:checked + .switch-slider:before {
 }
 
 .walk-content p {
-    color: var(--color-secondary-300);
+    color: var(--color-secondary-100);
     font-size: 14px;
     line-height: 1.6;
     margin: 0;
@@ -4872,7 +4872,7 @@ input:checked + .switch-slider:before {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-secondary-400);
+    color: var(--color-secondary-100);
     font-size: 14px;
     margin-top: 8px;
 }
