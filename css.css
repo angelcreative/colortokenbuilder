@@ -5179,7 +5179,7 @@ input:checked + .switch-slider:before {
     width: 100%;
     max-width: 360px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
 .video-thumbnail {
@@ -5269,7 +5269,7 @@ input:checked + .switch-slider:before {
 .video-title {
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-primary-900);
+    color: #232a31 !important;!i;!;
     margin: 0 0 4px 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -5279,7 +5279,7 @@ input:checked + .switch-slider:before {
 
 .channel-name {
     font-size: 14px;
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     margin-bottom: 4px;
 }
 
