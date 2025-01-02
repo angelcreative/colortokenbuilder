@@ -4881,7 +4881,11 @@ input:checked + .switch-slider:before {
     font-size: 20px;
 }
 
-
+/* Opción 1: Para SVG inline */
+.walk-card  .svg-fill {
+    fill: var(--color-secondary-600);
+    transition: fill 0.3s ease;
+}
 
 /* Opción 2: Para SVG como imagen */
 .walk-card  .svg-color {
