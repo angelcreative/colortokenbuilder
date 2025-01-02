@@ -3431,13 +3431,13 @@ label,
 }
 
 
-.stats-card, .form-card, .map-card, .product-card, .alarm-card {
+.stats-card, .form-card, .map-card, .product-card {
     background: #fff;
     border-radius: 16px;
     padding: 24px;
     width: 100%;
     max-width: 360px;
-    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);););););););););
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -4538,7 +4538,7 @@ div#dynamicColorPalette {
     width: 100%;
     max-width: 360px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+   box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
 .alarm-header {
@@ -4573,8 +4573,8 @@ div#dynamicColorPalette {
     height: 100px;
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgb(var(--color-primary-900-rgb) / 0.15);
+    margin-bottom: -4px;
 }
-
 .alarm-time {
     font-size: 32px;
     font-weight: 700;
