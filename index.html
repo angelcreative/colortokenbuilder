@@ -404,6 +404,78 @@ content_copy
 <section class="ui-components">
 
 	<div class="component-group">
+
+<!--music-->
+		<div class="player-card">
+    <!-- Video de fondo con overlay -->
+    <div class="player-background">
+        <video autoplay muted loop class="background-video">
+            <source src="https://assets.codepen.io/t-1/portrait_nebula.mp4" type="video/mp4">
+        </video>
+        <div class="background-overlay"></div>
+    </div>
+
+    <div class="player-content">
+        <!-- Información de la canción -->
+        <div class="song-info">
+            <img src="https://i.postimg.cc/VvK0rzyF/album-cover.jpg" alt="Album Cover" class="album-cover">
+            <div class="song-details">
+                <h3 class="song-title">Starlight Dreams</h3>
+                <p class="song-artist">Cosmic Waves</p>
+            </div>
+        </div>
+
+        <!-- Barra de progreso -->
+        <div class="progress-container">
+            <span class="current-time">2:14</span>
+            <div class="progress-bar">
+                <div class="progress-current"></div>
+                <div class="progress-handle"></div>
+            </div>
+            <span class="total-time">4:30</span>
+        </div>
+
+        <!-- Controles principales -->
+        <div class="player-controls">
+            <button class="control-button">
+                <span class="material-symbols-outlined">shuffle</span>
+            </button>
+            <button class="control-button">
+                <span class="material-symbols-outlined">skip_previous</span>
+            </button>
+            <button class="control-button play-button">
+                <span class="material-symbols-outlined">play_circle</span>
+            </button>
+            <button class="control-button">
+                <span class="material-symbols-outlined">skip_next</span>
+            </button>
+            <button class="control-button">
+                <span class="material-symbols-outlined">repeat</span>
+            </button>
+        </div>
+
+        <!-- Controles secundarios -->
+        <div class="secondary-controls">
+            <button class="control-button">
+                <span class="material-symbols-outlined">playlist_play</span>
+            </button>
+            <div class="volume-control">
+                <span class="material-symbols-outlined">volume_up</span>
+                <div class="volume-slider">
+                    <div class="volume-current"></div>
+                    <div class="volume-handle"></div>
+                </div>
+            </div>
+            <button class="control-button">
+                <span class="material-symbols-outlined">favorite</span>
+            </button>
+        </div>
+    </div>
+</div>
+		
+
+<!--stats-->
+		
 	<div class="stats-card">
     <div class="stats-header">
         <h3>Gross volume</h3>
@@ -507,6 +579,8 @@ content_copy
     </div>
 </div>
 
+<!-- profile -->
+		
 <div class="profile-card">
 	<video class="video-background" autoplay="" loop="" muted="">
     <source src="https://cdn.hailuoai.video/moss/prod/2024-12-05-18/video/1733395010596253153-video_watermark_641db266d5bcacdb9dcdaab10de976a3_321025685518364674.mp4" type="video/mp4">
