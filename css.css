@@ -3990,12 +3990,13 @@ div#dynamicColorPalette {
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #4c5d6b;
+    color: #ffffff;
     font-size: 14px;
 }
 
 .profile-status .material-symbols-outlined {
     font-size: 16px;
+    animation: spinner 1s linear infinite;
 }
 
 .profile-info {
