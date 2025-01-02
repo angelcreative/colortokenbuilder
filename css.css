@@ -4530,3 +4530,87 @@ div#dynamicColorPalette {
     margin-top: 40px;
     padding: 0 12px 0 12px;
 }
+
+
+.alarm-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+}
+
+.alarm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.alarm-header h3 {
+    color: var(--color-primary-900);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.alarm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.alarm-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-primary-50);
+    border-radius: 16px;
+    transition: all 0.2s ease;
+}
+
+.alarm-item:hover {
+    background: var(--color-primary-100);
+}
+
+.alarm-time {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary-600);
+    min-width: 70px;
+}
+
+.alarm-details {
+    flex: 1;
+}
+
+.alarm-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-primary-400);
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.alarm-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-primary-900);
+    margin: 0;
+}
+
+/* Reutilizando el switch de UI components */
+.alarm-item .ui-switch {
+    margin-left: auto;
+}
+
+/* Estado activo del item */
+.alarm-item:has(.ui-switch input:checked) {
+    background: var(--color-primary-100);
+}
+
+.alarm-item:has(.ui-switch input:checked) .alarm-time {
+    color: var(--color-primary-700);
+}
