@@ -283,7 +283,7 @@ color: var(--color-primary); /* color-color-1 */
 margin-bottom: 20px;
 }
 
-.custom-plan {background-color: var(--color-primary-100); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
+.custom-plan {background-color: var(--color-primary-50); /* background-color-1 */padding: 15px;border-radius: 15px;margin-bottom: 15px;color: var(--color-secondary); /* color-color-2 */}
 
 .custom-plan h3 {
 margin: 0 0 10px 0;
@@ -2218,7 +2218,7 @@ border-radius: 12px;
 margin-bottom: 16px;
 }
 
-.custom-card h2 {color: var(--color-primary-900);font-size: 16px;font-weight: 600;margin: 12px 0 4px;}
+.custom-card h2 {color: #232a31;font-size: 16px;font-weight: 600;margin: 12px 0 4px;}
 
 .custom-card p {color: #4C5D6B;font-size: 14px;}
 
@@ -2260,21 +2260,12 @@ color: var(--color-primary-400);
 margin-bottom: 16px;
 }
 
-.custom-plan h3 {color: var(--color-primary-800);font-size: 16px;font-weight: 600;margin-bottom: 4px;}
+.custom-plan h3 {color: #232a31;font-size: 16px;font-weight: 600;margin-bottom: 4px;}
 
 .custom-plan p {color: #4C5D6B;font-size: 14px;}
 
 /* Icon wrapper */
-.custom-icon-wrapper {
-width: 40px;
-height: 40px;
-border-radius: 8px;
-display: flex;
-align-items: center;
-justify-content: center;
-background: var(--color-primary-600);
-color: white;
-}
+.custom-icon-wrapper {width: 40px;height: 40px;border-radius: 8px;display: flex;align-items: center;justify-content: center;background: var(--color-primary-600);color: white;}
 
 .icon-tag .material-symbols-outlined {font-size: 20px;margin: 0;text-align: center;display: flex;align-items: center;justify-content: center;}
 
@@ -2400,8 +2391,8 @@ label,
 .ui-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background: var(--color-primary-500);
-  color: var(--color-primary-600);
+  background: #4c5d6b47;
+  color: #4c5d6b;
 }
 
 /* Tamaños */
@@ -3504,7 +3495,7 @@ label,
 .chart-placeholder {
     width: 100%;
     height: 100%;
-    background: var(--color-primary-100);
+    background: var(--color-primary-50);
     border-radius: 8px;
 }
 
@@ -3640,7 +3631,7 @@ label,
 }
 
 .reminder-content h3 {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 4px;
@@ -3677,11 +3668,11 @@ label,
     height: 56px;
     border-radius: 100%;
     margin-bottom: 12px;
-    border: 2px solid var(--color-primary-200);
+    border: 1px solid #232a314a;
 }
 
 .pet-card h3 {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
@@ -3703,12 +3694,12 @@ label,
 }
 
 .visit-count span {
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     font-size: 14px;
 }
 
 .visit-count .count {
-    color: var(--color-primary-700);
+    color: #232a31;
     font-weight: 600;
 }
 
@@ -3788,7 +3779,7 @@ label,
 }
 
 .stat-card p {
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     font-size: 14px;
     margin-bottom: 8px;
 }
@@ -3802,12 +3793,12 @@ label,
 .stat-value .current {
     font-size: 30px;
     font-weight: 700;
-    color: var(--color-primary-900);
+    color: #232a31;
 }
 
 .stat-value .total {
     font-size: 20px;
-    color: var(--color-primary-400);
+    color: #4c5d6b;
 }
 
 .vehicles-section h3 {
@@ -3851,7 +3842,7 @@ label,
 
 .vehicle-schedule {
     font-size: 14px;
-    color: #4C5D6B;
+    color: #4c5d6b80;
     margin: 0;
 }
 
@@ -3923,7 +3914,7 @@ div#dynamicColorPalette {
 
 .form-subtitle {
     font-size: 12px;
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     letter-spacing: 1px;
     margin-bottom: 24px;
 }
@@ -3999,7 +3990,7 @@ div#dynamicColorPalette {
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     font-size: 14px;
 }
 
@@ -4029,7 +4020,7 @@ div#dynamicColorPalette {
 }
 
 .user-handle {
-    color: var(--color-primary-900);
+    color: #fff;
     font-size: 14px;
 }
 
@@ -4100,7 +4091,7 @@ div#dynamicColorPalette {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--color-primary-600);
+  color: #4c5d6b;
 }
 
 .map-rating .material-symbols-outlined {
@@ -4108,7 +4099,7 @@ div#dynamicColorPalette {
 }
 
 .map-location {
-  color: var(--color-primary-600);
+  color: #4c5d6b;
   font-size: 14px;
   margin-bottom: 16px;
 }
@@ -4349,7 +4340,7 @@ div#dynamicColorPalette {
 }
 
 .product-category {
-    color: var(--color-primary-400);
+    color: #4c5d6ba8;
     font-size: 14px;
     margin-bottom: 12px;
 }
@@ -4361,13 +4352,13 @@ div#dynamicColorPalette {
 }
 
 .current-price {
-    color: var(--color-primary-900);
+    color: #232a31;
     font-size: 24px;
     font-weight: 700;
 }
 
 .original-price {
-    color: var(--color-primary-400);
+    color: #4c5d6b8a;
     font-size: 16px;
     text-decoration: line-through;
 }
@@ -4420,7 +4411,7 @@ div#dynamicColorPalette {
     display: flex;
     justify-content: space-between;
     /* padding: 16px 0 0; */
-    color: var(--color-primary-400);
+    color: #4c5d6b;
     font-size: 14px;
 }
 
