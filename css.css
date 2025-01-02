@@ -4880,3 +4880,12 @@ input:checked + .switch-slider:before {
 .walk-meta .material-symbols-outlined {
     font-size: 20px;
 }
+
+
+
+/* Opción 2: Para SVG como imagen */
+.walk-card  .svg-color {
+    filter: brightness(0) saturate(100%) invert(41%) sepia(97%) 
+            saturate(1265%) hue-rotate(210deg) brightness(96%) contrast(96%);
+    transition: filter 0.3s ease;
+}
