@@ -4371,10 +4371,10 @@ div#dynamicColorPalette {
 }
 
 .product-name {
-    color: var(--color-primary-900);
+    color: var(--color-primary-900) !important;!i;!;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 4px !important;!i;!;
 }
 
 .product-category {
@@ -4872,7 +4872,7 @@ input:checked + .switch-slider:before {
 .qr-code img {
     width: 80px;
     height: 80px;
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .boarding-time {
