@@ -406,37 +406,33 @@ content_copy
 	<div class="component-group">
 
 <!--music-->
-		<div class="player-card">
-    <!-- Video de fondo con overlay -->
+	<div class="player-card">
     <div class="player-background">
-       <video class="video-background" autoplay="" loop="" muted="">
-    <source src="https://dnznrvs05pmza.cloudfront.net/cbc8fa65-9593-435b-9c70-681c942383e8.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+        <video class="background-video" autoplay loop muted>
+            <source src="https://dnznrvs05pmza.cloudfront.net/cbc8fa65-9593-435b-9c70-681c942383e8.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOTdjYmFhNzAxNWYyMDExOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTczNTk0ODgwMH0.UZORgbu-ckiT0xFq0eHL3pLDaZ6epJgffG6ubJFrdPg" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
         <div class="background-overlay"></div>
     </div>
-
+    
     <div class="player-content">
-        <!-- Información de la canción -->
         <div class="song-info">
-            <img src="https://i.postimg.cc/VvK0rzyF/album-cover.jpg" alt="Album Cover" class="album-cover">
+            <img src="ruta-a-tu-imagen-album.jpg" alt="Portada del álbum" class="album-cover">
             <div class="song-details">
-                <h3 class="song-title">Starlight Dreams</h3>
-                <p class="song-artist">Cosmic Waves</p>
+                <h3 class="song-title">Nombre de la canción</h3>
+                <p class="song-artist">Nombre del artista</p>
             </div>
         </div>
 
-        <!-- Barra de progreso -->
         <div class="progress-container">
-            <span class="current-time">2:14</span>
+            <span>0:00</span>
             <div class="progress-bar">
                 <div class="progress-current"></div>
                 <div class="progress-handle"></div>
             </div>
-            <span class="total-time">4:30</span>
+            <span>3:45</span>
         </div>
 
-        <!-- Controles principales -->
         <div class="player-controls">
             <button class="control-button">
                 <span class="material-symbols-outlined">shuffle</span>
@@ -455,11 +451,7 @@ content_copy
             </button>
         </div>
 
-        <!-- Controles secundarios -->
         <div class="secondary-controls">
-            <button class="control-button">
-                <span class="material-symbols-outlined">playlist_play</span>
-            </button>
             <div class="volume-control">
                 <span class="material-symbols-outlined">volume_up</span>
                 <div class="volume-slider">
@@ -467,9 +459,6 @@ content_copy
                     <div class="volume-handle"></div>
                 </div>
             </div>
-            <button class="control-button">
-                <span class="material-symbols-outlined">favorite</span>
-            </button>
         </div>
     </div>
 </div>
