@@ -663,6 +663,25 @@ color:var(--color-primary);
 
 /* General Styles ====================================== WEB*/
 
+.intro {
+    width: 960px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+.intro p {
+    margin-bottom: 20px;
+}
+
+.intro li {
+    margin: 0 0 20px 0;
+    color: #4c5d6b;
+}
+
+.intro p {
+    color: #4c5d6b;
+}
+
 .custom-web {
 padding:0;
 }
