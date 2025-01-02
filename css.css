@@ -4577,7 +4577,7 @@ div#dynamicColorPalette {
     max-width: 360px;
     overflow: hidden;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
-    height: 414px;
+    height: 500px;
 }
 
 .alarm-header {
@@ -4606,12 +4606,12 @@ div#dynamicColorPalette {
     padding: 20px 24px;
     transition: all 0.3s ease;
     cursor: pointer;
-    height: 80px;
+    height: 102px;
     gap: 16px;
 }
 
 .alarm-item:hover {
-    height: 100px;
+    height: 110px;
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgb(var(--color-primary-900-rgb) / 0.15);
     margin-bottom: -4px;
