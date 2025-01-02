@@ -4538,7 +4538,8 @@ div#dynamicColorPalette {
     width: 100%;
     max-width: 360px;
     overflow: hidden;
-   box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+    height: 414px;
 }
 
 .alarm-header {
@@ -4546,17 +4547,19 @@ div#dynamicColorPalette {
     justify-content: space-between;
     align-items: center;
     padding: 24px;
-    background: var(--color-primary-50);
+    background: linear-gradient(135deg,         var(--color-primary-600) 0%,         var(--color-secondary-600) 100%);
+    margin: 0;
 }
 
 .alarm-header h3 {
-    color: var(--color-primary-900);
+    color: var(--color-primary-50);
     font-size: 20px;
     font-weight: 600;
+    margin: 0;
 }
 
 .alarm-list {
-    padding: 8px 0;
+    padding: 0;
 }
 
 .alarm-item {
