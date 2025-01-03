@@ -5384,7 +5384,7 @@ input:checked + .switch-slider:before {
 }
 
 .typography-card {
-    width: 200px;
+    width: 100px;
     background: var(--color-primary-50);
     border-radius: 12px;
     padding: 24px;
@@ -5398,13 +5398,13 @@ input:checked + .switch-slider:before {
 }
 
 .typography-name {
-    font-size: 14px;
-    color: #000;
+    font-size: 12px;
+    color: var(--color-primary-600);
     margin-bottom: 12px;
 }
 
 .typography-sample {
-    font-size: 24px;
+    font-size: 16px;
     color: #000;
     line-height: 1.2;
 }
