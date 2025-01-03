@@ -6072,11 +6072,11 @@ input:checked + .switch-slider:before {
 }
 
 .more-options {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    color: #262626;
+    /* background: none; */
+    /* border: none; */
+    /* padding: 8px; */
+    /* cursor: pointer; */
+    /* color: #262626; */
 }
 
 /* Image Container */
@@ -6139,11 +6139,11 @@ input:checked + .switch-slider:before {
 }
 
 .action-btn {
-    background: none;
-    border: none;
-    padding: 8px;
+    /* background: none; */
+    /* border: none; */
+    /* padding: 8px; */
     cursor: pointer;
-    color: #262626;
+    /* color: #232a31; */
     transition: all 0.2s ease;
 }
 
