@@ -6022,7 +6022,6 @@ input:checked + .switch-slider:before {
 
 
 /*ig*/
-
 .instagram-card {
     width: 468px;
     background: white;
@@ -6080,37 +6079,51 @@ input:checked + .switch-slider:before {
     color: #262626;
 }
 
-/* Image Area */
+/* Image Container */
 .instagram-image {
+    position: relative;
     width: 100%;
     aspect-ratio: 1/1;
     background: #fafafa;
-    position: relative;
+    overflow: hidden;
 }
 
-/* Chess Board */
-.chess-board {
+.instagram-image img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.instagram-image:hover img {
+    transform: scale(1.02);
+}
+
+/* Double Tap Overlay */
+.double-tap-overlay {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-.row {
-    display: flex;
-    flex: 1;
+.heart-animation {
+    font-size: 96px;
+    color: white;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.3));
+    transform: scale(0);
 }
 
-.square {
-    flex: 1;
+.double-tap-overlay.active {
+    opacity: 1;
 }
 
-.square.white {
-    background: white;
-}
-
-.square.black {
-    background: black;
+.double-tap-overlay.active .heart-animation {
+    animation: heartPop 1s cubic-bezier(0.17, 0.89, 0.32, 1.49);
 }
 
 /* Actions */
@@ -6131,7 +6144,7 @@ input:checked + .switch-slider:before {
     padding: 8px;
     cursor: pointer;
     color: #262626;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .action-btn:hover {
@@ -6143,17 +6156,26 @@ input:checked + .switch-slider:before {
 }
 
 /* Animaciones */
+@keyframes heartPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
 .action-btn:active {
     transform: scale(0.95);
+}
+
+.action-btn.liked {
+    color: #ed4956;
+}
+
+.action-btn.liked .material-symbols-outlined {
+    animation: likeAnimation 0.3s ease;
 }
 
 @keyframes likeAnimation {
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
-}
-
-.action-btn.liked {
-    color: #ed4956;
-    animation: likeAnimation 0.3s ease;
 }
