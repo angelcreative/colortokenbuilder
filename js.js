@@ -855,6 +855,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    
     // Función para cambiar la tipografía
     function initTypographyCards() {
         const typographyCards = document.querySelectorAll('.typography-card');
@@ -882,10 +883,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', () => {
         initTypographyCards();
+        initSidebar();
+        // ... resto de inicializaciones
     });
-
-
- 
+    
+    
+    
+    
     
     // Animación de los círculos de progreso
     document.addEventListener('DOMContentLoaded', () => {
@@ -898,8 +902,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     });
-    
-    
     
     
     
