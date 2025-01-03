@@ -3747,7 +3747,7 @@ label,
     justify-content: space-between;
     align-items: center;
     height: 44px;
-    color: var(--color-primary-900);
+    color: var(--color-primary-100);
 }
 
 .fleet-header {
@@ -5570,10 +5570,29 @@ input:checked + .switch-slider:before {
 
 /*car*/
 
+
+.status-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.battery-status {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: var(--color-primary-400);
+    margin-left: 12px;
+}
+
+.status-left {
+    padding: 3px 0 0 0;
+}
+
 .car-dashboard-card {
     width: 720px;
-    height: 480px;
-    background: linear-gradient(180deg, #1a1f35 0%, #131726 100%);
+    height: auto;
+    background: linear-gradient(135deg,         var(--color-primary-600) 0%,         var(--color-secondary-600) 100%);
     border-radius: 24px;
     padding: 24px;
     color: white;
@@ -5584,19 +5603,24 @@ input:checked + .switch-slider:before {
 }
 
 .dashboard-header {
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .status-bar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     font-size: 14px;
     opacity: 0.8;
+    gap: 8px;
+    width: 100%;
 }
 
 .car-logo {
     color: var(--color-primary-400);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .speed-meter {
@@ -5628,14 +5652,14 @@ input:checked + .switch-slider:before {
 }
 
 .speed-value {
-    font-size: 64px;
+    font-size: 36px;
     font-weight: 700;
     fill: white;
     text-anchor: middle;
 }
 
 .speed-unit {
-    font-size: 16px;
+    font-size: 12px;
     fill: rgba(255, 255, 255, 0.6);
     text-anchor: middle;
 }
@@ -5651,7 +5675,7 @@ input:checked + .switch-slider:before {
 }
 
 .mode-badge {
-    background: var(--color-primary-500);
+    background: #074eec87;
     padding: 4px 12px;
     border-radius: 100px;
     font-size: 12px;
@@ -5666,6 +5690,10 @@ input:checked + .switch-slider:before {
 
 .stat-group {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 .circular-gauge {
@@ -5676,8 +5704,9 @@ input:checked + .switch-slider:before {
 
 .gauge-bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgb(255 255 255 / 10%);
     stroke-width: 8;
+    border-radius: 0;
 }
 
 .gauge-fill {
@@ -5752,7 +5781,7 @@ input:checked + .switch-slider:before {
     left: 0;
     right: 0;
     padding: 24px;
-    background: linear-gradient(0deg, rgba(19, 23, 38, 1) 0%, rgba(19, 23, 38, 0) 100%);
+    background: linear-gradient(0deg, rgb(38 46 74 / 66%) 0%, rgba(19, 23, 38, 0) 100%);
 }
 
 .nav-info {
