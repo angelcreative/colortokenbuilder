@@ -4074,6 +4074,141 @@ div#dynamicColorPalette {
 }
 
 
+
+/*jogging*/
+.workout-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-background);
+  box-shadow: var(--shadow-lg);
+}
+
+.workout-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.workout-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.8) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-white);
+}
+
+.workout-header {
+  margin-bottom: 24px;
+}
+
+.workout-header h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.workout-date {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.metrics-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 32px 0;
+}
+
+.metric-circle {
+  width: 100px;
+  height: 100px;
+}
+
+.circular-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.2);
+  stroke-width: 2.8;
+}
+
+.circle {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.percentage {
+  fill: var(--color-white);
+  font-size: 0.5em;
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+.metric-label {
+  fill: var(--color-white);
+  font-size: 0.3em;
+  text-anchor: middle;
+  opacity: 0.8;
+}
+
+.workout-details {
+  margin: 24px 0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.detail-item i {
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+.workout-action {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.workout-action:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
 /*map*/
 
 
