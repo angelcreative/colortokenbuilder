@@ -5568,6 +5568,230 @@ input:checked + .switch-slider:before {
   }
 }
 
+/*car*/
+
+.car-dashboard-card {
+    width: 720px;
+    height: 480px;
+    background: linear-gradient(180deg, #1a1f35 0%, #131726 100%);
+    border-radius: 24px;
+    padding: 24px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-header {
+    margin-bottom: 24px;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.car-logo {
+    color: var(--color-primary-400);
+}
+
+.speed-meter {
+    position: relative;
+    height: 200px;
+    margin-bottom: 32px;
+}
+
+.speed-gauge {
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: url(#speed-gradient);
+    stroke-width: 8;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 78.5;
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 1s ease;
+}
+
+.speed-value {
+    font-size: 64px;
+    font-weight: 700;
+    fill: white;
+    text-anchor: middle;
+}
+
+.speed-unit {
+    font-size: 16px;
+    fill: rgba(255, 255, 255, 0.6);
+    text-anchor: middle;
+}
+
+.mode-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 40px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-badge {
+    background: var(--color-primary-500);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.car-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 32px;
+}
+
+.stat-group {
+    text-align: center;
+}
+
+.circular-gauge {
+    width: 80px;
+    height: 80px;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke-width: 8;
+    transition: stroke-dasharray 1s ease;
+}
+
+.power-fill {
+    stroke: #00ff88;
+}
+
+.battery-fill {
+    stroke: #00a8ff;
+}
+
+.temp-fill {
+    stroke: #ff6b6b;
+}
+
+.gauge-value, .gauge-label {
+    fill: white;
+    text-anchor: middle;
+    transform: rotate(90deg);
+}
+
+.gauge-value {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.gauge-label {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.tire-pressure {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.tire-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.tire {
+    text-align: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.pressure {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.psi {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.dashboard-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(0deg, rgba(19, 23, 38, 1) 0%, rgba(19, 23, 38, 0) 100%);
+}
+
+.nav-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.direction {
+    font-weight: 500;
+}
+
+.distance {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* Animaciones y efectos */
+@keyframes gaugeAnimation {
+    from {
+        stroke-dashoffset: 314;
+    }
+    to {
+        stroke-dashoffset: 78.5;
+    }
+}
+
+.gauge-fill {
+    animation: gaugeAnimation 1.5s ease-out forwards;
+}
+
+
+/*sidebar*/
+
 .sidebar {
     position: fixed;
     right: -400px; /* Inicialmente oculto */
