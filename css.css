@@ -662,7 +662,7 @@ color:var(--color-primary);
 /* General Styles ====================================== WEB*/
 
 .intro {
-    width: 960px;
+    width: 80%;
     margin: 80px auto;
     text-align: center;
 }
