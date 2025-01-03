@@ -4077,7 +4077,7 @@ div#dynamicColorPalette {
 .workout-card {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
   height: 500px;
   border-radius: 24px;
   overflow: hidden;
