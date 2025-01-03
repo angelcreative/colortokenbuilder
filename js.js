@@ -855,4 +855,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     
+    // Función para cambiar la tipografía
+    function initTypographyCards() {
+        const typographyCards = document.querySelectorAll('.typography-card');
+        
+        typographyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remover clase active de todas las cards
+                typographyCards.forEach(c => c.classList.remove('active'));
+                
+                // Añadir clase active a la card seleccionada
+                card.classList.add('active');
+                
+                // Obtener la fuente del atributo data-font
+                const fontFamily = card.getAttribute('data-font');
+                
+                // Aplicar la fuente al body
+                document.body.style.fontFamily = fontFamily;
+                
+                // Opcional: Mostrar notificación
+                showCustomAlert('Font changed to ' + card.querySelector('.typography-name').textContent);
+            });
+        });
+    }
+
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        initTypographyCards();
+    });
+    
+    
     
