@@ -6019,3 +6019,141 @@ input:checked + .switch-slider:before {
     color: var(--color-primary-900);
     margin-bottom: 16px;
 }
+
+
+/*ig*/
+
+.instagram-card {
+    width: 468px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* Header */
+.instagram-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+
+.avatar-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.avatar-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.more-options {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #262626;
+}
+
+/* Image Area */
+.instagram-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #fafafa;
+    position: relative;
+}
+
+/* Chess Board */
+.chess-board {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+
+.square {
+    flex: 1;
+}
+
+.square.white {
+    background: white;
+}
+
+.square.black {
+    background: black;
+}
+
+/* Actions */
+.instagram-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #262626;
+    transition: color 0.2s ease;
+}
+
+.action-btn:hover {
+    color: #8e8e8e;
+}
+
+.action-btn .material-symbols-outlined {
+    font-size: 24px;
+}
+
+/* Animaciones */
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.action-btn.liked {
+    color: #ed4956;
+    animation: likeAnimation 0.3s ease;
+}
