@@ -883,6 +883,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', () => {
         initTypographyCards();
     });
+
+
+ 
+    
+    // Animación de los círculos de progreso
+    document.addEventListener('DOMContentLoaded', () => {
+        const circles = document.querySelectorAll('.circle');
+        circles.forEach(circle => {
+            const value = circle.getAttribute('stroke-dasharray').split(',')[0];
+            circle.style.strokeDasharray = `0, 100`;
+            setTimeout(() => {
+                circle.style.strokeDasharray = `${value}, 100`;
+            }, 100);
+        });
+    });
+    
+    
+    
+    
     
     
     
