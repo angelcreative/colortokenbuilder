@@ -1,7 +1,19 @@
 // Declarar colorWheel globalmente
 let colorWheel;
 
-document.addEventListener('DOMContentLoaded', function() { 
+// Añadir esta función antes del DOMContentLoaded
+function initSidebar() {
+    const sidebarToggles = document.querySelectorAll('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    sidebarToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
 
     const toggleSwitch = document.getElementById('theme-toggle');
     
@@ -884,6 +896,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', () => {
         initTypographyCards();
         initSidebar();
+        updateHarmonyColors(); // Si es necesario
         // ... resto de inicializaciones
     });
     
