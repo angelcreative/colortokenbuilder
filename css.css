@@ -5376,7 +5376,7 @@ input:checked + .switch-slider:before {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    padding-top: 24px;
+    padding-top: 8px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     min-width: 60%;
     margin: 20px auto 40px;
