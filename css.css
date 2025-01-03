@@ -5376,7 +5376,7 @@ input:checked + .switch-slider:before {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    padding-top: 8px;
+    padding-top: 24px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     min-width: 60%;
     margin: 20px auto 40px;
@@ -5387,7 +5387,7 @@ input:checked + .switch-slider:before {
     width: 100px;
     background: var(--color-primary-50);
     border-radius: 12px;
-    padding: 24px;
+    padding: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
