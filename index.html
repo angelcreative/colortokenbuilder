@@ -8,9 +8,8 @@
 
         <link rel="stylesheet" href="css.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600&family=Inter:wght@400;600&family=Lato:wght@400;700&family=Lexend:wght@400;600&family=Montserrat:wght@400;600&family=Noto+Sans+JP:wght@400;600&family=Open+Sans:wght@400;600&family=Oswald:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;600&family=Sora:wght@400;600&family=Space+Mono&family=Urbanist:wght@400;600&family=Varela+Round&display=swap" rel="stylesheet">   
-
+<!-- Añadir justo después de Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600&family=Inter:wght@400;600&family=Lato:wght@400;700&family=Lexend:wght@400;600&family=Montserrat:wght@400;600&family=Noto+Sans+JP:wght@400;600&family=Open+Sans:wght@400;600&family=Oswald:wght@400;600&family=Poppins:wght@400;600&family=Raleway:wght@400;600&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;600&family=Sora:wght@400;600&family=Space+Mono&family=Urbanist:wght@400;600&display=swap" rel="stylesheet">
     <meta name="description" content="ColorToken allows you to generate, customize, and export color tokens from palettes in SVG and JSON formats. Easily copy tokens for seamless integration into your design projects.">
     
     <!-- Open Graph / Facebook -->
@@ -59,14 +58,28 @@ content_copy
     </p>
 </div>  
 
-<div class="container">
-    <div class="coloresWheel">
+<!-- Añadir justo después del body -->
+<button class="sidebar-toggle">
+    <span class="material-symbols-outlined">palette</span>
+    <span>Customize</span>
+</button>
+
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Customization</h2>
+        <button class="sidebar-toggle">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    
+    <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Color Wheel</h3>
         <div class="color-wheel-container">
+            <!-- Mover aquí el contenido existente del color wheel -->
             <div class="flex">
                 <div class="hexInputcontainer">
                     <input type="color" id="hexInput" placeholder="Enter HEX value (optional)">
                 </div>
-                
                 <select id="harmonyType">
                     <option value="complementary">Complementary</option>
                     <option value="analogous">Analogous</option>
@@ -76,93 +89,101 @@ content_copy
                 <div id="colorWheelContainer"></div>
             </div>
         </div>
+    </div>
+    
+    <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Typography</h3>
+        <!-- Mover aquí el contenido existente de typography cards -->
+        <!--typography-->
+        <div class="typography-cards">
+            <div class="typography-card font-roboto" data-font="'Roboto', sans-serif">
+                <div class="typography-name">Roboto</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-opensans" data-font="'Open Sans', sans-serif">
+                <div class="typography-name">Open Sans</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-poppins" data-font="'Poppins', sans-serif">
+                <div class="typography-name">Poppins</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-urbanist" data-font="'Urbanist', sans-serif">
+                <div class="typography-name">Urbanist</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-inter" data-font="'Inter', sans-serif">
+                <div class="typography-name">Inter</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-lexend" data-font="'Lexend', sans-serif">
+                <div class="typography-name">Lexend</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-sora" data-font="'Sora', sans-serif">
+                <div class="typography-name">Sora</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-raleway" data-font="'Raleway', sans-serif">
+                <div class="typography-name">Raleway</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-oswald" data-font="'Oswald', sans-serif">
+                <div class="typography-name">Oswald</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-notojp" data-font="'Noto Sans JP', sans-serif">
+                <div class="typography-name">Noto JP</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-commissioner" data-font="'Commissioner', sans-serif">
+                <div class="typography-name">Commissioner</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-spacemono" data-font="'Space Mono', monospace">
+                <div class="typography-name">Space Mono</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-lato" data-font="'Lato', sans-serif">
+                <div class="typography-name">Lato</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-montserrat" data-font="'Montserrat', sans-serif">
+                <div class="typography-name">Montserrat</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        
+            <div class="typography-card font-robotocondensed" data-font="'Roboto Condensed', sans-serif">
+                <div class="typography-name">Roboto Condensed</div>
+                <div class="typography-sample">ABC<br>123</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end sidebar-->
+
+<div class="container">
+    <div class="coloresWheel">
+        <
 
         <div class="selectColores">
             <div class="shades-container">
                 <div id="harmonyColors"></div>
                 <div id="colorCards" class="selectColores"></div>
-		     <!--typography-->
-                <div class="typography-cards">
-                    <div class="typography-card font-roboto" data-font="'Roboto', sans-serif">
-                        <div class="typography-name">Roboto</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-opensans" data-font="'Open Sans', sans-serif">
-                        <div class="typography-name">Open Sans</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-poppins" data-font="'Poppins', sans-serif">
-                        <div class="typography-name">Poppins</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-urbanist" data-font="'Urbanist', sans-serif">
-                        <div class="typography-name">Urbanist</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-inter" data-font="'Inter', sans-serif">
-                        <div class="typography-name">Inter</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-lexend" data-font="'Lexend', sans-serif">
-                        <div class="typography-name">Lexend</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-sora" data-font="'Sora', sans-serif">
-                        <div class="typography-name">Sora</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-
-		<div class="typography-card font-varelaround" data-font="'Varela Round', sans-serif">
-    <div class="typography-name">Varela Round</div>
-    <div class="typography-sample">ABC<br>123</div>
-</div>
-                
-                    <div class="typography-card font-raleway" data-font="'Raleway', sans-serif">
-                        <div class="typography-name">Raleway</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-oswald" data-font="'Oswald', sans-serif">
-                        <div class="typography-name">Oswald</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-notojp" data-font="'Noto Sans JP', sans-serif">
-                        <div class="typography-name">Noto JP</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-commissioner" data-font="'Commissioner', sans-serif">
-                        <div class="typography-name">Commissioner</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-spacemono" data-font="'Space Mono', monospace">
-                        <div class="typography-name">Space Mono</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-lato" data-font="'Lato', sans-serif">
-                        <div class="typography-name">Lato</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-montserrat" data-font="'Montserrat', sans-serif">
-                        <div class="typography-name">Montserrat</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                
-                    <div class="typography-card font-robotocondensed" data-font="'Roboto Condensed', sans-serif">
-                        <div class="typography-name">Roboto Condensed</div>
-                        <div class="typography-sample">ABC<br>123</div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -318,7 +339,7 @@ content_copy
         <div class="pets-grid">
             <!-- Pet 1 -->
             <div class="pet-card">
-                <img src="https://i.postimg.cc/VNVdkYwS/image.png" alt="Luna" class="pet-image">
+                <img src="https://placedog.net/100/100?id=1" alt="Luna" class="pet-image">
                 <h3>Luna</h3>
                 <p>Vaccines up to date</p>
                 <p>Monthly check-up</p>
@@ -329,7 +350,7 @@ content_copy
                 </div>
             </div>
 		  <div class="pet-card">
-                <img src="https://i.postimg.cc/VNVdkYwS/image.png" alt="Luna" class="pet-image">
+                <img src="https://placedog.net/100/100?id=1" alt="Luna" class="pet-image">
                 <h3>Luna</h3>
                 <p>Vaccines up to date</p>
                 <p>Monthly check-up</p>
@@ -339,7 +360,7 @@ content_copy
                     <span class="count">163</span>
                 </div>
             </div>  <div class="pet-card">
-                <img src="https://i.postimg.cc/VNVdkYwS/image.png" alt="Luna" class="pet-image">
+                <img src="https://placedog.net/100/100?id=1" alt="Luna" class="pet-image">
                 <h3>Luna</h3>
                 <p>Vaccines up to date</p>
                 <p>Monthly check-up</p>
@@ -349,7 +370,7 @@ content_copy
                     <span class="count">163</span>
                 </div>
             </div>  <div class="pet-card">
-                <img src="https://i.postimg.cc/VNVdkYwS/image.png" alt="Luna" class="pet-image">
+                <img src="https://placedog.net/100/100?id=1" alt="Luna" class="pet-image">
                 <h3>Luna</h3>
                 <p>Vaccines up to date</p>
                 <p>Monthly check-up</p>
@@ -933,87 +954,6 @@ content_copy
     </div>
 </div>
 
-
-<!--jogging-->
-		<div class="workout-card">
-    <!-- Video de fondo -->
-    <video class="workout-bg" autoplay muted loop>
-        <source src="https://cdn.hailuoai.video/moss/prod/2025-01-03-01/video/1735839668308869269-video_watermark_26515357c4f71bb8eac020df71e015ab_331239529609232393.mp4" type="video/mp4">
-    </video>
-    <!-- Contenido principal -->
-    <div class="workout-content">
-        <div class="workout-header">
-            <h3>Morning Run</h3>
-            <span class="workout-date">3 January, 2025</span>
-        </div>
-
-        <!-- Métricas principales -->
-        <div class="metrics-container">
-            <div class="metric-circle">
-                <svg viewBox="0 0 36 36" class="circular-chart">
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle-bg"/>
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle" stroke-dasharray="75, 100"/>
-                    <text x="18" y="20.35" class="percentage">5.2</text>
-                    <text x="18" y="25" class="metric-label">km</text>
-                </svg>
-            </div>
-
-            <div class="metric-circle">
-                <svg viewBox="0 0 36 36" class="circular-chart">
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle-bg"/>
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle" stroke-dasharray="85, 100"/>
-                    <text x="18" y="20.35" class="percentage">32</text>
-                    <text x="18" y="25" class="metric-label">min</text>
-                </svg>
-            </div>
-
-            <div class="metric-circle">
-                <svg viewBox="0 0 36 36" class="circular-chart">
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle-bg"/>
-                    <path d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                        class="circle" stroke-dasharray="65, 100"/>
-                    <text x="18" y="20.35" class="percentage">320</text>
-                    <text x="18" y="25" class="metric-label">kcal</text>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Detalles adicionales -->
-        <div class="workout-details">
-            <div class="detail-item">
-                <span class="material-symbols-outlined">location_on</span>
-                <span>Central Park Route</span>
-            </div>
-            <div class="detail-item">
-                <span class="material-symbols-outlined">directions_run</span>
-                <span>Pace: 6'15"/km</span>
-            </div>
-        </div>
-
-        <!-- Botón de acción -->
-        <button  class="workout-action ui-button primary">
-            View Complete Route
-        </button>
-    </div>
-</div>
-		
 
 		<!-- video list -->
 		<div class="video-card">
