@@ -52,8 +52,7 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
-  font-size: 100%;
+   font-size: 100%;
   margin: 0;
   vertical-align: baseline;
 }
@@ -374,8 +373,7 @@ color: var(--button-secondary); /* button-color-2 */
 
 .custom-dashboard,
 .custom-web {
-  font-family: system-ui, sans-serif;
-  padding: 20px;
+   padding: 20px;
   background-color: #f7f7f7;
   color: var(--color-primary);
   border: 1px solid gainsboro;
@@ -630,7 +628,9 @@ fill: none;
 stroke-width: 3;
 }
 
-.circle:nth-child(2) {stroke: var(--color-secondary-600);}
+.circle:nth-child(2) {
+stroke:var(--button-primary);
+}
 
 .circle:nth-child(3) {
 stroke: var(--button-color-1);
@@ -662,7 +662,7 @@ color:var(--color-primary);
 /* General Styles ====================================== WEB*/
 
 .intro {
-    width: 80%;
+    width: 960px;
     margin: 80px auto;
     text-align: center;
 }
@@ -863,8 +863,7 @@ color: var(--color-primary); }
   padding: 40px;
   background-color: var(--background-primary);
   color: var(--color-primary);
-  font-family: system-ui, sans-serif;
-flex-direction: row;
+ flex-direction: row;
 }
 
 .pricing-card {
@@ -977,8 +976,7 @@ background: #ffffff9c;
 .styleTile {
   padding: 40px;
   background-color:none;
-  font-family: system-ui, sans-serif;
-  color: var(--color-primary);
+   color: var(--color-primary);
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -2054,8 +2052,7 @@ button,
 .ui-cascade-dropdown {
 position: relative;
   min-width: 200px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
+ }
 
 .ui-cascade-button {
   width: 100%;
@@ -2302,8 +2299,7 @@ margin-bottom: 16px;
 body {
   color: var(--color-primary-600);
   line-height: 1;
-  font-family: system-ui, -apple-system, sans-serif;
-}
+ }
 
 /* Títulos principales */
 h1, h2, .title-main {
@@ -3276,14 +3272,12 @@ label,
 .color-rgb {
     font-size: 12px;
     color: #4C5D6B;
-    font-family: monospace;
-}
+ }
 
 .color-hex {
     font-size: 12px;
     color: #4C5D6B;
-    font-family: monospace;
-}
+ }
 
 .color-value {
     font-size: 12px;
@@ -3563,7 +3557,7 @@ label,
     max-width: 480px;
     margin: 0 auto;
     background: white;
-    /* padding: 24px; */
+    padding: 24px;
     border-radius: 24px;
     box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
 }
@@ -3742,7 +3736,7 @@ label,
 .fleet-app {
     background: white;
     border-radius: 24px;
-    /* padding: 24px; */
+    padding: 24px;
     max-width: 480px;
     margin: 0 auto;
     box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
@@ -4071,141 +4065,6 @@ div#dynamicColorPalette {
     font-size: 14px;
 }
 
-
-
-/*jogging*/
-.workout-card {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  height: 500px;
-  border-radius: 24px;
-  overflow: hidden;
-  background: var(--color-background);
-  box-shadow: var(--shadow-lg);
-}
-
-.workout-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  opacity: 0.8;
-}
-
-.workout-content {
-  position: relative;
-  z-index: 2;
-  padding: 24px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent 0%, var(--color-primary-900) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--color-white);
-}
-
-.workout-header {
-  margin-bottom: 24px;
-}
-
-.workout-header h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-}
-
-.workout-date {
-  font-size: 14px;
-  opacity: 0.8;
-  color: var(--color-primary-600);
-}
-
-.metrics-container {
-  display: flex;
-  justify-content: space-around;
-  margin: 32px 0;
-}
-
-.metric-circle {
-  width: 100px;
-  height: 100px;
-  color: var(--color-primary-50);
-}
-
-.circular-chart {
-  width: 100%;
-  height: 100%;
-}
-
-.circle-bg {
-  fill: none;
-  stroke: rgba(255,255,255,0.2);
-  stroke-width: 2.8;
-}
-
-.circle {
-  fill: none;
-  stroke: var(--color-primary);
-  stroke-width: 2.8;
-  stroke-linecap: round;
-  animation: progress 1s ease-out forwards;
-}
-
-.percentage {
-  fill: var(--color-primary-50);
-  font-size: 0.5em;
-  text-anchor: middle;
-  font-weight: bold;
-}
-
-.metric-label {
-  fill: var(--color-primary-300);
-  font-size: 0.3em;
-  text-anchor: middle;
-  opacity: 0.8;
-  color: var(--color-primary-50);
-}
-
-.workout-details {
-  margin: 24px 0;
-  color: var(--color-primary-50);
-}
-
-.detail-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.detail-item i {
-  margin-right: 12px;
-  opacity: 0.8;
-}
-
-.workout-action {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 12px;
-  background: var(--color-primary-600);
-  color: var(--color-white);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.workout-action:hover {
-  background: var(--color-primary-dark);
-  /* transform: translateY(-2px); */
-}
-
-@keyframes progress {
-  0% {
-    stroke-dasharray: 0 100;
-  }
-}
 
 /*map*/
 
@@ -5512,7 +5371,6 @@ input:checked + .switch-slider:before {
     color: var(--color-primary-400);
 }
 
-
 /* Typography Cards - Añadir después de gradient-cards */
 .typography-cards {
     display: flex;
@@ -5567,4 +5425,194 @@ input:checked + .switch-slider:before {
 .font-lato { font-family: 'Lato', sans-serif; }
 .font-montserrat { font-family: 'Montserrat', sans-serif; }
 .font-robotocondensed { font-family: 'Roboto Condensed', sans-serif; }
-.font-varelaround { font-family: 'Varela Round', sans-serif; }
+
+.workout-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-background);
+  box-shadow: var(--shadow-lg);
+}
+
+.workout-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.workout-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.8) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-white);
+}
+
+.workout-header {
+  margin-bottom: 24px;
+}
+
+.workout-header h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.workout-date {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.metrics-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 32px 0;
+}
+
+.metric-circle {
+  width: 100px;
+  height: 100px;
+}
+
+.circular-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.2);
+  stroke-width: 2.8;
+}
+
+.circle {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.percentage {
+  fill: var(--color-white);
+  font-size: 0.5em;
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+.metric-label {
+  fill: var(--color-white);
+  font-size: 0.3em;
+  text-anchor: middle;
+  opacity: 0.8;
+}
+
+.workout-details {
+  margin: 24px 0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.detail-item i {
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+.workout-action {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.workout-action:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.sidebar {
+    position: fixed;
+    right: -400px; /* Inicialmente oculto */
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    right: 24px;
+    top: 24px;
+    z-index: 1001;
+    background: var(--color-primary-50);
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    background: var(--color-primary-100);
+    transform: translateY(-2px);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sidebar-section {
+    margin-bottom: 32px;
+}
+
+.sidebar-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primary-900);
+    margin-bottom: 16px;
+}
