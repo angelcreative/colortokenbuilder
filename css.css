@@ -5426,10 +5426,17 @@ input:checked + .switch-slider:before {
 .font-montserrat { font-family: 'Montserrat', sans-serif; }
 .font-robotocondensed { font-family: 'Roboto Condensed', sans-serif; }
 
+
+
+.workout-card video {
+    transform: scale(2.3);
+    padding-top: 80px;
+}
+
 .workout-card {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
   height: 500px;
   border-radius: 24px;
   overflow: hidden;
@@ -5475,6 +5482,7 @@ input:checked + .switch-slider:before {
 .workout-date {
   font-size: 14px;
   opacity: 0.8;
+  color: var(--color-primary-300);
 }
 
 .metrics-container {
@@ -5508,14 +5516,14 @@ input:checked + .switch-slider:before {
 }
 
 .percentage {
-  fill: var(--color-white);
+  fill: var(--color-secondary-50);
   font-size: 0.5em;
   text-anchor: middle;
   font-weight: bold;
 }
 
 .metric-label {
-  fill: var(--color-white);
+  fill: var(--color-primary-300);
   font-size: 0.3em;
   text-anchor: middle;
   opacity: 0.8;
@@ -5523,6 +5531,7 @@ input:checked + .switch-slider:before {
 
 .workout-details {
   margin: 24px 0;
+  color: var(--color-primary-200);
 }
 
 .detail-item {
