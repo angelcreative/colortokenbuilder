@@ -5378,3 +5378,59 @@ input:checked + .switch-slider:before {
     font-size: 12px;
     color: var(--color-primary-400);
 }
+
+
+/* Typography Cards - Añadir después de gradient-cards */
+.typography-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    min-width: 60%;
+    margin: 20px auto 40px;
+    justify-content: center;
+}
+
+.typography-card {
+    width: 200px;
+    background: var(--color-primary-50);
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.typography-card.active {
+    border: 2px solid var(--color-primary-600);
+}
+
+.typography-name {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 12px;
+}
+
+.typography-sample {
+    font-size: 24px;
+    color: #000;
+    line-height: 1.2;
+}
+
+/* Clases específicas para cada tipografía */
+.font-roboto { font-family: 'Roboto', sans-serif; }
+.font-opensans { font-family: 'Open Sans', sans-serif; }
+.font-poppins { font-family: 'Poppins', sans-serif; }
+.font-urbanist { font-family: 'Urbanist', sans-serif; }
+.font-inter { font-family: 'Inter', sans-serif; }
+.font-lexend { font-family: 'Lexend', sans-serif; }
+.font-sora { font-family: 'Sora', sans-serif; }
+.font-raleway { font-family: 'Raleway', sans-serif; }
+.font-oswald { font-family: 'Oswald', sans-serif; }
+.font-notojp { font-family: 'Noto Sans JP', sans-serif; }
+.font-commissioner { font-family: 'Commissioner', sans-serif; }
+.font-spacemono { font-family: 'Space Mono', monospace; }
+.font-lato { font-family: 'Lato', sans-serif; }
+.font-montserrat { font-family: 'Montserrat', sans-serif; }
+.font-robotocondensed { font-family: 'Roboto Condensed', sans-serif; }
