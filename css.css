@@ -3764,7 +3764,7 @@ label,
 }
 
 .icon-button {
-    padding: 8px;
+    /* padding: 8px; */
     border-radius: 100%;
     border: none;
     background: var(--color-primary-50);
@@ -4216,24 +4216,25 @@ div#dynamicColorPalette {
 
 .pin-card {
     background: var(--background-light);
-    border-radius: var(--border-radius-lg);
+    border-radius: 24px;
     padding: 32px;
     width: 380px;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     display: flex;
     flex-direction: column;
     gap: 24px;
+    text-align: center;
 }
 
 .card-title {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    /* font-size: 18px; */
+    font-weight: bold;
     color: var(--color-primary-900);
     margin: 0;
 }
 
 .card-description {
-    color: var(--color-primary-600);
+    color: #4c5d6b;
     font-size: var(--font-size-base);
     line-height: 1.5;
     margin: 0;
@@ -4250,7 +4251,7 @@ div#dynamicColorPalette {
 .otp-inputs input {
     width: 56px;
     height: 56px;
-    border-radius: var(--border-radius-md);
+    border-radius: 8px;
     border: 2px solid var(--color-primary-200);
     background: var(--color-primary-50);
     font-size: var(--font-size-xl);
@@ -4272,21 +4273,23 @@ div#dynamicColorPalette {
     font-weight: var(--font-weight-medium);
     color: var(--color-primary-900);
     margin-bottom: 8px;
+    text-align: left;
 }
 
 .password-input {
     position: relative;
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .password-input input {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid var(--color-primary-200);
-    border-radius: var(--border-radius-md);
-    font-size: var(--font-size-base);
-    background: var(--color-primary-50);
+    /* padding: 12px 16px; */
+    /* border: 2px solid var(--color-primary-200); */
+    /* border-radius: var(--border-radius-md); */
+    /* font-size: var(--font-size-base); */
+    /* background: var(--color-primary-50); */
 }
 
 .toggle-visibility.icon-button {
@@ -4312,7 +4315,7 @@ div#dynamicColorPalette {
     justify-content: space-between;
     align-items: center;
     font-size: var(--font-size-sm);
-    color: var(--color-primary-600);
+    color: #4c5d6b;
 }
 
 .resend-link {
