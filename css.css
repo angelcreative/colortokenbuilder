@@ -5191,6 +5191,9 @@ input:checked + .switch-slider:before {
     display: flex;
     gap: 12px;
     margin-top: 8px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .walk-actions .ui-button {
@@ -6752,7 +6755,7 @@ input:checked + .switch-slider:before {
     }
 
     .video-feed {
-        height: 20vw;
+        height: 60vw;
     }
 
     .control-panel {
@@ -6886,10 +6889,10 @@ input:checked + .switch-slider:before {
 .data-item,
 .setting {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--color-primary-200);
+    padding: 0;
+    /* border-bottom: 1px solid var(--color-primary-200); */
     flex-direction: row;
 }
 
@@ -6959,4 +6962,9 @@ input:checked + .switch-slider:before {
     #columns {
         column-count: 1;
     }
+}
+
+
+.flight-data .data-item {
+    justify-content: space-between;
 }
