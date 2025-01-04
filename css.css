@@ -6924,7 +6924,7 @@ input:checked + .switch-slider:before {
 .component-group {
     max-width: 1600px;
     margin: 24px auto;
-    padding: 0 24px;
+    padding: 24px;
 }
 
 #columns {
@@ -6935,7 +6935,7 @@ input:checked + .switch-slider:before {
 
 /* Cada card dentro del grid */
 .component-group > * {
-    display: inline-block;
+    /* display: inline-block; */
     width: 100%;
     margin-bottom: 24px;
     break-inside: avoid; /* Evita que las cards se corten entre columnas */
