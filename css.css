@@ -4316,9 +4316,12 @@ div#dynamicColorPalette {
 .expiry-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: var(--font-size-sm);
+    align-items: flex-start;
+    font-size: 14px;
     color: #4c5d6b;
+    text-align: left;
+    flex-direction: row;
+    gap: 8px;
 }
 
 .resend-link {
