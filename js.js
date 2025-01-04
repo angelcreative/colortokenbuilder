@@ -13,7 +13,7 @@ function initSidebar() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { 
 
     const toggleSwitch = document.getElementById('theme-toggle'); 
     
