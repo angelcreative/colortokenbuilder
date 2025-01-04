@@ -243,7 +243,7 @@ content_copy
                         <div class="custom-recent-search">
                             <div class="custom-recent-search-header">
                                 <h3>Recent Search</h3>
-                                <a href="#" class="custom-see-all">See All</a>
+                                <a href="#" class="custom-see-all ui-button tertiary">See All</a>
                             </div>
                             <ul>
                                 <li class="custom-search-item">
@@ -338,7 +338,7 @@ content_copy
     <div class="pets-section">
         <div class="section-header">
             <h2>My Pets</h2>
-            <a href="#" class="view-all">View all</a>
+            <a href="#" class="view-all  ui-button tertiary">View all</a>
         </div>
         <div class="pets-grid">
             <!-- Pet 1 -->
@@ -1173,7 +1173,76 @@ A card is a core interface element in modern UI/UX design that functions as a mo
     </div>
 </div>
 
-<!--car-->
+<!--triplets-->
+		<div class="pin-cards-container">
+    <!-- Card 1: Verify Phone -->
+    <div class="pin-card">
+        <h2 class="card-title">Verify Phone Number</h2>
+        <p class="card-description">
+            Please enter the 4 digit OTP code sent to your phone number +234808****700 below to create new PIN.
+        </p>
+        
+        <div class="otp-inputs">
+            <input type="text" maxlength="1" value="4">
+            <input type="text" maxlength="1" value="5">
+            <input type="text" maxlength="1" value="8">
+            <input type="text" maxlength="1" value="0">
+        </div>
+
+        <div class="expiry-info">
+            <span>Expires in: <strong>8 mins</strong></span>
+            <a href="#" class="resend-link">Didn't get code? Resend</a>
+        </div>
+
+        <button class="ui-button primary">Verify number</button>
+    </div>
+
+    <!-- Card 2: Set New PIN -->
+    <div class="pin-card">
+        <h2 class="card-title">Set new transaction PIN</h2>
+        <p class="card-description">
+            Please create a new 4 digit PIN below to access your account again.
+        </p>
+
+        <div class="pin-inputs">
+            <div class="input-group">
+                <label>New PIN</label>
+                <div class="password-input">
+                    <input type="password" placeholder="****">
+                    <button class="icon-button">
+                        <span class="material-symbols-outlined">visibility_off</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Confirm PIN</label>
+                <div class="password-input">
+                    <input type="password" placeholder="****">
+                    <button class="icon-button">
+                        <span class="material-symbols-outlined">visibility_off</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="ui-button primary">Reset PIN</button>
+    </div>
+
+    <!-- Card 3: Success -->
+    <div class="pin-card">
+        <div class="success-icon">
+            <span class="material-symbols-outlined">celebration</span>
+        </div>
+        
+        <h2 class="card-title">PIN changed successfully!</h2>
+        <p class="card-description">
+            Your PIN has been successfully changed, you can now log in with your new PIN.
+        </p>
+
+        <button class="ui-button primary">Log in now</button>
+    </div>
+</div>
 
 		
 <!--//-->
