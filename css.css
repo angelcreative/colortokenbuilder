@@ -6473,3 +6473,133 @@ input:checked + .switch-slider:before {
     color: var(
     --color-primary-500);
 }
+
+
+
+/*chat*/
+
+.chat-card {
+    width: 360px;
+    height: 480px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* Header */
+.chat-header {
+    padding: 16px;
+    background: var(--color-primary-700); /* Navy blue como en la imagen */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Messages Container */
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    overflow-y: auto;
+}
+
+.message-timestamp {
+    font-size: 12px;
+    color: #a0a0a0;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.message {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.message.sent {
+    align-self: flex-end;
+    background: var(--color-primary-600); /* Lavender como en la imagen */
+    color: var(--color-primary-50);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: var(--color-secondary-600); /* Navy blue */
+    color: var(--color-secondary-50);
+}
+
+/* Input Area */
+.chat-input {
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+    /* padding: 12px; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 4px; */
+    /* font-size: 14px; */
+    /* color: #666; */
+}
+
+.chat-input input::placeholder {
+    color: #999;
+}
+
+.send-button {
+    /* width: 40px; */
+    /* height: 40px; */
+    border: none;
+    border-radius: 50%;
+    background: #e6e6fa; /* Lavender */
+    color: #000080; /* Navy blue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background: #d8d8f0;
+}
+
+.message-status {
+    font-size: 12px;
+    color: var(--color-secondary-50);
+    margin-left: 4px;
+}
+
+/* Scrollbar personalizado */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+}
