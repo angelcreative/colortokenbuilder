@@ -4068,7 +4068,7 @@ div#dynamicColorPalette {
 
 /*food*/
 .food-carousel {
-    width: 360px;
+    max-width: 360px;
     position: relative;
     padding: 0;
 }
@@ -4134,7 +4134,7 @@ div#dynamicColorPalette {
     background: #fff;
     border-radius: 12px;
     padding: 16px;
-    width: 336px;
+    max-width: 336px;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
@@ -4220,7 +4220,7 @@ div#dynamicColorPalette {
     background: var(--background-light);
     border-radius: 24px;
     padding: 32px;
-    width: 360px;
+    max-width: 360px;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     display: flex;
     flex-direction: column;
@@ -6153,7 +6153,7 @@ input:checked + .switch-slider:before {
 
 /*ig*/
 .instagram-card {
-    width: 360px;
+    max-width: 360px;
     background: white;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
@@ -6395,7 +6395,7 @@ input:checked + .switch-slider:before {
 
 
 .profileme-card {
-    width: 360px;
+    max-width: 360px;
     background: var(--color-primary-50);
     border-radius: 24px;
     overflow: hidden;
@@ -6481,7 +6481,7 @@ input:checked + .switch-slider:before {
 /*chat*/
 
 .chat-card {
-    width: 360px;
+    max-width: 360px;
     height: 480px;
     background: white;
     display: flex;
@@ -6634,7 +6634,7 @@ input:checked + .switch-slider:before {
 
 /* Base styles */
 .drone-monitor {
-    width: 360px;
+    max-width: 360px;
     background-color: #242424;
     border-radius: 15px;
     overflow: hidden;
@@ -6940,4 +6940,23 @@ input:checked + .switch-slider:before {
 
 #columns > div {
     margin-bottom: 48px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1400px) {
+    #columns {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 1024px) {
+    #columns {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    #columns {
+        column-count: 1;
+    }
 }
