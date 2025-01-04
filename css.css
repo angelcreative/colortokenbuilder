@@ -6915,3 +6915,29 @@ input:checked + .switch-slider:before {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+
+
+.component-group {
+    max-width: 1600px;
+    margin: 24px auto;
+    padding: 0 24px;
+}
+
+#columns {
+    column-count: 3;
+    column-gap: 16px;
+    row-gap: 16px;
+}
+
+/* Cada card dentro del grid */
+.component-group > * {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 24px;
+    break-inside: avoid; /* Evita que las cards se corten entre columnas */
+}
+
+#columns > div {
+    margin-bottom: 48px;
+}
