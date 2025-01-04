@@ -6968,3 +6968,8 @@ input:checked + .switch-slider:before {
 .flight-data .data-item {
     justify-content: space-between;
 }
+
+.camera-settings .setting {
+    display: flex;
+    justify-content: space-between;
+}
