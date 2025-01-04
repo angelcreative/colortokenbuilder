@@ -929,6 +929,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos DOM
+    const recTimeEl = document.querySelector('.rec-time');
+    const fpsCounter = document.querySelector('.fps-counter');
+    const batteryValue = document.querySelector('.battery .value');
+    const altitudeValue = document.querySelector('.altitude .value');
+    const speedValue = document.querySelector('.flight-data .data-item:nth-child(1) .value');
+    const distanceValue = document.querySelector('.flight-data .data-item:nth-child(2) .value');
+    const flightTimeValue = document.querySelector('.flight-data .data-item:nth-child(3) .value');
+
+    // Variables de control
+    let seconds = 0;
+    let distance = 0;
+    let battery = 100;
+    let altitude = 270;
+    let speed = 20;
+
+    // Función para números aleatorios con rango
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    // Actualizar tiempo de grabación
+    setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        recTimeEl.textContent = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }, 1000);
+
+    // Fluctuar FPS
+    setInterval(() => {
+        const fps = randomInRange(19.2, 20.1).toFixed(2);
+        fpsCounter.textContent = `${fps} FPS`;
+    }, 500);
+
+    // Actualizar batería
+    setInterval(() => {
+        if (battery > 5) {
+            battery -= 0.1;
+            batteryValue.textContent = `${Math.round(battery)}%`;
+            
+            // Cambiar icono de batería según nivel
+            const batteryIcon = document.querySelector('.battery .material-symbols-outlined');
+            if (battery < 20) {
+                batteryValue.style.color = '#ff4444';
+                batteryIcon.textContent = 'battery_1_bar';
+            }
+        }
+    }, 5000);
+
+    // Simular vuelo
+    setInterval(() => {
+        // Altitud
+        altitude += randomInRange(-5, 5);
+        altitude = Math.max(0, Math.min(500, altitude));
+        altitudeValue.textContent = `${Math.round(altitude)} m`;
+
+        // Velocidad
+        speed += randomInRange(-2, 2);
+        speed = Math.max(0, Math.min(40, speed));
+        speedValue.textContent = `${Math.round(speed)} km/h`;
+
+        // Distancia
+        distance += speed / 3600; // Convertir km/h a km por segundo
+        distanceValue.textContent = `${distance.toFixed(1)} km`;
+    }, 1000);
+
+    // Actualizar tiempo de vuelo
+    let flightSeconds = 0;
+    setInterval(() => {
+        flightSeconds++;
+        const fMinutes = Math.floor(flightSeconds / 60);
+        const fSecs = flightSeconds % 60;
+        flightTimeValue.textContent = `${String(fMinutes).padStart(2, '0')}:${String(fSecs).padStart(2, '0')}`;
+    }, 1000);
+});
+
+// Añadir al JavaScript existente:
+document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        // Remover active de todos los botones y contenidos
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        // Activar el botón clickeado y su contenido
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+    });
+});
     
     
