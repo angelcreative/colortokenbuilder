@@ -6839,6 +6839,7 @@ input:checked + .switch-slider:before {
     gap: 8px;
     transition: all 0.3s ease;
     border-radius: 0px;
+  font-family: inherit;
 }
 
 .tab-btn.active {
