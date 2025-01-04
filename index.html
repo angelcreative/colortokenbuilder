@@ -1245,71 +1245,126 @@ A card is a core interface element in modern UI/UX design that functions as a mo
 </div>
 
 <!--drone-->
-		<div class="drone-monitor">
+<div class="drone-monitor">
     <!-- Video Feed -->
     <div class="video-feed">
         <video id="droneVideo" autoplay="" loop="" muted="">
             <source src="https://videos.pexels.com/video-files/11677103/11677103-uhd_2560_1440_24fps.mp4" type="video/mp4">
         </video>
         
-        <!-- Overlay Information -->
         <div class="overlay-info">
             <div class="top-bar">
-                <span class="recording">• REC 02:09</span>
-                <span class="resolution">4K • 19.67FPS</span>
+                <span class="recording">
+                    <span class="material-symbols-outlined">fiber_manual_record</span>
+                    <span class="rec-time">02:09</span>
+                </span>
+                <span class="resolution">
+                    <span class="material-symbols-outlined">hd</span>
+                    <span class="fps-counter">19.67 FPS</span>
+                </span>
             </div>
             <div class="center-target"></div>
         </div>
     </div>
 
-    <!-- Control Panel -->
-    <div class="control-panel">
-        <!-- Status Info -->
-        <div class="status-info">
-            <div class="battery">
-                <span class="label">Battery</span>
-                <span class="value">75%</span>
-            </div>
-            <div class="altitude">
-                <span class="label">Altitude</span>
-                <span class="value">270 m</span>
-            </div>
-        </div>
-        
-        <!-- Flight Data -->
-        <div class="flight-data">
-            <div class="data-item">
-                <span class="label">Speed</span>
-                <span class="value">20 km/h</span>
-            </div>
-            <div class="data-item">
-                <span class="label">Distance</span>
-                <span class="value">1.2 km</span>
-            </div>
-            <div class="data-item">
-                <span class="label">Flight Time</span>
-                <span class="value">05:43</span>
-            </div>
+    <!-- Tabs Control Panel -->
+    <div class="tabs-container">
+        <!-- Tab Headers -->
+        <div class="tab-headers">
+            <button class="tab-btn active" data-tab="status">
+                <span class="material-symbols-outlined">monitoring</span>
+                Status
+            </button>
+            <button class="tab-btn" data-tab="flight">
+                <span class="material-symbols-outlined">flight</span>
+                Flight
+            </button>
+            <button class="tab-btn" data-tab="camera">
+                <span class="material-symbols-outlined">camera</span>
+                Camera
+            </button>
         </div>
 
-        <!-- Camera Settings -->
-        <div class="camera-settings">
-            <div class="setting">
-                <span class="label">ISO</span>
-                <span class="value">600</span>
+        <!-- Tab Contents -->
+        <div class="tab-contents">
+            <!-- Status Tab -->
+            <div class="tab-content active" id="status">
+                <div class="status-info">
+                    <div class="battery">
+                        <span class="label">
+                            <span class="material-symbols-outlined">battery_6_bar</span>
+                            Battery
+                        </span>
+                        <span class="value">75%</span>
+                    </div>
+                    <div class="altitude">
+                        <span class="label">
+                            <span class="material-symbols-outlined">flight_takeoff</span>
+                            Altitude
+                        </span>
+                        <span class="value">270 m</span>
+                    </div>
+                </div>
             </div>
-            <div class="setting">
-                <span class="label">Shutter</span>
-                <span class="value">1/180</span>
+
+            <!-- Flight Tab -->
+            <div class="tab-content" id="flight">
+                <div class="flight-data">
+                    <div class="data-item">
+                        <span class="label">
+                            <span class="material-symbols-outlined">speed</span>
+                            Speed
+                        </span>
+                        <span class="value">20 km/h</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">
+                            <span class="material-symbols-outlined">near_me</span>
+                            Distance
+                        </span>
+                        <span class="value">1.2 km</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="label">
+                            <span class="material-symbols-outlined">timer</span>
+                            Flight Time
+                        </span>
+                        <span class="value">05:43</span>
+                    </div>
+                </div>
             </div>
-            <div class="setting">
-                <span class="label">FPS</span>
-                <span class="value">24</span>
+
+            <!-- Camera Tab -->
+            <div class="tab-content" id="camera">
+                <div class="camera-settings">
+                    <div class="setting">
+                        <span class="label">
+                            <span class="material-symbols-outlined">iso</span>
+                            ISO
+                        </span>
+                        <span class="value">600</span>
+                    </div>
+                    <div class="setting">
+                        <span class="label">
+                            <span class="material-symbols-outlined">camera</span>
+                            Shutter
+                        </span>
+                        <span class="value">1/180</span>
+                    </div>
+                    <div class="setting">
+                        <span class="label">
+                            <span class="material-symbols-outlined">videocam</span>
+                            FPS
+                        </span>
+                        <span class="value">24</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+		
 <!--triplets-->
 <div class="pin-cards-container">
     <!-- Card 1: Verify Phone -->
