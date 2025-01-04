@@ -6395,7 +6395,7 @@ input:checked + .switch-slider:before {
 
 
 .profileme-card {
-    width: 320px;
+    width: 360px;
     background: var(--color-primary-50);
     border-radius: 24px;
     overflow: hidden;
