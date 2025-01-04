@@ -6803,3 +6803,92 @@ input:checked + .switch-slider:before {
     align-items: flex-start;
     gap: 4px;
 }
+
+
+/* Mantener los estilos anteriores y añadir/modificar: */
+
+.tabs-container {
+    background: var(--color-primary-50);
+}
+
+.tab-headers {
+    display: flex;
+    border-bottom: 1px solid var(--color-primary-200);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--color-primary-600);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--color-primary-900);
+    border-bottom: 2px solid var(--color-primary-600);
+}
+
+.tab-btn .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.tab-contents {
+    padding: 16px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Estilos para los contenidos de las tabs */
+.status-info,
+.flight-data,
+.camera-settings {
+    background: var(--color-primary-100);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.data-item,
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-primary-200);
+}
+
+.data-item:last-child,
+.setting:last-child {
+    border-bottom: none;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary-700);
+}
+
+.value {
+    font-weight: 500;
+    color: var(--color-primary-900);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
