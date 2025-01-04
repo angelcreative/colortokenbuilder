@@ -1557,7 +1557,7 @@ display:block; cursor:pointer
 }
 
 .component-group h3 {
-  color: #4c5d6b;
+  /* color: #4c5d6b; */
   margin-bottom: 1rem;
 }
 
@@ -5295,6 +5295,7 @@ input:checked + .switch-slider:before {
     font-size: 24px;
     font-weight: 600;
     margin: 0 0 4px 0;
+    color: var(--color-primary-50);
 }
 
 .song-artist {
@@ -5746,6 +5747,7 @@ input:checked + .switch-slider:before {
   font-size: 24px;
   font-weight: 600;
   margin: 0 0 8px 0;
+  color: var(--color-primary-50);
 }
 
 .workout-date {
