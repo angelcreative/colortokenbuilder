@@ -15,7 +15,7 @@ function initSidebar() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    const toggleSwitch = document.getElementById('theme-toggle');
+    const toggleSwitch = document.getElementById('theme-toggle'); 
     
     // Get the current theme from localStorage
     const currentTheme = localStorage.getItem('theme');
