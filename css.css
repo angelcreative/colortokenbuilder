@@ -7312,9 +7312,9 @@ input:checked + .switch-slider:before {
 }
 
 .testimonial-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 84px;
+    height: 64px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
