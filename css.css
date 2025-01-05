@@ -7098,3 +7098,128 @@ input:checked + .switch-slider:before {
 .video-control-btn:hover {
   background: var(--color-primary-500);
 }
+
+
+/*code*/
+
+
+.code-snippet-card {
+    background: #0A1929;
+    border-radius: 16px;
+    overflow: hidden;
+    font-family: 'Space Mono', monospace;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255,255,255,0.1);
+    max-width: 360px;
+}
+
+.snippet-tabs {
+    display: flex;
+    background: #0A1929;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 8px;
+    gap: 1px;
+}
+
+.snippet-tabs .tab-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: var(--color-primary-500);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+}
+
+.snippet-tabs .tab-btn.active {
+    color: var(--color-primary-500);
+    position: relative;
+}
+
+.snippet-tabs .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary-600);
+}
+
+.copy-btn {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #4A5568;
+    cursor: pointer;
+    /* padding: 4px; */
+    border-radius: 900px;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.code-area, 
+.response-area {
+    padding: 16px;
+}
+
+.response-header {
+    color: #FF5D5D;
+    font-size: 12px;
+    padding: 8px 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.code-content,
+.response-content {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #E2E8F0;
+    text-wrap: auto;
+    overflow-wrap: anywhere;
+}
+
+/* Syntax highlighting */
+.keyword {
+    color: #00FF9C;
+}
+
+.string {
+    color: var(--color-secondary-600);
+}
+
+.line-number {
+    color: var(--color-secondary-600);
+    margin-right: 16px;
+    user-select: none;
+}
+
+/* Animaciones */
+.code-snippet-card {
+    transition: transform 0.2s ease;
+}
+
+.code-snippet-card:hover {
+    /* transform: translateY(-2px); */
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .snippet-tabs .tab-btn {
+        padding: 8px;
+    }
+    
+    .code-content,
+    .response-content {
+        font-size: 12px;
+    }
+}
