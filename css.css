@@ -4108,7 +4108,7 @@ div#dynamicColorPalette {
     background: white;
     border: none;
     width: 40px;
-    height: 40px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -4994,7 +4994,7 @@ input:checked + .switch-slider:before {
 }
 
 .flight-info {
-    background: var(--color-secondary-50);
+    background: var(--color-primary-50);
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
@@ -6609,7 +6609,7 @@ input:checked + .switch-slider:before {
 }
 
 .send-button:hover {
-    background: #d8d8f0;
+    background: var(--color-primary-300);
 }
 
 .message-status {
