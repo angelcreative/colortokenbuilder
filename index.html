@@ -1183,7 +1183,45 @@ A card is a core interface element in modern UI/UX design that functions as a mo
         </div>
     </div>
 </div>
-		
+
+<!--code-->
+	    <div class="code-snippet-card">
+    <!-- Tabs de lenguajes -->
+    <div class="snippet-tabs">
+        <button class="tab-btn active">PYTHON</button>
+        <button class="tab-btn">NODE</button>
+        <button class="tab-btn">GO</button>
+        <button class="tab-btn">CURL</button>
+        
+        <button class="copy-btn">
+            <span class="material-symbols-outlined">content_copy</span>
+        </button>
+    </div>
+
+    <!-- Área de código -->
+    <div class="code-area">
+        <pre class="code-content"><code><span class="line-number">1</span><span class="keyword">import</span> cohere
+<span class="line-number">2</span>co = cohere.Client(<span class="string">'apikey'</span>)
+<span class="line-number">3</span>response = co.generate(
+<span class="line-number">4</span>    prompt=<span class="string">'Once upon a time in a magical land called'</span>
+<span class="line-number">5</span>)
+<span class="line-number">6</span><span class="keyword">print</span>(<span class="string">'Prediction: {}'</span>.format(response.generations[0].text))</code></pre>
+    </div>
+
+    <!-- Área de respuesta -->
+    <div class="response-area">
+        <div class="response-header">RESPONSE</div>
+        <pre class="response-content"><code>{
+    <span class="string">"generations"</span>: [
+        {
+            <span class="string">"text"</span>: <span class="string">"\"Phoenix, Arizona\" there lived a tiny lit"</span>
+        }
+    ],
+    <span class="string">"prompt"</span>: <span class="string">"Once upon a time in a magical land called"</span>
+}</code></pre>
+    </div>
+</div>
+	    
 <!--//-->
     </div>
 </div>
