@@ -6982,7 +6982,7 @@ input:checked + .switch-slider:before {
   overflow: hidden;
   box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
   width: 100%;
-  max-width: 600px;
+  max-width: 360px;
   margin: 1rem auto;
 }
 
