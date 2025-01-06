@@ -1782,7 +1782,7 @@ url(
 }
 
 .ui-switch .slider {
-  width: 36px;
+  min-width: 36px;
   height: 20px;
   background: var(--color-primary-400);
   border-radius: 20px;
@@ -7479,8 +7479,6 @@ h3.search-header {
     border-color: var(--color-primary-600);
 }
 
-
-
 /*candidate*/
 .candidates-card {
     background: var(--color-primary-50);
@@ -7488,6 +7486,7 @@ h3.search-header {
     padding: 24px;
     width: 100%;
     max-width: 360px;
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
 .candidates-title {
@@ -7575,4 +7574,113 @@ h3.search-header {
 
 .candidate-meta .switch-label {
     margin-left: 8px;
+}
+
+/*calendar*/
+
+
+.calendar-stats-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.calendar-header h2 {
+    color: #232a31;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.weekday {
+    color: #4c5d6b;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px;
+}
+
+.day {
+    color: #232a31;
+    font-size: 16px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.day:hover {
+    background: var(--color-primary-50);
+}
+
+.day.selected {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+    font-weight: 500;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #232a31;
+    font-weight: 500;
+}
+
+.stat-subtitle {
+    color: #4c5d6b;
+    font-size: 14px;
+}
+
+.stat-percentage {
+    font-size: 20px;
+    font-weight: 600;
+    color: #232a31;
+}
+
+/* Iconos específicos */
+.stat-header .material-symbols-outlined {
+    font-size: 20px;
 }
