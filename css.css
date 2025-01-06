@@ -367,7 +367,9 @@ font-size: 1.2em;
 color: var(--button-secondary); /* button-color-2 */
 }
 
-
+button, input, select {
+    font-family: inherit;
+}
 
 /* dashboard */
 
