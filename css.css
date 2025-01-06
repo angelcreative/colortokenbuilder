@@ -7684,3 +7684,109 @@ h3.search-header {
 .stat-header .material-symbols-outlined {
     font-size: 20px;
 }
+
+
+/*profile mail*/
+
+/*contact mail*/
+
+.contact-profile-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.profile-main {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--color-primary-100);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-main .profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.profile-name {
+    color: #232a31;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-email {
+    color: #4c5d6b;
+    font-size: 14px;
+    margin: 0;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.profile-actions .ui-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 12px;
+}
+
+.secondary-actions {
+    display: flex;
+    gap: 8px;
+}
+
+
+.icon-button:hover {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+}
+
+.view-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary-600);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.view-details:hover {
+    color: var(--color-primary-700);
+}
+
+.view-details .material-symbols-outlined {
+    font-size: 18px;
+}
