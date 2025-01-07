@@ -8211,3 +8211,80 @@ form.login-form {
 }
 
 
+/*storage*/
+
+.storage-card {
+    background: var(--background-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.storage-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.storage-icon {
+    font-size: var(--font-size-2xl);
+}
+
+.storage-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.storage-progress {
+    margin-bottom: var(--spacing-lg);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--color-primary-100);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--color-primary-600);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-normal);
+}
+
+.storage-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.storage-button {
+    /* width: 100%; */
+    /* background: var(--text-dark); */
+    /* color: var(--text-light); */
+    /* border: none; */
+    /* border-radius: var(--radius-md); */
+    /* padding: var(--spacing-sm) var(--spacing-md); */
+    /* font-size: var(--font-size-base); */
+    /* font-weight: var(--font-weight-medium); */
+    /* cursor: pointer; */
+    /* transition: background var(--transition-fast); */
+}
+
+.storage-button:hover {
+    background: var(--color-primary-900);
+}
+
+
