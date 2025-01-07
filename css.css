@@ -8288,3 +8288,123 @@ form.login-form {
 }
 
 
+/*feedback*/
+
+
+.feedback-card {
+    background: var(--background-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    width: 100%;
+    max-width: 360px;
+    box-shadow: var(--shadow-lg);
+}
+
+.feedback-title {
+    color: var(--color-primary-900);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+}
+
+.feedback-question {
+    margin-bottom: var(--spacing-xl);
+}
+
+.feedback-question p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    margin-bottom: var(
+    --spacing-lg);
+}
+
+.rating-group {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: space-evenly;
+}
+
+.rating-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md););
+    border: 1px solid var(
+    --color-primary-200);
+    border-radius: var(
+    --radius-md);
+    background: var(
+    --background-light);
+    cursor: pointer;
+    transition: all var(
+    --transition-fast);
+    width: 33%;
+}
+
+.rating-button .material-symbols-outlined {
+    font-size: var(--font-size-2xl);
+    color: var(--text-secondary);
+}
+
+.rating-button span:not(.material-symbols-outlined) {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.rating-button:hover,
+.rating-button.active {
+    background: var(--color-primary-50);
+    border-color: var(--color-primary-600);
+}
+
+.rating-button:hover .material-symbols-outlined,
+.rating-button.active .material-symbols-outlined {
+    color: var(--color-primary-600);
+}
+
+.feedback-input {
+    margin-bottom: var(--spacing-xl);
+}
+
+.feedback-input label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-sm);
+}
+
+.feedback-input textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-primary-200);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    resize: vertical;
+}
+
+.feedback-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.link-primary {
+    color: var(--color-primary-600);
+    text-decoration: none;
+}
+
+.link-primary:hover {
+    text-decoration: underline;
+}
+
+.feedback-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-direction: row;
+}
+
+
+
