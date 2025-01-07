@@ -8149,8 +8149,8 @@ h3.search-header {
     --background-hover: rgba(255, 255, 255, 0.05);
 
     /* Text Colors */
-    --text-primary: var(--text-primary);
-    --text-secondary: var(--text-secondary);
+    --text-primary: #232a31;
+    --text-secondary: #4c5d6b;
     --text-tertiary: #6B7280;
     --text-light: #FFFFFF;
     --text-dark: #000000;
