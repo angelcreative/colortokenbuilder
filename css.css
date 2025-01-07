@@ -7891,7 +7891,7 @@ h3.search-header {
 .upload-footer {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
     flex-direction: column-reverse;
     gap: 24px;
 }
@@ -7920,6 +7920,8 @@ h3.search-header {
 .action-buttons {
     display: flex;
     gap: 12px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Hover effects */
