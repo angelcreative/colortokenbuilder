@@ -2565,7 +2565,7 @@ label,
 /* Card con acciones */
 .card-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0.5rem;
   padding-top: 1rem;
 }
@@ -4100,14 +4100,14 @@ div#dynamicColorPalette {
     width: 100%;
     border-radius: 24px;
     /* overflow: hidden; */
-    /* box-shadow: 0 8px 24px rgba(0,0,0,0.1); */
+    box-shadow: none !important;!i;!;
 }
 
 /* Background Card */
 .food-card-bg {
     position: relative;
     width: 100%;
-    height: 216px;
+    height: 224px;
     overflow: hidden;
     border-radius: 14px;
 }
