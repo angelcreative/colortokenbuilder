@@ -5784,6 +5784,72 @@ input:checked + .switch-slider:before {
     color: var(--color-primary-400);
 }
 
+/*radii*/
+/* Button Radius Controls */
+.radius-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.radius-card {
+    background: var(--background-light);
+    border: 1px solid var(--color-primary-200);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.radius-card:hover {
+    background: var(--color-primary-50);
+    border-color: var(--color-primary-300);
+}
+
+.radius-card.active {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+    color: var(--text-light);
+}
+
+.radius-name {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    color: inherit;
+}
+
+.radius-sample {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.radius-card.active .radius-sample {
+    color: var(--text-light);
+}
+
+/* Estilos específicos para cada tipo de radius */
+.radius-sm .radius-sample {
+    border-radius: var(--radius-sm);
+}
+
+.radius-md .radius-sample {
+    border-radius: var(--radius-md);
+}
+
+.radius-lg .radius-sample {
+    border-radius: var(--radius-lg);
+}
+
+.radius-xl .radius-sample {
+    border-radius: var(--radius-xl);
+}
+
+.radius-full .radius-sample {
+    border-radius: var(--radius-full);
+}
+
 /* Typography Cards - Añadir después de gradient-cards */
 .typography-cards {
     display: flex;
