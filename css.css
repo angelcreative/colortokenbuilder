@@ -8504,4 +8504,13 @@ form.login-form {
 }
 
 
+/*base card*/
+
+.base-card {
+    box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+    border-radius: 24px;
+    max-width: 360px;
+    height: auto;
+}
+
 
