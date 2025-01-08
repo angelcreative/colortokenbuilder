@@ -1635,7 +1635,7 @@ display:block; cursor:pointer
 
 .ui-input-group label {
   color: var(--color-primary-700);
-  font-size: 16px;
+  font-size: var(--font-size-xs);
 }
 
 .ui-input {
@@ -4289,9 +4289,9 @@ div#dynamicColorPalette {
 
 .input-group label {
     display: block;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
-    color: var(--color-primary-900);
+    color: var(--color-primary-600);
     margin-bottom: 8px;
     text-align: left;
 }
