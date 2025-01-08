@@ -6603,7 +6603,7 @@ input:checked + .switch-slider:before {
     font-size: 18px;
     font-weight: 300;
     color: var(--color-primary-700);
-    margin: 8px 0 0 0;
+    margin: 8px 0 12px 0;
 }
 
 .profileme-location,
@@ -6612,7 +6612,7 @@ input:checked + .switch-slider:before {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    color: var(--color-primary-600);
+    color: var(--text-tertiary);
     font-size: 14px;
     margin-bottom: 4px;
 }
