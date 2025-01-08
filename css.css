@@ -1576,11 +1576,11 @@ display:block; cursor:pointer
 
 /* Buttons */
 .ui-button {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.2s ease;
+     padding: 12px 24px;
+    border-radius: var(--button-radius, var(--radius-md)); /* Valor por defecto --radius-md (8px) */
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
 /* Primary Button */
@@ -2164,50 +2164,6 @@ position: relative;
 
 
 
-/* Estilos base unificados para todos los botones */
-.ui-button {/* padding: 12px 24px; */border-radius: 8px;font-weight: 500;font-size: 14px;border: none;transition: all 0.2s ease;cursor: pointer;}
-
-/* Estilo primario */
-.ui-button.primary {
-background: var(--color-primary-600);
-color: white;
-}
-
-.ui-button.primary:hover {
-background: var(--color-primary-500);
-}
-
-.ui-button.primary:active {
-background: var(--color-primary-700);
-}
-
-/* Estilo secundario */
-.ui-button.secondary {
-background: var(--color-primary-200);
-color: var(--color-primary-700);
-}
-
-.ui-button.secondary:hover {
-background: var(--color-primary-100);
-}
-
-.ui-button.secondary:active {
-background: var(--color-primary-300);
-}
-
-/* Estilo terciario */
-.ui-button.tertiary {background: transparent;color: var(--color-primary-700);/* padding: 8px 16px; */}
-
-.ui-button.tertiary:hover {color: var(--color-primary-500);/* text-decoration: underline; */}
-
-/* Estados disabled */
-.ui-button:disabled {
-opacity: 0.5;
-cursor: not-allowed;
-background: var(--color-primary-200);
-color: var(--color-primary-600);
-}
-
 
 /* Estilos para la sección mobile */
 .custom-app {
@@ -2350,71 +2306,7 @@ label,
   font-size: 16px;
 }
 
-/* Sistema de Botones */
-.ui-button {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 16px;
-  border: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  text-align: center;
-  justify-content: center;
-}
 
-/* Variantes */
-.ui-button.primary {
-  background: var(--color-primary-600);
-  color: white;
-}
-
-.ui-button.primary:hover {
-  background: var(--color-primary-500);
-  color: var(--color-primary-600);
-}
-
-.ui-button.primary:active {
-  background: var(--color-primary-700);
-  color: #fff;
-}
-
-.ui-button.secondary {
-  background: var(--color-primary-300);
-  color: var(--color-primary-600);
-}
-
-.ui-button.secondary:hover {
-  background: var(--color-primary-500);
-  color: var(--color-primary-600);
-}
-
-.ui-button.secondary:active {
-  background: var(--color-primary-300);
-}
-
-.ui-button.tertiary {
-  background: transparent;
-  color: var(--color-primary-700);
-  /* padding: 8px 16px; */
-}
-
-.ui-button.tertiary:hover {
-  color: var(--color-primary-600);
-  background: var(--color-primary-500);
-}
-
-/* Estados */
-.ui-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: var(--text-secondary)47;
-  color: var(--text-secondary);
-}
 
 /* Tamaños */
 .ui-button.small {
