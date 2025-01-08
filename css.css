@@ -6489,6 +6489,7 @@ input:checked + .switch-slider:before {
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
+    min-width: 240px !important;!i;!;
 }
 
 .resource-card:hover {
