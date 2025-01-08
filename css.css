@@ -3986,13 +3986,10 @@ div#dynamicColorPalette {
 
 .profile-card {
     background: url(https://i.postimg.cc/RCtv3Tdg/image.png) 0px -70px;
-    border-radius: 24px;
-    padding: 24px;
-    width: 100%;
-    max-width: 360px;
+    
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgb(var(--color-primary-900-rgb) / 0.1);
+   
     background-size: cover;
     height: 416px;
     display: flex;
@@ -5171,7 +5168,7 @@ input:checked + .switch-slider:before {
 
 /*walk*/
 .walk-card {
-    background: var(--color-secondary-600);
+    background: linear-gradient(0deg, var(--color-primary-900), var(--color-primary-600));
     border-radius: 24px;
     width: 100%;
     max-width: 360px;
