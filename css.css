@@ -7943,7 +7943,7 @@ h3.search-header {
 
 .upload-icon {
     font-size: 48px;
-    color: #6366F1;
+    color: var(--color-primary-600);
 }
 
 .upload-text {
