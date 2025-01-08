@@ -1560,7 +1560,7 @@ display:block; cursor:pointer
 
 .component-group h3 {
   /* color: var(--text-secondary); */
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .component-demo {
@@ -1724,12 +1724,11 @@ url(
 }
 
 .checkmark {
-  width: 20px;
-  height: 20px;
+  min-width: 24px;
+  height: 24px;
   border: 2px solid var(--color-primary-300);
   border-radius: 4px;
   position: relative;
-  background: white;
 }
 
 .ui-checkbox input:checked + .checkmark {
@@ -1986,13 +1985,13 @@ body {
 /* Títulos principales */
 h1, h2, .title-main {
   color: var(--color-primary-900);
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 /* Subtítulos */
 h3, h4, .subtitle {
-  color: var(--color-primary-800);
-  font-weight: 600;
+  /* color: var(--color-primary-800); */
+  /* font-weight: 600; */
 }
 
 /* Textos de apoyo, descripciones, captions */
@@ -2007,8 +2006,8 @@ figcaption,
 /* Labels y textos de formulario */
 label, 
 .form-label {
-  color: var(--color-primary-600);
-  font-weight: 500;
+  /* color: var(--color-primary-600); */
+  /* font-weight: 500; */
 }
 
 /* Links */
@@ -2245,27 +2244,27 @@ body {
 /* Títulos principales */
 h1, h2, .title-main {
   color: var(--text-primary);
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: var(--font-size-2xl);
   margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.875rem;
+  /* font-size: var(--font-size-2xl); */
+  /* margin-bottom: 0.875rem; */
 }
 
 /* Subtítulos */
 h3, h4, .subtitle {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: var(--font-size-xl);
   margin-bottom: 0.75rem;
 }
 
@@ -2297,8 +2296,8 @@ figcaption,
 label, 
 .form-label {
   color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 16px;
+  /* font-weight: 500; */
+  font-size: var(--font-size-sm);
 }
 
 
@@ -2496,10 +2495,6 @@ label,
 }
 
 .card-title {
-  margin: 0;
-  color: var(--color-primary-900);
-  font-size: 1.25rem;
-  font-weight: 600;
 }
 
 .card-subtitle {
@@ -3501,9 +3496,9 @@ label,
 }
 
 .stats-header h3 {
-    color: var(--text-primary);
-    font-size: 24px;
-    font-weight: 500;
+    /* color: var(--text-primary); */
+    /* font-size: 24px; */
+    /* font-weight: 500; */
     margin: 0;
 }
 
@@ -4032,10 +4027,10 @@ div#dynamicColorPalette {
 }
 
 .profile-name {
-    color: var(--color-primary-50);
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
+    /* color: var(--color-primary-50); */
+    /* font-size: 24px; */
+    /* font-weight: 600; */
+    /* margin-bottom: 8px; */
 }
 
 .profile-status {
@@ -4253,10 +4248,9 @@ div#dynamicColorPalette {
 }
 
 .card-title {
-    /* font-size: 18px; */
-    font-weight: bold;
-    color: var(--color-primary-900);
+    color: var(--text-primary);
     margin: 0;
+    font-size: var(--font-size-2xl);
 }
 
 .card-description {
@@ -4403,10 +4397,10 @@ div#dynamicColorPalette {
 
 
 .map-header h2 {
-  color: var(--text-primary);
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
+  /* color: var(--text-primary); */
+  /* font-size: 20px; */
+  /* font-weight: 600; */
+  /* margin: 0; */
 }
 
 .map-rating {
@@ -4655,10 +4649,10 @@ div#dynamicColorPalette {
 }
 
 .product-name {
-    color: var(--color-primary-900) !important;!i;!;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 4px !important;!i;!;
+    /* color: var(--color-primary-900) !important; */!i;!;
+    /* font-size: 20px; */
+    /* font-weight: 600; */
+    /* margin-bottom: 4px !important; */!i;!;
 }
 
 .product-category {
@@ -5002,7 +4996,7 @@ input:checked + .switch-slider:before {
 
 .airline-name {
     color: var(--text-primary);
-    font-size: 20px;
+    font-size: var(--font-size-2xl);
     font-weight: 600;
 }
 
@@ -5031,7 +5025,7 @@ input:checked + .switch-slider:before {
 }
 
 .city-code {
-    font-size: 32px;
+    font-size: var(--font-size-2xl);
     font-weight: 700;
     color: var(--color-primary-900);
 }
@@ -5198,8 +5192,7 @@ input:checked + .switch-slider:before {
 
 .walk-content h2 {
     color: var(--color-secondary-50);
-    font-size: 24px;
-    font-weight: 600;
+    /* font-weight: 600; */
     margin: 0;
 }
 
@@ -7031,7 +7024,7 @@ input:checked + .switch-slider:before {
 }
 
 #columns > div {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 /* Responsive breakpoints */
@@ -7373,11 +7366,11 @@ input:checked + .switch-slider:before {
 }
 
 .sales-title {
-    color: var(--text-primary);
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    margin-top: 0;
+    /* color: var(--text-primary); */
+    /* font-size: 32px; */
+    /* font-weight: 600; */
+    /* margin-bottom: 16px; */
+    /* margin-top: 0; */
 }
 
 .sales-description {
@@ -7622,8 +7615,8 @@ h3.search-header {
 }
 
 .candidate-details p {
-    color: var(--text-secondary);
-    font-size: 14px;
+    color: var(--text-tertiary);
+    font-size: var(--font-size-xs);
     margin: 4px 0 0 0;
 }
 
@@ -7824,10 +7817,10 @@ h3.search-header {
 }
 
 .profile-name {
-    color: var(--color-primary-50);
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
+    /* color: var(--color-primary-50); */
+    /* font-size: 18px; */
+    /* font-weight: 600; */
+    /* margin: 0; */
 }
 
 .profile-email {
@@ -7859,8 +7852,8 @@ h3.search-header {
 
 
 .icon-button:hover {
-    background: var(--color-primary-100);
-    color: var(--color-primary-700);
+    background: var(--color-primary-600);
+    color: var(--color-primary-100);
 }
 
 .view-details {
@@ -8205,11 +8198,11 @@ h3.search-header {
 }
 
 .login-title {
-    color: var(--text-primary);
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
+    /* color: var(--text-primary); */
+    /* font-size: var(--font-size-3xl); */
+    /* font-weight: var(--font-weight-bold); */
+    /* text-align: center; */
+    /* margin-bottom: var(--spacing-2xl); */
 }
 
 /* Form Elements */
@@ -8394,10 +8387,10 @@ form.login-form {
 }
 
 .feedback-title {
-    color: var(--color-primary-900);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: var(--spacing-lg);
+    /* color: var(--color-primary-900); */
+    /* font-size: var(--font-size-2xl); */
+    /* font-weight: var(--font-weight-semibold); */
+    /* margin-bottom: var(--spacing-lg); */
 }
 
 .feedback-question {
@@ -8505,7 +8498,7 @@ form.login-form {
 .base-card {
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     border-radius: 24px;
-    max-width: 360px;
+    min-width: 380px;
     height: auto;
 }
 
