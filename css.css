@@ -1884,6 +1884,10 @@ button,
   border: none;
   transition: all 0.2s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* Estilo primario */
@@ -8597,6 +8601,8 @@ form.login-form {
     align-items: center;
     gap: var(--spacing-md);
     margin-top: var(--spacing-sm);
+    justify-content: space-between;
+    width: 100%;
 }
 
 .cookie-link {
