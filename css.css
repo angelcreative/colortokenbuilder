@@ -1576,7 +1576,7 @@ display:block; cursor:pointer
 
 /* Buttons */
 .ui-button {
-     padding: 12px 24px;
+    padding: 12px 24px;
     border-radius: var(--button-radius, var(--radius-md)); /* Valor por defecto --radius-md (8px) */
     font-weight: 500;
     font-size: 14px;
@@ -1879,7 +1879,7 @@ button,
 .custom-subscribe-btn,
 .copyButton {
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: var(--button-radius, var(--radius-md)); /* Valor por defecto --radius-md (8px) */
   font-weight: 500;
   font-size: 16px;
   border: none;
@@ -2025,12 +2025,7 @@ a:hover {
  display:none; /* El color del texto se mantiene contrastante con el fondo */
 }
 
-/* Mantener los colores de los botones como están */
-button,
-.ui-button,
-.cta-button {
-  /* Los estilos existentes se mantienen */
-}
+
 
 /* Textos en el color picker */
 .color-info,
