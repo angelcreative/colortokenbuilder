@@ -7239,6 +7239,9 @@ input:checked + .switch-slider:before {
   justify-content: center;
   padding: 0;
 }
+button.video-control-btn:last-child {
+    color: var(--color-error);
+}
 
 .video-control-btn:hover {
   background: var(--color-primary-500);
