@@ -3986,16 +3986,15 @@ div#dynamicColorPalette {
 
 .profile-card {
     background: url(https://i.postimg.cc/RCtv3Tdg/image.png) 0px -70px;
-    
     position: relative;
     overflow: hidden;
-   
     background-size: cover;
-    height: 416px;
+    min-height: 416px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding: 24px;
 }
 
 .profile-card video.video-background {
@@ -7825,7 +7824,7 @@ h3.search-header {
 }
 
 .profile-name {
-    color: var(--text-primary);
+    color: var(--color-primary-50);
     font-size: 18px;
     font-weight: 600;
     margin: 0;
