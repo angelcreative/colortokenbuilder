@@ -8559,7 +8559,56 @@ form.login-form {
     flex-direction: row;
 }
 
+/*cookie*/
+.cookie-consent-card {
+    padding:24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
 
+.cookie-icon {
+    margin-bottom: var(--spacing-sm);
+    height: 200px;
+}
+
+.cookie-icon img {
+    height: 200px;
+}
+
+.cookie-title {
+    /* color: var(--text-primary); */
+    /* font-size: var(--font-size-xl); */
+    /* font-weight: var(--font-weight-semibold); */
+    /* margin: 0; */
+}
+
+.cookie-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    margin: 0;
+    line-height: var(--line-height-normal);
+}
+
+.cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+}
+
+.cookie-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    transition: color var(--transition-fast);
+}
+
+.cookie-link:hover {
+    color: var(--color-primary-600);
+}
 /*base card*/
 
 .base-card {
