@@ -1,6 +1,21 @@
 // Declarar colorWheel globalmente
 let colorWheel;
 
+// Añadir esta variable global junto a las otras existentes
+let currentButtonRadius = localStorage.getItem('preferredButtonRadius') || 'md';
+
+// Añadir esta nueva función
+function updateButtonRadius(radius) {
+    currentButtonRadius = radius;
+    document.documentElement.style.setProperty('--button-radius', `var(--radius-${radius})`);
+    
+    document.querySelectorAll('.radius-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.radius === radius);
+    });
+
+    localStorage.setItem('preferredButtonRadius', radius);
+}
+
 // Añadir esta función antes del DOMContentLoaded
 function initSidebar() {
     const sidebarToggles = document.querySelectorAll('.sidebar-toggle');
@@ -914,6 +929,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 circle.style.strokeDasharray = `${value}, 100`;
             }, 100);
         });
+
+
     });
 
 
@@ -927,6 +944,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 circle.style.strokeDasharray = `${value}, 100`;
             }, 100);
         });
+
+
     });
     
 
@@ -1020,5 +1039,19 @@ document.querySelectorAll('.tab-btn').forEach(button => {
         document.getElementById(button.dataset.tab).classList.add('active');
     });
 });
-    
-    
+   
+
+// Dentro del addEventListener('DOMContentLoaded') existente
+document.addEventListener('DOMContentLoaded', () => {
+ 
+
+    // Añadir estos nuevos event listeners (sintaxis corregida)
+    document.querySelectorAll('.radius-card').forEach(card => {
+        card.addEventListener('click', () => {
+            updateButtonRadius(card.dataset.radius);
+        });
+    });
+
+    // Aplicar el radio inicial
+    updateButtonRadius(currentButtonRadius);
+});
