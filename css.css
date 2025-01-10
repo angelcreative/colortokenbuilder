@@ -8711,8 +8711,8 @@ form.login-form {
     background: var(--background-light);
     border-radius: var(--radius-xl);
     padding: var(--spacing-lg);
-    width: 100%;
-    /* max-width: 390px; */
+    width: 380px;
+    max-width: 380px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -8786,7 +8786,7 @@ form.login-form {
 
 .onboarding-content {
     text-align: center;
-    padding: 0 var(--spacing-md);
+    padding: 0;
 }
 
 .onboarding-title {
