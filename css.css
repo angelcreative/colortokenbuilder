@@ -7071,11 +7071,60 @@ input:checked + .switch-slider:before {
     padding: 24px;
 }
 
+
 #columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     width: 100%;
+    grid-auto-rows: 0;
+    grid-auto-flow:dense ;
+}
+
+/* Para navegadores que soportan masonry */
+@supports (grid-template-rows: masonry) {
+    #columns {
+        grid-template-rows: masonry;
+    }
+}
+
+/* Fallback para navegadores que no soportan masonry */
+@supports not (grid-template-rows: masonry) {
+    #columns {
+        display: block;
+        column-count: 3;
+        column-gap: 16px;
+    }
+    
+    #columns > * {
+        break-inside: avoid;
+        margin-bottom: 16px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    #columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @supports not (grid-template-rows: masonry) {
+        #columns {
+            column-count: 2;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #columns {
+        grid-template-columns: 1fr;
+    }
+    
+    @supports not (grid-template-rows: masonry) {
+        #columns {
+            column-count: 1;
+        }
+    }
 }
 
 /* Asegurarse que los elementos no se partan */
@@ -8824,8 +8873,9 @@ form.login-form {
 .base-card {
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     border-radius: 24px;
-    min-width: 380px;
+    width: 380px;
     height: fit-content;
+    max-width: 380px;
 }
 
 
