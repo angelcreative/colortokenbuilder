@@ -6780,11 +6780,12 @@ input:checked + .switch-slider:before {
 
 /* Base styles */
 .drone-monitor {
-    width: 380px;
+    max-width: 360px;
     background-color: #242424;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
+    height: fit-content;
 }
 
 /* Video feed section */
@@ -7071,9 +7072,17 @@ input:checked + .switch-slider:before {
 }
 
 #columns {
-    column-count: 3;
-    column-gap: 16px;
-    row-gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+/* Asegurarse que los elementos no se partan */
+#columns > * {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
 }
 
 /* Cada card dentro del grid */
@@ -7126,6 +7135,7 @@ input:checked + .switch-slider:before {
   box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
   width: 100%;
   max-width: 360px;
+  margin: 1rem auto;
 }
 
 .main-video-area {
@@ -7376,6 +7386,7 @@ button.video-control-btn:last-child {
     border-radius: 24px;
     overflow: hidden;
     max-width: 360px;
+    margin: 1rem auto;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
@@ -8814,8 +8825,7 @@ form.login-form {
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
     border-radius: 24px;
     min-width: 380px;
-    height: auto;
-    width: 380px;
+    height: fit-content;
 }
 
 
