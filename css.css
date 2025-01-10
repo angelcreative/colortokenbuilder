@@ -6780,7 +6780,7 @@ input:checked + .switch-slider:before {
 
 /* Base styles */
 .drone-monitor {
-    max-width: 360px;
+    width: 380px;
     background-color: #242424;
     border-radius: 15px;
     overflow: hidden;
@@ -7126,7 +7126,6 @@ input:checked + .switch-slider:before {
   box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
   width: 100%;
   max-width: 360px;
-  margin: 1rem auto;
 }
 
 .main-video-area {
@@ -7377,7 +7376,6 @@ button.video-control-btn:last-child {
     border-radius: 24px;
     overflow: hidden;
     max-width: 360px;
-    margin: 1rem auto;
     box-shadow: 0 8px 24px rgb(72 96 148 / 18%);
 }
 
@@ -8817,6 +8815,7 @@ form.login-form {
     border-radius: 24px;
     min-width: 380px;
     height: auto;
+    width: 380px;
 }
 
 
