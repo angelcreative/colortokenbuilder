@@ -7998,7 +7998,7 @@ h3.search-header {
 
 
 .upload-card {
-    background: var(--color-primary-100);
+    background: var(--color-primary-300);
     border-radius: 16px;
     padding: 24px;
     width: 100%;
@@ -8020,12 +8020,12 @@ h3.search-header {
 }
 
 .upload-area {
-    border: 2px dashed var(--color-primary-600);
+    border: 2px dashed var(--color-primary-500);
     border-radius: 12px;
     padding: 40px;
     margin-bottom: 24px;
     position: relative;
-    background: var(--color-primary-300);
+    background: var(--color-primary-100);
     overflow: hidden;
 }
 
@@ -8039,7 +8039,7 @@ h3.search-header {
     bottom: -1px;
     border-radius: 12px;
     padding: 2px;
-    background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-600));
+    background: var(--color-primary-50);
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
@@ -8134,7 +8134,7 @@ h3.search-header {
 
 /* Hover effects */
 .upload-area:hover {
-    border-color: #6366F1;
+    border-color: var(--color-primary-600);
     cursor: pointer;
 }
 
