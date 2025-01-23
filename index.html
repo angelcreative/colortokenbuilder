@@ -785,6 +785,8 @@ A card is a core interface element in modern UI/UX design that functions as a mo
     </div>
 </div>
 
+
+      
 <!--weather-->
 	    <div class="weather-card base-card">
     <div class="weather-header">
@@ -1835,7 +1837,73 @@ A card is a core interface element in modern UI/UX design that functions as a mo
     </div>
 </div>
 
-
+<!---->
+<div class="payment-card base-card">
+    <h2>Payment Plan</h2>
+    <div class="payment-tabs">
+        <button class="tab-btn">Credit Card</button>
+        <button class="tab-btn active">Paypal</button>
+    </div>
+    
+    <div class="saved-cards">
+        <div class="card-item active">
+            <div class="card-radio ui-radio radiomark"></div>
+            <div class="card-info">
+                <span class="card-dots">•••• 4470</span>
+                <span class="card-type">Visa Card</span>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="card-brand">
+        </div>
+        
+        <div class="card-item">
+            <div class="card-radio ui-radio radiomark"></div>
+            <div class="card-info">
+                <span class="card-dots">•••• 0900</span>
+                <span class="card-type">Mastercard</span>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-brand">
+        </div>
+        
+        <button class="add-card-btn">
+            <span class="material-symbols-outlined">add</span>
+            Add New Card
+        </button>
+    </div>
+    
+    <div class="discount-section">
+        <h3>Discount Code</h3>
+        <div class="discount-input">
+            <input type="text" value="30KCELEB" class="ui-input" placeholder="Enter code">
+            <button class="ui-button secondary">Apply</button>
+        </div>
+        <span class="discount-applied">30% Discount code applied</span>
+    </div>
+    
+    <div class="price-summary">
+        <div class="price-row">
+            <span class="plan-name">Team Plan</span>
+            <span class="price">$189.00</span>
+            <span class="plan-details">5 Users Quaterly</span>
+        </div>
+        
+        <div class="price-row discount">
+            <span>Discount (30%)</span>
+            <span class="discount-amount">- $63.85</span>
+        </div>
+        
+        <div class="price-row total">
+            <div>
+                <span class="total-label">Total</span>
+                <span class="next-payment">Next payment will charge 10th of January, 2023</span>
+            </div>
+            <span class="total-amount">$126.15</span>
+        </div>
+    </div>
+    
+    <button class="pay-now-btn ui-button primary">Pay Now</button>
+</div>
 
 <!--//-->
     </div>
