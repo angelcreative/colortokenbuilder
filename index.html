@@ -1751,7 +1751,7 @@ A card is a core interface element in modern UI/UX design that functions as a mo
 </div>
 
 <!--code-->
-	    <div class="code-snippet-card base-card">
+<div class="code-snippet-card base-card">
     <!-- Tabs de lenguajes -->
     <div class="snippet-tabs">
         <button class="tab-btn active">PYTHON</button>
@@ -1787,7 +1787,56 @@ A card is a core interface element in modern UI/UX design that functions as a mo
 }</code></pre>
     </div>
 </div>
-	    
+
+
+<!--menubar-card-->
+<div class="menubar-card base-card">
+    <div class="navigation">
+        <div class="nav-item active">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </div>
+        <div class="nav-item">
+            <span class="material-symbols-outlined">video_library</span>
+            <span>Video</span>
+        </div>
+        <div class="nav-item">
+            <span class="material-symbols-outlined">add</span>
+            <span>Post</span>
+        </div>
+        <div class="nav-item">
+            <span class="material-symbols-outlined">group</span>
+            <span>Group</span>
+        </div>
+        <div class="nav-item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Profile</span>
+        </div>
+    </div>
+
+    <div class="floating-menu">
+        <button class="menu-toggle">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+        <div class="menu-items">
+            <button class="menu-item">
+                <span class="material-symbols-outlined">broadcast_on_home</span>
+            </button>
+            <button class="menu-item">
+                <span class="material-symbols-outlined">video_library</span>
+            </button>
+            <button class="menu-item">
+                <span class="material-symbols-outlined">book</span>
+            </button>
+            <button class="menu-item">
+                <span class="material-symbols-outlined">edit</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
 <!--//-->
     </div>
 </div>
@@ -2008,7 +2057,17 @@ A card is a core interface element in modern UI/UX design that functions as a mo
     <script src="ntc.js"></script>
     <script src="js.js"></script> <!-- Tu propio archivo de script -->
 
+<script>
+    document.querySelector('.floating-button').addEventListener('click', function() {
+    document.querySelector('.expanded-menu').classList.add('active');
+    this.style.display = 'none';
+});
 
+document.querySelector('.close-button').addEventListener('click', function() {
+    document.querySelector('.expanded-menu').classList.remove('active');
+    document.querySelector('.floating-button').style.display = 'flex';
+});
+</script>
 
 
 
