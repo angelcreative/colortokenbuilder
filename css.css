@@ -8991,11 +8991,11 @@
   
   .payment-card {
     padding: var(--spacing-xl);
-    background: var(--background-light);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    max-width: 100%;
-    overflow: hidden;
+    /* background: var(--background-light); */
+    /* border-radius: var(--radius-lg); */
+    /* box-shadow: var(--shadow-md); */
+    /* max-width: 100%; */
+    /* overflow: hidden; */
 }
 
 .payment-card h2 {
