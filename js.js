@@ -1269,230 +1269,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Función para convertir una card a SVG usando Paper.js
-async function cardToSVG(card) {
+// Función para copiar la card como PNG
+async function copyCardAsPNG(card) {
   try {
-    // Obtener dimensiones y estilos computados
-    const rect = card.getBoundingClientRect();
-    const styles = window.getComputedStyle(card);
-
-    // Crear un canvas temporal para Paper.js
-    const canvas = document.createElement('canvas');
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    paper.setup(canvas);
-
-    // Crear el grupo principal
-    const mainGroup = new paper.Group();
-
-    // Función recursiva para procesar elementos
-    async function processElement(element, parentGroup) {
-      const elementRect = element.getBoundingClientRect();
-      const elementStyles = window.getComputedStyle(element);
-      const relativeRect = {
-        left: elementRect.left - rect.left,
-        top: elementRect.top - rect.top,
-        width: elementRect.width,
-        height: elementRect.height,
-      };
-
-      // Crear grupo para este elemento
-      const elementGroup = new paper.Group({
-        parent: parentGroup,
-      });
-
-      // Procesar el fondo si existe
-      if (elementStyles.backgroundColor !== 'rgba(0, 0, 0, 0)') {
-        const background = new paper.Path.Rectangle({
-          point: [relativeRect.left, relativeRect.top],
-          size: [relativeRect.width, relativeRect.height],
-          radius: parseInt(elementStyles.borderRadius) || 0,
-          fillColor: elementStyles.backgroundColor,
-          parent: elementGroup,
-        });
-
-        // Aplicar sombras si existen
-        if (elementStyles.boxShadow !== 'none') {
-          const shadowMatch = elementStyles.boxShadow.match(/rgba?\([^)]+\)|[0-9.]+px/g);
-          if (shadowMatch) {
-            background.style.shadowColor = shadowMatch[0];
-            background.style.shadowBlur = parseInt(shadowMatch[1]);
-            background.style.shadowOffset = new paper.Point(
-              parseInt(shadowMatch[2]),
-              parseInt(shadowMatch[3])
-            );
-          }
-        }
-      }
-
-      // Procesar bordes si existen
-      if (elementStyles.border !== 'none') {
-        new paper.Path.Rectangle({
-          point: [relativeRect.left, relativeRect.top],
-          size: [relativeRect.width, relativeRect.height],
-          radius: parseInt(elementStyles.borderRadius) || 0,
-          strokeColor: elementStyles.borderColor,
-          strokeWidth: parseInt(elementStyles.borderWidth),
-          parent: elementGroup,
-        });
-      }
-
-      // Procesar imágenes
-      if (element.tagName === 'IMG') {
-        const raster = await new Promise((resolve) => {
-          const tempImage = new Image();
-          tempImage.crossOrigin = 'Anonymous';
-          tempImage.onload = () => {
-            const raster = new paper.Raster(tempImage);
-            raster.position = new paper.Point(
-              relativeRect.left + relativeRect.width / 2,
-              relativeRect.top + relativeRect.height / 2
-            );
-            raster.size = new paper.Size(relativeRect.width, relativeRect.height);
-
-            // Aplicar máscara si tiene borde redondeado
-            if (parseInt(elementStyles.borderRadius) > 0) {
-              const mask = new paper.Path.Rectangle({
-                point: [relativeRect.left, relativeRect.top],
-                size: [relativeRect.width, relativeRect.height],
-                radius: parseInt(elementStyles.borderRadius),
-                fillColor: 'black',
-              });
-              const imageGroup = new paper.Group([raster, mask]);
-              imageGroup.clipped = true;
-              imageGroup.parent = elementGroup;
-            } else {
-              raster.parent = elementGroup;
-            }
-            resolve(raster);
-          };
-          tempImage.src = element.src;
-        });
-      }
-
-      // Procesar iconos de Material Symbols
-      if (element.classList.contains('material-symbols-outlined')) {
-        const iconPath = await convertIconToPath(element.textContent, {
-          fontSize: parseInt(elementStyles.fontSize),
-          color: elementStyles.color,
-          x: relativeRect.left + relativeRect.width / 2,
-          y: relativeRect.top + relativeRect.height / 2,
-        });
-        if (iconPath) {
-          iconPath.parent = elementGroup;
-        }
-      }
-      // Procesar texto normal
-      else if (element.textContent.trim() && !element.children.length) {
-        new paper.PointText({
-          point: [relativeRect.left, relativeRect.top + parseInt(elementStyles.fontSize)],
-          content: element.textContent,
-          fontSize: parseInt(elementStyles.fontSize),
-          fontFamily: elementStyles.fontFamily,
-          fontWeight: elementStyles.fontWeight,
-          fillColor: elementStyles.color,
-          opacity: elementStyles.opacity,
-          parent: elementGroup,
-        });
-      }
-
-      // Procesar elementos hijos
-      for (const child of element.children) {
-        await processElement(child, elementGroup);
-      }
-    }
-
-    // Función para convertir icono a path
-    async function convertIconToPath(iconName, options) {
-      const iconSvgPath = await getIconSvgPath(iconName);
-      if (!iconSvgPath) return null;
-
-      const path = new paper.Path(iconSvgPath);
-      path.fillColor = options.color;
-      path.scale(options.fontSize / 24); // 24 es el tamaño base de los iconos
-      path.position = new paper.Point(options.x, options.y);
-      return path;
-    }
-
-    // Función para obtener el path SVG del icono
-    async function getIconSvgPath(iconName) {
-      // Mapa de paths de iconos comunes
-      const iconPaths = {
-        arrow_forward: 'M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z',
-        more_horiz:
-          'M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
-        palette:
-          'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
-        brush:
-          'M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.22 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34c-.39-.39-1.02-.39-1.41 0L9 12.25 11.75 15l8.96-8.96c.39-.39.39-1.02 0-1.41z',
-        // Añade más paths según necesites
-      };
-
-      return iconPaths[iconName] || null;
-    }
-
-    // Procesar la card completa
-    await processElement(card, mainGroup);
-
-    // Exportar a SVG
-    const svg = paper.project.exportSVG({
-      asString: true,
-      precision: 2,
-      matchShapes: true,
-      embedImages: true,
+    const canvas = await html2canvas(card, {
+      backgroundColor: null,
+      scale: 2, // Mayor calidad
+      logging: false,
+      useCORS: true
     });
-
-    // Limpiar
-    paper.project.clear();
-
-    return svg;
+    
+    canvas.toBlob(async (blob) => {
+      try {
+        const data = new ClipboardItem({ 'image/png': blob });
+        await navigator.clipboard.write([data]);
+        showCustomAlert('Card copied as PNG', 'code');
+      } catch (error) {
+        console.error('Error copying PNG to clipboard:', error);
+        showCustomAlert('Error copying PNG', 'error');
+      }
+    }, 'image/png');
   } catch (error) {
-    console.error('Error converting card to SVG:', error);
-    throw error;
+    console.error('Error generating PNG:', error);
+    showCustomAlert('Error generating PNG', 'error');
   }
 }
 
-// Actualizar la función copySvgCard para usar la nueva conversión
-async function copySvgCard(card) {
-  try {
-    const svgString = await cardToSVG(card);
-    await navigator.clipboard.writeText(svgString);
-    showCustomAlert('Card copied as PNG', 'code');
-    console.log('SVG copiado:', svgString);
-  } catch (error) {
-    console.error('Error copying PNG:', error);
-    showCustomAlert('Error copying PNG', 'error');
-  }
-}
-
-// El event listener existente se mantiene igual
+// Event listener para Alt + Click
 document.addEventListener('click', (event) => {
   const card = event.target.closest('.base-card');
   if (card && event.altKey) {
     event.preventDefault();
-    copySvgCard(card);
+    copyCardAsPNG(card);
   }
 });
 
 // Función para crear y mostrar el tooltip personalizado
 function createCustomTooltip(card) {
-  // Crear el tooltip solo una vez y reutilizarlo
   let tooltip = document.querySelector('.custom-tooltip');
   if (!tooltip) {
     tooltip = document.createElement('div');
     tooltip.className = 'custom-tooltip';
     tooltip.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="material-symbols-outlined" style="font-size: 16px;">
-                    info
-                </span>
-                <span>Alt + Click to copy as PNG</span>
-            </div>
-        `;
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">
+          info
+        </span>
+        <span>Alt + Click to copy as PNG</span>
+      </div>
+    `;
 
-    // Estilos mejorados del tooltip
     Object.assign(tooltip.style, {
-      position: 'fixed', // Cambiado a fixed para mejor posicionamiento
+      position: 'fixed',
       padding: '8px 16px',
       background: '#FFFFFF',
       color: '#000000',
@@ -1517,12 +1345,9 @@ function createCustomTooltip(card) {
   function showTooltip(event) {
     clearTimeout(hideTimeout);
     const rect = card.getBoundingClientRect();
-
-    // Posicionar el tooltip
     tooltip.style.visibility = 'visible';
     tooltip.style.opacity = '1';
-
-    // Calcular posición centrada sobre la card
+    
     const tooltipRect = tooltip.getBoundingClientRect();
     const left = rect.left + (rect.width - tooltipRect.width) / 2;
     const top = rect.top - tooltipRect.height - 8;
@@ -1538,7 +1363,6 @@ function createCustomTooltip(card) {
     }, 100);
   }
 
-  // Añadir event listeners
   card.addEventListener('mouseenter', showTooltip);
   card.addEventListener('mouseleave', hideTooltip);
 }
