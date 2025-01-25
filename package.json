@@ -5,5 +5,11 @@
   },
   "devDependencies": {
     "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "dom-to-svg": "^0.12.2",
+    "html2canvas": "^1.4.1",
+    "roughjs": "^4.6.6",
+    "svg.js": "^2.7.1"
   }
 }

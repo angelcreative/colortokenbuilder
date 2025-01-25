@@ -14,6 +14,7 @@ function updateButtonRadius(radius) {
     });
 
     localStorage.setItem('preferredButtonRadius', radius);
+    showCustomAlert(`Border radius changed to ${radius}`, 'radius');
 }
 
 // Añadir esta función antes del DOMContentLoaded
@@ -28,8 +29,80 @@ function initSidebar() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() { 
+// 1. Añadir la función showCustomAlert al inicio del archivo
+function showCustomAlert(message, type = 'color') {
+    const alertBox = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+    
+    if (!alertBox || !alertMessage) {
+        console.warn('Custom alert elements not found, falling back to default alert');
+        alert(message);
+        return;
+    }
+    
+    // Estilos mejorados para el toast
+    Object.assign(alertBox.style, {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '8px 16px',
+        background: '#FFFFFF',
+        color: '#000000',
+        borderRadius: '8px',
+        position: 'fixed',
+        bottom: '-100px', // Empezamos fuera de la vista
+        left: '16px', // 16px desde el borde izquierdo
+        transform: 'none', // Eliminamos el translateX que lo centraba
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        zIndex: '9999',
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+        fontSize: '14px',
+        fontWeight: '500',
+        height: 'fit-content'
+    });
 
+    // Seleccionar el icono según el tipo de notificación
+    let icon = '';
+    switch(type) {
+        case 'color':
+            icon = 'palette';
+            break;
+        case 'typography':
+            icon = 'text_fields';
+            break;
+        case 'radius':
+            icon = 'rounded_corner';
+            break;
+        default:
+            icon = 'info';
+    }
+
+    // Contenido del mensaje con icono contextual
+    alertMessage.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 16px;">
+                ${icon}
+            </span>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Mostrar el toast
+    alertBox.style.display = 'flex';
+    setTimeout(() => {
+        alertBox.style.bottom = '16px'; // 16px desde el borde inferior
+    }, 100);
+
+    // Auto-ocultar después de 3 segundos
+    setTimeout(() => {
+        alertBox.style.bottom = '-100px';
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 300);
+    }, 3000);
+}
+
+document.addEventListener('DOMContentLoaded', function() { 
     const toggleSwitch = document.getElementById('theme-toggle'); 
     
     // Get the current theme from localStorage
@@ -53,35 +126,77 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', 'light');
       }
     });
-    
-    
-        
         
         var colorWheelContainer = document.getElementById('colorWheelContainer');
         var hexInput = document.getElementById('hexInput');
         var currentPalettes = [];  // Store currently displayed palettes
     
-        // Inicializar colorWheel con Purple Heart y actualizar a square
+    // Inicializar colorWheel con Purple Heart
         colorWheel = new iro.ColorPicker(colorWheelContainer, {
             width: 200,
             color: "#5036C2"
         });
     
-        document.getElementById('harmonyType').value = 'square';
-        updateHarmonyColors("#5036C2");
+    // Establecer Square como valor por defecto
+    const harmonySelect = document.getElementById('harmonyType');
+    if (harmonySelect) {
+        harmonySelect.value = 'square';
+    }
+
+    // Generar y mostrar los colores iniciales
+    const initialColor = "#5036C2";
+    const initialColors = getHarmonyColors(initialColor, 'square');
+
+    if (initialColors) {
+        // Limpiar el contenedor
+        const harmonyColors = document.getElementById('harmonyColors');
+        if (harmonyColors) {
+            harmonyColors.innerHTML = '';
+        }
+
+        // Mostrar colores sólidos
+        displayColors(initialColors);
+        
+        // Forzar la creación de gradientes inmediatamente después
+        setTimeout(() => {
+            displayGradientCards(initialColors);
+        }, 0);
+        
+        // Mostrar paletas de color
+        displayColorCards(initialColors);
+        
+        // Actualizar variables CSS
+        updateCSSVariables(initialColor, initialColors);
+        
+        // Actualizar paletas mostradas
+        updateDisplayedPalettes(initialColors);
+    }
     
         function updateHarmonyColors(baseColor) {
-            const harmonyType = document.getElementById('harmonyType').value;
+        if (!baseColor || !chroma.valid(baseColor)) {
+            console.warn('Invalid or no base color provided to updateHarmonyColors');
+            baseColor = "#5036C2"; // Color por defecto
+        }
+
+        const harmonyType = document.getElementById('harmonyType')?.value || 'square';
             const colors = getHarmonyColors(baseColor, harmonyType);
+        
+        if (colors) {
             displayColors(colors);
-            updateColorIndicators(colors);
-            updateDisplayedPalettes(colors);
-            displayColorCards(colors, baseColor);
             displayGradientCards(colors);
+            updateDisplayedPalettes(colors);
+            displayColorCards(colors);
             updateCSSVariables(baseColor, colors);
+            updateColorIndicators(colors);
+        }
         }
     
         function getHarmonyColors(color, type) {
+        if (!color || !chroma.valid(color)) {
+            console.warn('Invalid color provided to getHarmonyColors');
+            return null;
+        }
+
             const baseColor = chroma(color);
             const baseHue = baseColor.get('hsl.h');
             const baseSaturation = baseColor.get('hsl.s');
@@ -101,6 +216,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'square':
                     hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
                     break;
+            default:
+                hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
             }
     
             return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
@@ -108,9 +225,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
         function displayColors(colors) {
             const harmonyColors = document.getElementById('harmonyColors');
+        if (!harmonyColors || !colors) return;
+        
             harmonyColors.innerHTML = '';
             
             colors.forEach(color => {
+            if (!color) return;
                 const colorName = ntc.name(color)[1].replace(/-color.*$/i, '').trim();
                 const rgbColor = chroma(color).rgb();
                 const cardHTML = `
@@ -127,6 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 harmonyColors.innerHTML += cardHTML;
             });
         }
+
+    document.getElementById('harmonyType').value = 'square';
+    updateHarmonyColors("#5036C2");
     
         function displayGradientCards(colors) {
             // Limpiar gradientes anteriores si existen
@@ -198,27 +321,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         function updateColorIndicators(colors) {
-            // Primero eliminar los indicadores existentes
+        const colorWheelContainer = document.getElementById('colorWheelContainer');
+        if (!colorWheelContainer) return;
+
+        // Limpiar indicadores existentes
             colorWheelContainer.querySelectorAll('.colorIndicator').forEach(indicator => indicator.remove());
 
-            // Obtener las dimensiones del color wheel
-            const wheelSize = colorWheel.props.width; // Usar el tamaño del colorWheel
+        // Obtener dimensiones del color wheel
+        const wheelSize = colorWheel.props.width;
             const wheelRadius = wheelSize / 2;
             const centerX = wheelRadius;
             const centerY = wheelRadius;
 
-            // Crear indicadores para todos los colores excepto el principal
+        // Crear indicadores
             colors.forEach((color, index) => {
-                if (index === 0) return; // Saltar el color principal
-
+            if (index === 0) return;
                 const hue = chroma(color).get('hsl.h');
                 const angleRadians = (hue * Math.PI / 180);
-                
-                // Calcular la posición en el círculo
                 const indicatorX = centerX + (wheelRadius - 15) * Math.cos(angleRadians);
                 const indicatorY = centerY - (wheelRadius - 15) * Math.sin(angleRadians);
 
-                // Crear el indicador
                 const indicator = document.createElement('div');
                 indicator.classList.add('colorIndicator');
                 indicator.style.position = 'absolute';
@@ -230,242 +352,29 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     
-        
-        
-        //COPY 
-    /* Function to copy the color to clipboard
-    function copyToClipboard(colorHex) {
-        const el = document.createElement('textarea');
-        el.value = colorHex;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        alert('Color ' + colorHex + ' copied to clipboard!');
-    }*/
-    // Function to show the custom alert
-    function showAlert(message) {
-      const alertBox = document.getElementById('custom-alert');
-      const alertMessage = document.getElementById('alert-message');
-    
-     // Set the message in the alert box
-    alertMessage.textContent = message;
-    alertBox.style.display = 'flex';  // Show the alert box
-    alertBox.style.flexDirection = 'column';  // Set flex direction to column
-    alertBox.style.alignItems = 'center';  // Align items to stretch
-    alertBox.style.gap = '24px';  // Set gap between elements
-    
-    
-      // Close the alert when the user clicks the button
-      const alertOkButton = document.getElementById('alert-ok');
-      alertOkButton.onclick = function() {
-        alertBox.style.display = 'none';  // Hide the alert box
-      };
-    }
-    
-      // Function to copy the color to clipboard
-    function copyToClipboard(colorHex) {
-      const el = document.createElement('textarea');
-      el.value = colorHex;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      showAlert('Color ' + colorHex + ' copied to clipboard!');
-    }
-        
-        function generateShades(baseColor) {
-            const color = chroma(baseColor);
-            const shades = {};
-            
-            // El 600 es el color base seleccionado
-            shades[600] = baseColor;
-            
-            // Generar tonos desde 700 hasta 900 (más oscuros)
-            for(let i = 7; i <= 9; i++) {
-                const shade = i * 100;
-                shades[shade] = color.darken((i-6) * 0.3).hex();
-            }
-            
-            // Generar todos los tonos más claros desde 500 hasta 50 con una degradación constante
-            const steps = [500, 400, 300, 200, 100, 50];
-            const baseHue = color.get('hsl.h');
-            const baseSaturation = color.get('hsl.s');
-            const baseLightness = color.get('hsl.l');
-            
-            steps.forEach((step, index) => {
-                // Calcular el incremento gradual de luminosidad
-                const luminosityIncrease = (index + 1) * 0.08;
-                // Reducir gradualmente la saturación
-                const saturationDecrease = 1 - (index * 0.1);
-                
-                shades[step] = chroma.hsl(
-                    baseHue,
-                    Math.max(0, baseSaturation * saturationDecrease),
-                    Math.min(0.98, baseLightness + luminosityIncrease)
-                ).hex();
-            });
-            
-            return shades;
-        }
-        
-        function generateColorScale(selectedColor) {
-            return generateShades(selectedColor);
-        }
-    
-        function applyDynamicStyles(colorPalette) {
-            const root = document.documentElement;
-            
-            if (!colorWheel) {
-                console.warn('ColorWheel no está inicializado');
-                return;
-            }
-
-            const selectedColor = colorWheel.color.hexString;
-            const scale = generateColorScale(selectedColor);
-
-            // Establecer variables del color primario
-            Object.entries(scale).forEach(([shade, color]) => {
-                root.style.setProperty(`--color-primary-${shade}`, color);
-            });
-
-            // Asignar las variables CSS dinámicamente para los otros colores
-            Object.keys(colorPalette).forEach((colorKey, index) => {
-                if (index >= 4) return;
-
-                const palette = colorPalette[colorKey];
-                const colorName = `color-${index + 1}`;
-
-                root.style.setProperty(`--background-${colorName}-50`, palette["50"]);
-                root.style.setProperty(`--background-${colorName}-100`, palette["100"]);
-                root.style.setProperty(`--color-${colorName}`, palette["800"]);
-                root.style.setProperty(`--button-${colorName}`, index === 0 ? selectedColor : palette["600"]);
-            });
-
-            // Asignar las variables CSS estáticas
-            root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
-            root.style.setProperty('--color-primary', 'var(--color-color-1)');
-            root.style.setProperty('--button-primary', selectedColor);
-        }
-        
-        function generateColorPalettes(baseColors, selectedColor) {
-            const paletteContainer = document.createElement('div');
-            paletteContainer.id = 'paletteContainer';
-
-            baseColors.forEach(color => {
-                let colorName = ntc.name(color)[1];
-                colorName = colorName.replace(/-color.*$/i, '').trim();
-
-                const palette = document.createElement('div');
-                palette.style.display = 'flex';
-                palette.style.flexDirection = 'row';
-                palette.style.gap = '10px';
-                palette.style.flexWrap = 'wrap';
-                palette.style.marginBottom = '20px'; // Añadir espacio entre paletas
-
-                const scale = generateColorScale(color);
-                
-                // Crear cards para cada shade
-                Object.entries(scale).forEach(([shade, shadeColor]) => {
-                    let hexColor = shade === '600' ? color : shadeColor;
-                    let card = createColorCard(shade, hexColor.toUpperCase(), hexColor, color);
-                    palette.appendChild(card);
-                });
-
-                const paletteTitle = document.createElement('h4');
-                paletteTitle.textContent = colorName;
-                paletteTitle.style.marginBottom = '10px'; // Espacio después del título
-                paletteContainer.appendChild(paletteTitle);
-                paletteContainer.appendChild(palette);
-            });
-
-            const colorCardsContainer = document.getElementById('colorCards');
-            colorCardsContainer.appendChild(paletteContainer);
-        }
-    
-        function createColorCard(tokenName, hexColor, paletteColor, selectedColor) {
-            const card = document.createElement('div');
-            card.classList.add('colorCard', 'gradientCard');
-            card.style.backgroundColor = paletteColor;
-            card.style.color = chroma(paletteColor).luminance() > 0.5 ? '#333333' : '#ffffff';
-            card.style.width = '80px';
-            card.style.height = '80px'; 
-            card.style.borderRadius = '8px'; 
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
-            card.style.justifyContent = 'center';
-            card.style.alignItems = 'center';
-            card.style.fontFamily = 'Arial, sans-serif';
-            card.style.fontSize = '14px';
-        
-            // Highlight the matching color
-            if (chroma.valid(selectedColor) && chroma(paletteColor).hex() === chroma(selectedColor).hex()) {
-                card.style.border = '3px solid #000000';
-            }
-        
-            // Add a button to copy the hex color
-            const copyButton = document.createElement('button');
-            copyButton.textContent = 'Copy';
-            copyButton.classList.add('copyButton');
-            copyButton.style.marginTop = '8px';
-            copyButton.style.fontSize = '10px';
-            copyButton.style.padding = '4px';
-            copyButton.style.borderRadius = '4px';
-            copyButton.style.cursor = 'pointer';
-            copyButton.style.background = '#000';
-            copyButton.style.color = '#fff';
-            copyButton.addEventListener('click', function() {
-                copyToClipboard(hexColor);
-            });
-        
-            card.innerHTML = `
-                <div style="font-size: 14px; font-weight: bold;">${tokenName}</div>
-                <div style="font-size: 14px; margin-top: 4px;">${hexColor}</div>
-            `;
-            card.appendChild(copyButton);
-        
-            return card;
-        }
-        
-      
-          function updateDisplayedPalettes(baseColors) {
-            const colorPalette = generatePaletteJSON(baseColors); // Genera el colorPalette
-    
-            applyDynamicStyles(colorPalette); // Aplica los estilos dinámicos utilizando el colorPalette generado
-        }
-    
-    
-    
-        function displayColorCards(colors) {
-            const colorCardsContainer = document.getElementById('colorCards');
-            
-            // Limpiar solo el contenedor de paletas si existe
-            const existingPaletteContainer = document.getElementById('paletteContainer');
-            if (existingPaletteContainer) {
-                existingPaletteContainer.remove();
-            }
-
-            // Generar las nuevas paletas
-            generateColorPalettes(colors);
-            
-            // Actualizar los estilos dinámicos
+    // Event listeners
+    colorWheel.on(['color:init', 'color:change'], function(color) {
+        const colors = getHarmonyColors(color.hexString);
+        if (colors) {
+            displayColors(colors);
+            displayGradientCards(colors);
             updateDisplayedPalettes(colors);
+            displayColorCards(colors);
+            updateCSSVariables(color.hexString, colors);
         }
-    
-        function updateDisplayedPalettes(baseColors) {
-        currentPalettes = generatePaletteJSON(baseColors); // Almacenar las paletas generadas para exportación
-        
-        applyDynamicStyles(currentPalettes); // Aplicar los estilos dinámicos utilizando el colorPalette generado
-    }
-    
-    
-        colorWheel.on(['color:init', 'color:change'], function(color) {
-            updateHarmonyColors(color.hexString);
-            hexInput.value = color.hexString; // Update the hex input field when the color changes
-        });
-    
-        document.getElementById('harmonyType').addEventListener('change', function() {
-            updateHarmonyColors(colorWheel.color.hexString);
+        hexInput.value = color.hexString;
+    });
+
+    document.getElementById('harmonyType').addEventListener('change', function() {
+        const currentColor = colorWheel.color.hexString;
+        const colors = getHarmonyColors(currentColor, this.value);
+        if (colors) {
+            displayColors(colors);
+            displayGradientCards(colors);
+            updateDisplayedPalettes(colors);
+            displayColorCards(colors);
+            updateCSSVariables(currentColor, colors);
+        }
         });
     
         hexInput.addEventListener('input', function(e) {
@@ -511,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
             baseColors.forEach(color => {
                 let colorName = ntc.name(color)[1];
-                colorName = colorName.replace(/-color.*$/i, '').trim().toLowerCase().replace(/\s+/g, '-'); // Format color name for JSON key
+            colorName = colorName.replace(/-color.*$/i, '').trim().toLowerCase().replace(/\s+/g, '-');
     
                 const palette = {};
                 const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
@@ -621,7 +530,6 @@ document.addEventListener('DOMContentLoaded', function() {
             URL.revokeObjectURL(url);
         }
     
-    
     let debounceTimer;
     
     hexInput.addEventListener('input', function () {
@@ -637,11 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 300); // Delay in milliseconds (300ms)
     });
-    
-        
     });
-    
-    
     
     function applyDynamicStyles(colorPalette) {
         const root = document.documentElement;
@@ -761,15 +665,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     function generateShades(baseColor) {
         const color = chroma(baseColor);
         const shades = {};
@@ -805,9 +700,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return shades;
     }
     
-    
-    
-    
     // Establecer Square como valor por defecto en el select
     document.addEventListener('DOMContentLoaded', function() {
         const harmonySelect = document.getElementById('harmonyType');
@@ -816,14 +708,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateHarmonyColors("#5036C2");
     });
     
-    
-    
-    
-    
     function updateCSSVariables(selectedColor, colors) {
         const root = document.documentElement;
         
-        // Generar escala para color primario (existente)
+        // Generar escala para color primario
         const primaryScale = chroma.scale([
             chroma(selectedColor).luminance(0.95),
             chroma(selectedColor).luminance(0.9),
@@ -837,22 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
             chroma(selectedColor).darken(1.5)
         ]).colors(10);
 
-        // Generar escala para color secundario (nuevo)
-        const secondaryColor = colors[1]; // Tomar el segundo color de la armonía
-        const secondaryScale = chroma.scale([
-            chroma(secondaryColor).luminance(0.95),
-            chroma(secondaryColor).luminance(0.9),
-            chroma(secondaryColor).luminance(0.8),
-            chroma(secondaryColor).luminance(0.7),
-            chroma(secondaryColor).luminance(0.6),
-            chroma(secondaryColor).luminance(0.5),
-            secondaryColor,
-            chroma(secondaryColor).darken(0.5),
-            chroma(secondaryColor).darken(1),
-            chroma(secondaryColor).darken(1.5)
-        ]).colors(10);
-
-        // Establecer variables del color primario (existente)
+        // Establecer variables del color primario
         root.style.setProperty('--color-primary-50', primaryScale[0]);
         root.style.setProperty('--color-primary-100', primaryScale[1]);
         root.style.setProperty('--color-primary-200', primaryScale[2]);
@@ -864,24 +737,48 @@ document.addEventListener('DOMContentLoaded', function() {
         root.style.setProperty('--color-primary-800', primaryScale[8]);
         root.style.setProperty('--color-primary-900', primaryScale[9]);
 
-        // Establecer variables del color secundario (nuevo)
-        root.style.setProperty('--color-secondary-50', secondaryScale[0]);
-        root.style.setProperty('--color-secondary-100', secondaryScale[1]);
-        root.style.setProperty('--color-secondary-200', secondaryScale[2]);
-        root.style.setProperty('--color-secondary-300', secondaryScale[3]);
-        root.style.setProperty('--color-secondary-400', secondaryScale[4]);
-        root.style.setProperty('--color-secondary-500', secondaryScale[5]);
-        root.style.setProperty('--color-secondary-600', secondaryColor);
-        root.style.setProperty('--color-secondary-700', secondaryScale[7]);
-        root.style.setProperty('--color-secondary-800', secondaryScale[8]);
-        root.style.setProperty('--color-secondary-900', secondaryScale[9]);
+        // Generar y establecer variables para los colores secundarios
+        colors.forEach((color, index) => {
+            if (index === 0) return; // Saltar el color primario que ya fue procesado
 
-        // ... resto del código existente
+            const scale = chroma.scale([
+                chroma(color).luminance(0.95),
+                chroma(color).luminance(0.9),
+                chroma(color).luminance(0.8),
+                chroma(color).luminance(0.7),
+                chroma(color).luminance(0.6),
+                chroma(color).luminance(0.5),
+                color,
+                chroma(color).darken(0.5),
+                chroma(color).darken(1),
+                chroma(color).darken(1.5)
+            ]).colors(10);
+
+            // Establecer variables para colores secundarios
+            root.style.setProperty(`--generated-secondary-50`, scale[0]);
+            root.style.setProperty(`--generated-secondary-100`, scale[1]);
+            root.style.setProperty(`--generated-secondary-200`, scale[2]);
+            root.style.setProperty(`--generated-secondary-300`, scale[3]);
+            root.style.setProperty(`--generated-secondary-400`, scale[4]);
+            root.style.setProperty(`--generated-secondary-500`, scale[5]);
+            root.style.setProperty(`--generated-secondary-600`, color);
+            root.style.setProperty(`--generated-secondary-700`, scale[7]);
+            root.style.setProperty(`--generated-secondary-800`, scale[8]);
+            root.style.setProperty(`--generated-secondary-900`, scale[9]);
+
+            // También establecer las variables de color secundario directamente
+            root.style.setProperty(`--color-secondary-50`, scale[0]);
+            root.style.setProperty(`--color-secondary-100`, scale[1]);
+            root.style.setProperty(`--color-secondary-200`, scale[2]);
+            root.style.setProperty(`--color-secondary-300`, scale[3]);
+            root.style.setProperty(`--color-secondary-400`, scale[4]);
+            root.style.setProperty(`--color-secondary-500`, scale[5]);
+            root.style.setProperty(`--color-secondary-600`, color);
+            root.style.setProperty(`--color-secondary-700`, scale[7]);
+            root.style.setProperty(`--color-secondary-800`, scale[8]);
+            root.style.setProperty(`--color-secondary-900`, scale[9]);
+        });
     }
-    
-    
-    
-    
     
     // Función para cambiar la tipografía
     function initTypographyCards() {
@@ -889,20 +786,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         typographyCards.forEach(card => {
             card.addEventListener('click', () => {
-                // Remover clase active de todas las cards
                 typographyCards.forEach(c => c.classList.remove('active'));
-                
-                // Añadir clase active a la card seleccionada
                 card.classList.add('active');
                 
-                // Obtener la fuente del atributo data-font
                 const fontFamily = card.getAttribute('data-font');
-                
-                // Aplicar la fuente al body
                 document.body.style.fontFamily = fontFamily;
                 
-                // Opcional: Mostrar notificación
-                showCustomAlert('Font changed to ' + card.querySelector('.typography-name').textContent);
+                const fontName = card.querySelector('.typography-name').textContent;
+                showCustomAlert(`Typography changed to ${fontName}`, 'typography');
             });
         });
     }
@@ -915,10 +806,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // ... resto de inicializaciones
     });
     
-    
-    
-    
-    
     // Animación de los círculos de progreso
     document.addEventListener('DOMContentLoaded', () => {
         const circles = document.querySelectorAll('.circle');
@@ -929,25 +816,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 circle.style.strokeDasharray = `${value}, 100`;
             }, 100);
         });
-
-
-    });
-
-
-// Animación de los círculos de progreso
-    document.addEventListener('DOMContentLoaded', () => {
-        const circles = document.querySelectorAll('.circle');
-        circles.forEach(circle => {
-            const value = circle.getAttribute('stroke-dasharray').split(',')[0];
-            circle.style.strokeDasharray = `0, 100`;
-            setTimeout(() => {
-                circle.style.strokeDasharray = `${value}, 100`;
-            }, 100);
-        });
-
-
-    });
-    
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos DOM
@@ -1039,11 +908,9 @@ document.querySelectorAll('.tab-btn').forEach(button => {
         document.getElementById(button.dataset.tab).classList.add('active');
     });
 });
-   
 
 // Dentro del addEventListener('DOMContentLoaded') existente
 document.addEventListener('DOMContentLoaded', () => {
- 
 
     // Añadir estos nuevos event listeners (sintaxis corregida)
     document.querySelectorAll('.radius-card').forEach(card => {
@@ -1055,3 +922,287 @@ document.addEventListener('DOMContentLoaded', () => {
     // Aplicar el radio inicial
     updateButtonRadius(currentButtonRadius);
 });
+
+console.log('Script loaded!');
+
+// Añadir esta función que falta
+function updateDisplayedPalettes(baseColors) {
+    const colorPalette = generatePaletteJSON(baseColors);
+    applyDynamicStyles(colorPalette);
+}
+
+// Añadir la función generatePaletteJSON que es necesaria
+function generatePaletteJSON(baseColors) {
+    const palettes = {};
+
+    baseColors.forEach(color => {
+        let colorName = ntc.name(color)[1];
+        colorName = colorName.replace(/-color.*$/i, '').trim().toLowerCase().replace(/\s+/g, '-');
+
+        const palette = {};
+        const shades = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
+
+        shades.forEach((shade, i) => {
+            const lightness = 1 - (i * 0.1);
+            const paletteColor = chroma(color).set('hsl.l', i === 0 ? 0.95 : lightness).hex();
+            palette[shade] = paletteColor.toLowerCase();
+        });
+
+        palettes[colorName] = palette;
+    });
+
+    return palettes;
+}
+
+// Mover la función updateHarmonyColors fuera del DOMContentLoaded
+function updateHarmonyColors(baseColor) {
+    const harmonyType = document.getElementById('harmonyType')?.value || 'square';
+    const colors = getHarmonyColors(baseColor, harmonyType);
+    displayColors(colors);
+    updateColorIndicators(colors);
+    updateDisplayedPalettes(colors);
+    displayColorCards(colors);
+    displayGradientCards(colors);
+    updateCSSVariables(baseColor, colors);
+}
+
+// Mover la función getHarmonyColors fuera del DOMContentLoaded
+function getHarmonyColors(color, type) {
+    if (!color || !chroma.valid(color)) {
+        console.warn('Invalid color provided to getHarmonyColors');
+        return null;
+    }
+
+    const baseColor = chroma(color);
+    const baseHue = baseColor.get('hsl.h');
+    const baseSaturation = baseColor.get('hsl.s');
+    const baseLightness = baseColor.get('hsl.l');
+    let hues;
+
+    switch (type) {
+        case 'complementary':
+            hues = [baseHue, (baseHue + 180) % 360];
+            break;
+        case 'analogous':
+            hues = [(baseHue - 30 + 360) % 360, baseHue, (baseHue + 30) % 360];
+            break;
+        case 'triadic':
+            hues = [baseHue, (baseHue + 120) % 360, (baseHue + 240) % 360];
+            break;
+        case 'square':
+            hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
+            break;
+        default:
+            hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
+    }
+
+    return hues.map(hue => chroma.hsl(hue, baseSaturation, baseLightness).hex());
+}
+
+// Mover la función displayColors fuera del DOMContentLoaded
+function displayColors(colors) {
+    const harmonyColors = document.getElementById('harmonyColors');
+    if (!harmonyColors || !colors) return;
+    
+    harmonyColors.innerHTML = '';
+    
+    colors.forEach(color => {
+        if (!color) return;
+        const colorName = ntc.name(color)[1].replace(/-color.*$/i, '').trim();
+        const rgbColor = chroma(color).rgb();
+        const cardHTML = `
+            <div class="color-card">
+                <div class="color-preview" style="background-color: ${color};"></div>
+                <div class="color-info">
+                    <div class="color-name">${colorName}</div>
+                    <div class="color-rgb">RGB ${rgbColor.join(' ')}</div>
+                    <div class="color-hex">${color.toUpperCase()}</div>
+                    <div class="color-value">600</div>
+                </div>
+            </div>
+        `;
+        harmonyColors.innerHTML += cardHTML;
+    });
+}
+
+// Mover la función displayColorCards fuera del DOMContentLoaded
+function displayColorCards(colors) {
+    const colorCardsContainer = document.getElementById('colorCards');
+    if (!colorCardsContainer) return;
+    
+    // Limpiar solo el contenedor de paletas si existe
+    const existingPaletteContainer = document.getElementById('paletteContainer');
+    if (existingPaletteContainer) {
+        existingPaletteContainer.remove();
+    }
+
+    // Generar las nuevas paletas
+    generateColorPalettes(colors);
+    
+    // Actualizar los estilos dinámicos
+    updateDisplayedPalettes(colors);
+}
+
+function generateColorPalettes(colors) {
+    const colorCardsContainer = document.getElementById('colorCards');
+    if (!colorCardsContainer) return;
+    
+    // Crear contenedor para las paletas
+    const paletteContainer = document.createElement('div');
+    paletteContainer.id = 'paletteContainer';
+    paletteContainer.style.display = 'flex';
+    paletteContainer.style.flexDirection = 'column';
+    paletteContainer.style.gap = '32px';
+    paletteContainer.style.padding = '24px';
+    
+    colors.forEach((baseColor, index) => {
+        const shades = generateShades(baseColor);
+        const colorName = ntc.name(baseColor)[1].replace(/-color.*$/i, '').trim();
+        
+        // Contenedor de la paleta
+        const paletteSection = document.createElement('div');
+        paletteSection.style.display = 'flex';
+        paletteSection.style.flexDirection = 'column';
+        paletteSection.style.gap = '16px';
+        
+        // Título de la paleta
+        const paletteTitle = document.createElement('h3');
+        paletteTitle.textContent = colorName;
+        paletteTitle.style.fontSize = '18px';
+        paletteTitle.style.fontWeight = '600';
+        paletteTitle.style.margin = '0';
+        
+        // Contenedor de las tarjetas de color
+        const cardsContainer = document.createElement('div');
+        cardsContainer.style.display = 'flex';
+        cardsContainer.style.gap = '8px';
+        cardsContainer.style.flexWrap = 'wrap';
+        
+        // Crear tarjetas para cada tono
+        Object.entries(shades).forEach(([shade, color]) => {
+            const card = createTokenCard(shade, color, baseColor);
+            cardsContainer.appendChild(card);
+        });
+        
+        paletteSection.appendChild(paletteTitle);
+        paletteSection.appendChild(cardsContainer);
+        paletteContainer.appendChild(paletteSection);
+    });
+    
+    colorCardsContainer.appendChild(paletteContainer);
+}
+
+function createTokenCard(shade, color, baseColor) {
+    const card = document.createElement('div');
+    const isDark = chroma(color).luminance() < 0.5;
+    
+    // Estilos base de la tarjeta
+    Object.assign(card.style, {
+        width: '110px',
+        height: '110px',
+        borderRadius: '12px',
+        backgroundColor: color,
+        padding: '12px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        position: 'relative',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        color: isDark ? '#ffffff' : '#000000',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        border: shade === '600' ? `2px solid ${isDark ? '#ffffff' : '#000000'}` : 'none'
+    });
+    
+    // Contenido superior
+    const topContent = document.createElement('div');
+    
+    // Número de shade
+    const shadeNumber = document.createElement('span');
+    shadeNumber.textContent = shade;
+    shadeNumber.style.fontSize = '24px';
+    shadeNumber.style.fontWeight = '700';
+    
+    topContent.appendChild(shadeNumber);
+    
+    // Contenido inferior
+    const bottomContent = document.createElement('div');
+    bottomContent.style.display = 'flex';
+    bottomContent.style.flexDirection = 'column';
+    bottomContent.style.gap = '4px';
+    
+    // Hex value
+    const hexValue = document.createElement('span');
+    hexValue.textContent = color.toUpperCase();
+    hexValue.style.fontSize = '12px';
+    hexValue.style.opacity = '0.8';
+    
+    // Botón de copiar
+    const copyButton = document.createElement('button');
+    Object.assign(copyButton.style, {
+        padding: '6px 12px',
+        fontSize: '12px',
+        borderRadius: '6px',
+        border: 'none',
+        background: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+        color: 'inherit',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '4px',
+        width: '100%',
+        transition: 'all 0.2s ease'
+    });
+    
+    const copyIcon = document.createElement('span');
+    copyIcon.className = 'material-symbols-outlined';
+    copyIcon.textContent = 'content_copy';
+    copyIcon.style.fontSize = '14px';
+    
+    copyButton.appendChild(copyIcon);
+    copyButton.appendChild(document.createTextNode('Copy'));
+    
+    // Eventos
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-2px)';
+        card.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    });
+    
+    copyButton.addEventListener('mouseenter', () => {
+        copyButton.style.background = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)';
+    });
+    
+    copyButton.addEventListener('mouseleave', () => {
+        copyButton.style.background = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
+    });
+    
+    copyButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyToClipboard(color);
+    });
+    
+    bottomContent.appendChild(hexValue);
+    bottomContent.appendChild(copyButton);
+    
+    card.appendChild(topContent);
+    card.appendChild(bottomContent);
+    
+    return card;
+}
+
+// Mejorar el manejo de errores en la copia
+async function copyToClipboard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        showCustomAlert(`Color ${text.toUpperCase()} copied!`, 'color');
+    } catch (err) {
+        console.error('Error copying to clipboard:', err);
+        showCustomAlert('Error copying color code', 'color');
+    }
+}
