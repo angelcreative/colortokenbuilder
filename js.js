@@ -5,7 +5,7 @@ let colorWheel;
 let currentButtonRadius = localStorage.getItem('preferredButtonRadius') || 'md';
 
 // Añadir esta nueva función
-function updateButtonRadius(radius) {
+function updateButtonRadius(radius, showToast = false) {
     currentButtonRadius = radius;
     document.documentElement.style.setProperty('--button-radius', `var(--radius-${radius})`);
     
@@ -14,7 +14,11 @@ function updateButtonRadius(radius) {
     });
 
     localStorage.setItem('preferredButtonRadius', radius);
-    showCustomAlert(`Border radius changed to ${radius}`, 'radius');
+    
+    // Solo mostrar el toast si showToast es true (cuando el usuario hace clic)
+    if (showToast) {
+        showCustomAlert(`Border radius changed to ${radius}`, 'radius');
+    }
 }
 
 // Añadir esta función antes del DOMContentLoaded
@@ -50,9 +54,9 @@ function showCustomAlert(message, type = 'color') {
         color: '#000000',
         borderRadius: '8px',
         position: 'fixed',
-        bottom: '-100px', // Empezamos fuera de la vista
-        left: '16px', // 16px desde el borde izquierdo
-        transform: 'none', // Eliminamos el translateX que lo centraba
+        bottom: '-100px',
+        left: '16px',
+        transform: 'none',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         zIndex: '9999',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
@@ -90,7 +94,7 @@ function showCustomAlert(message, type = 'color') {
     // Mostrar el toast
     alertBox.style.display = 'flex';
     setTimeout(() => {
-        alertBox.style.bottom = '16px'; // 16px desde el borde inferior
+        alertBox.style.bottom = '16px';
     }, 100);
 
     // Auto-ocultar después de 3 segundos
@@ -98,6 +102,8 @@ function showCustomAlert(message, type = 'color') {
         alertBox.style.bottom = '-100px';
         setTimeout(() => {
             alertBox.style.display = 'none';
+            // Limpiar el contenido después de que se oculte
+            alertMessage.innerHTML = '';
         }, 300);
     }, 3000);
 }
@@ -915,12 +921,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Añadir estos nuevos event listeners (sintaxis corregida)
     document.querySelectorAll('.radius-card').forEach(card => {
         card.addEventListener('click', () => {
-            updateButtonRadius(card.dataset.radius);
+            updateButtonRadius(card.dataset.radius, true);
         });
     });
 
-    // Aplicar el radio inicial
-    updateButtonRadius(currentButtonRadius);
+    // Aplicar el radio inicial sin mostrar toast
+    updateButtonRadius(currentButtonRadius, false);
 });
 
 console.log('Script loaded!');
@@ -1206,3 +1212,12 @@ async function copyToClipboard(text) {
         showCustomAlert('Error copying color code', 'color');
     }
 }
+
+// Modificar el HTML inicial para que solo tenga la estructura básica
+document.addEventListener('DOMContentLoaded', () => {
+    const customAlert = document.getElementById('custom-alert');
+    if (customAlert) {
+        customAlert.style.display = 'none';
+        customAlert.innerHTML = '<span id="alert-message"></span>';
+    }
+});
