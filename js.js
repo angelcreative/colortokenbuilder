@@ -1453,11 +1453,11 @@ async function copySvgCard(card) {
   try {
     const svgString = await cardToSVG(card);
     await navigator.clipboard.writeText(svgString);
-    showCustomAlert('Card copied as SVG', 'code');
+    showCustomAlert('Card copied as PNG', 'code');
     console.log('SVG copiado:', svgString);
   } catch (error) {
-    console.error('Error copying SVG:', error);
-    showCustomAlert('Error copying SVG', 'error');
+    console.error('Error copying PNG:', error);
+    showCustomAlert('Error copying PNG', 'error');
   }
 }
 
@@ -1482,7 +1482,7 @@ function createCustomTooltip(card) {
                 <span class="material-symbols-outlined" style="font-size: 16px;">
                     info
                 </span>
-                <span>Alt + Click to copy as SVG</span>
+                <span>Alt + Click to copy as PNG</span>
             </div>
         `;
 
