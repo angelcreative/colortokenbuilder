@@ -814,6 +814,9 @@ function updateCSSVariables(selectedColor, colors) {
     root.style.setProperty(`--color-secondary-800`, scale[8]);
     root.style.setProperty(`--color-secondary-900`, scale[9]);
   });
+
+  // Después de establecer todas las variables CSS, actualizar el contraste
+  updateButtonsContrast();
 }
 
 // Función para cambiar la tipografía
@@ -840,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSidebar();
   updateHarmonyColors(); // Si es necesario
   // ... resto de inicializaciones
+  updateButtonsContrast();
 });
 
 // Animación de los círculos de progreso
@@ -1418,9 +1422,9 @@ async function cardToSVG(card) {
         more_horiz:
           'M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
         palette:
-          'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
+          'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z',
         brush:
-          'M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34c-.39-.39-1.02-.39-1.41 0L9 12.25 11.75 15l8.96-8.96c.39-.39.39-1.02 0-1.41z',
+          'M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.22 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34c-.39-.39-1.02-.39-1.41 0L9 12.25 11.75 15l8.96-8.96c.39-.39.39-1.02 0-1.41z',
         // Añade más paths según necesites
       };
 
@@ -1544,3 +1548,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.base-card');
   cards.forEach((card) => createCustomTooltip(card));
 });
+
+function updateButtonsContrast() {
+  const root = document.documentElement;
+  
+  function getTextColor(bgColor) {
+    if (!bgColor || bgColor === 'transparent' || bgColor === 'rgba(0, 0, 0, 0)') {
+      return 'var(--color-primary-900)';
+    }
+    const luminance = chroma(bgColor).luminance();
+    return luminance > 0.5 ? 'var(--color-primary-900)' : '#FFFFFF';
+  }
+
+  // Obtener colores de las variables CSS
+  const colors = {
+    50: getComputedStyle(root).getPropertyValue('--color-primary-50').trim(),
+    100: getComputedStyle(root).getPropertyValue('--color-primary-100').trim(),
+    200: getComputedStyle(root).getPropertyValue('--color-primary-200').trim(),
+    600: getComputedStyle(root).getPropertyValue('--color-primary-600').trim()
+  };
+
+  // Aplicar contraste a elementos con fondo primary-600
+  document.querySelectorAll('button.primary, .ui-button.primary, .cta-button, #exportSvgButton, #exportJsonButton, .tag.primary').forEach(element => {
+    element.style.color = getTextColor(colors[600]);
+  });
+
+  // Aplicar contraste a elementos con fondo primary-200
+  document.querySelectorAll('button.secondary, .ui-button.secondary, .copyButton, .tag.secondary').forEach(element => {
+    element.style.color = getTextColor(colors[200]);
+  });
+
+  // Aplicar contraste a icon buttons
+  document.querySelectorAll('.icon-button').forEach(element => {
+    element.style.color = 'var(--color-primary-600)';
+    
+    // Añadir event listeners para hover
+    element.addEventListener('mouseenter', () => {
+      element.style.color = 'var(--color-primary-100)';
+    });
+    
+    element.addEventListener('mouseleave', () => {
+      element.style.color = 'var(--color-primary-600)';
+    });
+  });
+
+  // Aplicar contraste a tags light
+  document.querySelectorAll('.tag.light').forEach(element => {
+    element.style.color = getTextColor(colors[50]);
+  });
+
+  // Aplicar contraste a color cards
+  document.querySelectorAll('.color-preview').forEach(preview => {
+    const bgColor = window.getComputedStyle(preview).backgroundColor;
+    if (bgColor) {
+      const textColor = getTextColor(bgColor);
+      preview.style.color = textColor;
+      preview.querySelectorAll('*').forEach(child => {
+        child.style.color = textColor;
+      });
+    }
+  });
+}
