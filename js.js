@@ -1221,3 +1221,139 @@ document.addEventListener('DOMContentLoaded', () => {
         customAlert.innerHTML = '<span id="alert-message"></span>';
     }
 });
+
+// Función para convertir HTML a SVG usando html2canvas
+function convertToSvg(element) {
+    return html2canvas(element, {
+        backgroundColor: null,
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        onclone: (clonedDoc, element) => {
+            // Asegurarnos de capturar todos los estilos
+            const computedStyle = window.getComputedStyle(element);
+            const clonedElement = clonedDoc.querySelector('.base-card');
+            if (clonedElement) {
+                clonedElement.style.cssText = computedStyle.cssText;
+            }
+        }
+    }).then(canvas => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        image.setAttribute('width', width);
+        image.setAttribute('height', height);
+        image.setAttribute('x', '0');
+        image.setAttribute('y', '0');
+        image.setAttribute('href', canvas.toDataURL('image/png'));
+
+        svg.appendChild(image);
+        
+        const serializer = new XMLSerializer();
+        return serializer.serializeToString(svg);
+    });
+}
+
+// Función para copiar el SVG
+function copySvgCard(card) {
+    convertToSvg(card)
+        .then(svgString => {
+            navigator.clipboard.writeText(svgString);
+            showCustomAlert('Card copied as SVG', 'code');
+            console.log('SVG copiado:', svgString);
+        })
+        .catch(error => {
+            console.error('Error copying SVG:', error);
+            showCustomAlert('Error copying SVG', 'error');
+        });
+}
+
+// Event listener para todas las cards
+document.addEventListener('click', (event) => {
+    const card = event.target.closest('.base-card');
+    if (card && event.altKey) { // Verificar si se presionó Alt (Option en Mac)
+        event.preventDefault(); // Prevenir comportamiento por defecto
+        copySvgCard(card);
+    }
+});
+
+// Función para crear y mostrar el tooltip personalizado
+function createCustomTooltip(card) {
+    // Crear el tooltip solo una vez y reutilizarlo
+    let tooltip = document.querySelector('.custom-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'custom-tooltip';
+        tooltip.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">
+                    info
+                </span>
+                <span>Alt + Click to copy as SVG</span>
+            </div>
+        `;
+        
+        // Estilos mejorados del tooltip
+        Object.assign(tooltip.style, {
+            position: 'fixed', // Cambiado a fixed para mejor posicionamiento
+            padding: '8px 16px',
+            background: '#FFFFFF',
+            color: '#000000',
+            borderRadius: '8px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+            fontSize: '14px',
+            fontWeight: '500',
+            zIndex: '9999',
+            pointerEvents: 'none',
+            opacity: '0',
+            visibility: 'hidden',
+            transition: 'opacity 0.1s ease-in-out, visibility 0.1s ease-in-out',
+            whiteSpace: 'nowrap',
+            transform: 'translateY(0)'
+        });
+        
+        document.body.appendChild(tooltip);
+    }
+    
+    let hideTimeout;
+    
+    function showTooltip(event) {
+        clearTimeout(hideTimeout);
+        const rect = card.getBoundingClientRect();
+        
+        // Posicionar el tooltip
+        tooltip.style.visibility = 'visible';
+        tooltip.style.opacity = '1';
+        
+        // Calcular posición centrada sobre la card
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const left = rect.left + (rect.width - tooltipRect.width) / 2;
+        const top = rect.top - tooltipRect.height - 8;
+        
+        tooltip.style.left = `${Math.max(8, left)}px`;
+        tooltip.style.top = `${Math.max(8, top)}px`;
+    }
+    
+    function hideTooltip() {
+        hideTimeout = setTimeout(() => {
+            tooltip.style.opacity = '0';
+            tooltip.style.visibility = 'hidden';
+        }, 100);
+    }
+    
+    // Añadir event listeners
+    card.addEventListener('mouseenter', showTooltip);
+    card.addEventListener('mouseleave', hideTooltip);
+}
+
+// Modificar el event listener del DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.base-card');
+    cards.forEach(card => createCustomTooltip(card));
+});
