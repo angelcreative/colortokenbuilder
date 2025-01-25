@@ -1,10 +1,12 @@
 {
   "scripts": {
     "dev": "http-server",
-    "start": "http-server"
+    "start": "http-server",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json}\""
   },
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "prettier": "3.2.5"
   },
   "dependencies": {
     "dom-to-svg": "^0.12.2",

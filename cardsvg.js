@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('CardSVG script loaded, initializing...');
-    
-    function createCopyButton() {
-        const button = document.createElement('button');
-        button.className = 'copy-svg-btn';
-        button.style.cssText = `
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('CardSVG script loaded, initializing...');
+
+  function createCopyButton() {
+    const button = document.createElement('button');
+    button.className = 'copy-svg-btn';
+    button.style.cssText = `
             position: absolute;
             bottom: -25px;
             left: 50%;
@@ -24,116 +24,116 @@ document.addEventListener('DOMContentLoaded', function() {
             font-weight: 500;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         `;
-        
-        const icon = document.createElement('span');
-        icon.className = 'material-symbols-outlined';
-        icon.textContent = 'content_copy';
-        icon.style.fontSize = '16px';
-        
-        const text = document.createTextNode('Copy SVG Card');
-        
-        button.appendChild(icon);
-        button.appendChild(text);
-        
-        return button;
-    }
 
-    function initializeSVGCopyButtons() {
-        const cards = document.querySelectorAll('.base-card');
-        console.log('Found cards:', cards.length);
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = 'content_copy';
+    icon.style.fontSize = '16px';
 
-        cards.forEach(card => {
-            const wrapper = document.createElement('div');
-            wrapper.style.position = 'relative';
-            wrapper.style.marginBottom = '30px';
-            
-            // Envolver la card
-            card.parentNode.insertBefore(wrapper, card);
-            wrapper.appendChild(card);
-            
-            const copyButton = createCopyButton();
-            wrapper.appendChild(copyButton);
+    const text = document.createTextNode('Copy SVG Card');
 
-            let hideTimeout;
+    button.appendChild(icon);
+    button.appendChild(text);
 
-            // Eventos de hover
-            function showButton() {
-                clearTimeout(hideTimeout);
-                copyButton.style.opacity = '1';
-                copyButton.style.transform = 'translateX(-50%) translateY(0)';
-            }
+    return button;
+  }
 
-            function hideButton() {
-                hideTimeout = setTimeout(() => {
-                    copyButton.style.opacity = '0';
-                    copyButton.style.transform = 'translateX(-50%) translateY(-10px)';
-                }, 500);
-            }
+  function initializeSVGCopyButtons() {
+    const cards = document.querySelectorAll('.base-card');
+    console.log('Found cards:', cards.length);
 
-            card.addEventListener('mouseenter', showButton);
-            copyButton.addEventListener('mouseenter', showButton);
-            card.addEventListener('mouseleave', (e) => {
-                if (!e.relatedTarget?.classList.contains('copy-svg-btn')) {
-                    hideButton();
-                }
-            });
-            copyButton.addEventListener('mouseleave', (e) => {
-                if (!e.relatedTarget?.classList.contains('base-card')) {
-                    hideButton();
-                }
-            });
+    cards.forEach((card) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'relative';
+      wrapper.style.marginBottom = '30px';
 
-            // Manejo de la copia
-            copyButton.addEventListener('click', async function(e) {
-                e.stopPropagation();
-                try {
-                    // Verificar que dom-to-svg está disponible
-                    if (typeof elementToSVG === 'undefined') {
-                        throw new Error('SVG conversion library not loaded');
-                    }
+      // Envolver la card
+      card.parentNode.insertBefore(wrapper, card);
+      wrapper.appendChild(card);
 
-                    // Clonar la card para mantener los estilos
-                    const clonedCard = card.cloneNode(true);
-                    
-                    // Asegurar que el clon tenga las dimensiones correctas
-                    clonedCard.style.width = card.offsetWidth + 'px';
-                    clonedCard.style.height = card.offsetHeight + 'px';
+      const copyButton = createCopyButton();
+      wrapper.appendChild(copyButton);
 
-                    // Convertir a SVG manteniendo los estilos
-                    const svgString = elementToSVG(card, {
-                        width: card.offsetWidth,
-                        height: card.offsetHeight,
-                        style: true,
-                        computedStyle: true,
-                        filter: (node) => {
-                            // Solo incluir elementos de la card
-                            return node.nodeType === 1 && 
-                                   (node.classList.contains('base-card') || 
-                                    node.closest('.base-card'));
-                        }
-                    });
+      let hideTimeout;
 
-                    // Copiar al portapapeles
-                    await navigator.clipboard.writeText(svgString);
-                    
-                    // Notificar éxito
-                    showCustomAlert('SVG Card copied!');
-                    
-                    // Log para debug
-                    console.log('SVG copied successfully');
+      // Eventos de hover
+      function showButton() {
+        clearTimeout(hideTimeout);
+        copyButton.style.opacity = '1';
+        copyButton.style.transform = 'translateX(-50%) translateY(0)';
+      }
 
-                } catch (error) {
-                    console.error('Error copying SVG Card:', error);
-                    showCustomAlert('Error copying SVG Card: ' + error.message);
-                }
-            });
-        });
-    }
+      function hideButton() {
+        hideTimeout = setTimeout(() => {
+          copyButton.style.opacity = '0';
+          copyButton.style.transform = 'translateX(-50%) translateY(-10px)';
+        }, 500);
+      }
 
-    // Inicializar cuando el DOM esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeSVGCopyButtons);
-    } else {
-        initializeSVGCopyButtons();
-    }
+      card.addEventListener('mouseenter', showButton);
+      copyButton.addEventListener('mouseenter', showButton);
+      card.addEventListener('mouseleave', (e) => {
+        if (!e.relatedTarget?.classList.contains('copy-svg-btn')) {
+          hideButton();
+        }
+      });
+      copyButton.addEventListener('mouseleave', (e) => {
+        if (!e.relatedTarget?.classList.contains('base-card')) {
+          hideButton();
+        }
+      });
+
+      // Manejo de la copia
+      copyButton.addEventListener('click', async function (e) {
+        e.stopPropagation();
+        try {
+          // Verificar que dom-to-svg está disponible
+          if (typeof elementToSVG === 'undefined') {
+            throw new Error('SVG conversion library not loaded');
+          }
+
+          // Clonar la card para mantener los estilos
+          const clonedCard = card.cloneNode(true);
+
+          // Asegurar que el clon tenga las dimensiones correctas
+          clonedCard.style.width = card.offsetWidth + 'px';
+          clonedCard.style.height = card.offsetHeight + 'px';
+
+          // Convertir a SVG manteniendo los estilos
+          const svgString = elementToSVG(card, {
+            width: card.offsetWidth,
+            height: card.offsetHeight,
+            style: true,
+            computedStyle: true,
+            filter: (node) => {
+              // Solo incluir elementos de la card
+              return (
+                node.nodeType === 1 &&
+                (node.classList.contains('base-card') || node.closest('.base-card'))
+              );
+            },
+          });
+
+          // Copiar al portapapeles
+          await navigator.clipboard.writeText(svgString);
+
+          // Notificar éxito
+          showCustomAlert('SVG Card copied!');
+
+          // Log para debug
+          console.log('SVG copied successfully');
+        } catch (error) {
+          console.error('Error copying SVG Card:', error);
+          showCustomAlert('Error copying SVG Card: ' + error.message);
+        }
+      });
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSVGCopyButtons);
+  } else {
+    initializeSVGCopyButtons();
+  }
 });
