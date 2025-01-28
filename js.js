@@ -1,3 +1,4 @@
+// ColorToken - Sistema de tokens de diseño
 // Declarar colorWheel globalmente
 let colorWheel;
 
@@ -6,14 +7,14 @@ let currentButtonRadius = localStorage.getItem('preferredButtonRadius') || 'md';
 
 // Añadir esta nueva función
 function updateButtonRadius(radius, showToast = false) {
-  currentButtonRadius = radius;
-  document.documentElement.style.setProperty('--button-radius', `var(--radius-${radius})`);
-
+    currentButtonRadius = radius;
+    document.documentElement.style.setProperty('--button-radius', `var(--radius-${radius})`);
+    
   document.querySelectorAll('.radius-card').forEach((card) => {
-    card.classList.toggle('active', card.dataset.radius === radius);
-  });
+        card.classList.toggle('active', card.dataset.radius === radius);
+    });
 
-  localStorage.setItem('preferredButtonRadius', radius);
+    localStorage.setItem('preferredButtonRadius', radius);
 
   // Actualizar el drawer si está abierto
   const drawer = document.getElementById('designTokensDrawer');
@@ -29,14 +30,14 @@ function updateButtonRadius(radius, showToast = false) {
 
 // Añadir esta función antes del DOMContentLoaded
 function initSidebar() {
-  const sidebarToggles = document.querySelectorAll('.sidebar-toggle');
-  const sidebar = document.querySelector('.sidebar');
-
+    const sidebarToggles = document.querySelectorAll('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
   sidebarToggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
     });
-  });
 }
 
 // 1. Añadir la función showCustomAlert al inicio del archivo
@@ -115,37 +116,37 @@ function showCustomAlert(message, type = 'color') {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const toggleSwitch = document.getElementById('theme-toggle');
-
-  // Get the current theme from localStorage
-  const currentTheme = localStorage.getItem('theme');
-  if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    // If the theme is dark, mark the switch as active
-    if (currentTheme === 'dark') {
-      toggleSwitch.checked = true;
+    const toggleSwitch = document.getElementById('theme-toggle'); 
+    
+    // Get the current theme from localStorage
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    
+      // If the theme is dark, mark the switch as active
+      if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+      }
     }
-  }
-
-  // Listen for changes in the switch
+    
+    // Listen for changes in the switch
   toggleSwitch.addEventListener('change', function () {
-    if (this.checked) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    }
-  });
-
-  var colorWheelContainer = document.getElementById('colorWheelContainer');
-  var hexInput = document.getElementById('hexInput');
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+        
+        var colorWheelContainer = document.getElementById('colorWheelContainer');
+        var hexInput = document.getElementById('hexInput');
   var currentPalettes = []; // Store currently displayed palettes
-
+    
   // Inicializar colorWheel con Purple Heart
-  colorWheel = new iro.ColorPicker(colorWheelContainer, {
-    width: 200,
+        colorWheel = new iro.ColorPicker(colorWheelContainer, {
+            width: 200,
     color: '#5036C2',
   });
 
@@ -183,73 +184,73 @@ document.addEventListener('DOMContentLoaded', function () {
     // Actualizar paletas mostradas
     updateDisplayedPalettes(initialColors);
   }
-
-  function updateHarmonyColors(baseColor) {
+    
+        function updateHarmonyColors(baseColor) {
     if (!baseColor || !chroma.valid(baseColor)) {
       console.warn('Invalid or no base color provided to updateHarmonyColors');
       baseColor = '#5036C2'; // Color por defecto
     }
 
     const harmonyType = document.getElementById('harmonyType')?.value || 'square';
-    const colors = getHarmonyColors(baseColor, harmonyType);
+            const colors = getHarmonyColors(baseColor, harmonyType);
 
     if (colors) {
-      displayColors(colors);
-      displayGradientCards(colors);
+            displayColors(colors);
+            displayGradientCards(colors);
       updateDisplayedPalettes(colors);
       displayColorCards(colors);
-      updateCSSVariables(baseColor, colors);
+            updateCSSVariables(baseColor, colors);
       updateColorIndicators(colors);
     }
-  }
-
-  function getHarmonyColors(color, type) {
+        }
+    
+        function getHarmonyColors(color, type) {
     if (!color || !chroma.valid(color)) {
       console.warn('Invalid color provided to getHarmonyColors');
       return null;
     }
 
-    const baseColor = chroma(color);
-    const baseHue = baseColor.get('hsl.h');
-    const baseSaturation = baseColor.get('hsl.s');
-    const baseLightness = baseColor.get('hsl.l');
-    let hues;
-
-    switch (type) {
-      case 'complementary':
-        hues = [baseHue, (baseHue + 180) % 360];
-        break;
-      case 'analogous':
-        hues = [(baseHue - 30 + 360) % 360, baseHue, (baseHue + 30) % 360];
-        break;
-      case 'triadic':
-        hues = [baseHue, (baseHue + 120) % 360, (baseHue + 240) % 360];
-        break;
-      case 'square':
-        hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
-        break;
+            const baseColor = chroma(color);
+            const baseHue = baseColor.get('hsl.h');
+            const baseSaturation = baseColor.get('hsl.s');
+            const baseLightness = baseColor.get('hsl.l');
+            let hues;
+    
+            switch (type) {
+                case 'complementary':
+                    hues = [baseHue, (baseHue + 180) % 360];
+                    break;
+                case 'analogous':
+                    hues = [(baseHue - 30 + 360) % 360, baseHue, (baseHue + 30) % 360];
+                    break;
+                case 'triadic':
+                    hues = [baseHue, (baseHue + 120) % 360, (baseHue + 240) % 360];
+                    break;
+                case 'square':
+                    hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
+                    break;
       default:
         hues = [baseHue, (baseHue + 90) % 360, (baseHue + 180) % 360, (baseHue + 270) % 360];
-    }
-
+            }
+    
     return hues.map((hue) => chroma.hsl(hue, baseSaturation, baseLightness).hex());
-  }
-
-  function displayColors(colors) {
-    const harmonyColors = document.getElementById('harmonyColors');
+        }
+    
+        function displayColors(colors) {
+            const harmonyColors = document.getElementById('harmonyColors');
     if (!harmonyColors || !colors) return;
 
-    harmonyColors.innerHTML = '';
-
+            harmonyColors.innerHTML = '';
+            
     colors.forEach((color, index) => {
       if (!color) return;
       const colorName = ntc
         .name(color)[1]
         .replace(/-color.*$/i, '')
         .trim();
-      const rgbColor = chroma(color).rgb();
+                const rgbColor = chroma(color).rgb();
 
-      const cardHTML = `
+                const cardHTML = `
                     <div class="color-card">
           <div class="color-preview" style="background-color: ${color}; height: 160px; border-radius: 12px;"></div>
           <div class="color-info" style="padding: 16px;">
@@ -260,86 +261,86 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 `;
-      harmonyColors.innerHTML += cardHTML;
-    });
+                harmonyColors.innerHTML += cardHTML;
+            });
 
     // Actualizar los swatches en el drawer
     updateTokenViewer();
-  }
+        }
 
   document.getElementById('harmonyType').value = 'square';
   updateHarmonyColors('#5036C2');
+    
+        function displayGradientCards(colors) {
+            // Limpiar gradientes anteriores si existen
+            const existingGradients = document.querySelector('.gradient-cards');
+            if (existingGradients) {
+                existingGradients.remove();
+            }
 
-  function displayGradientCards(colors) {
-    // Limpiar gradientes anteriores si existen
-    const existingGradients = document.querySelector('.gradient-cards');
-    if (existingGradients) {
-      existingGradients.remove();
-    }
-
-    const harmonyType = document.getElementById('harmonyType').value;
-    const harmonyColors = document.getElementById('harmonyColors');
-
-    // Crear contenedor para gradientes
-    const gradientContainer = document.createElement('div');
-    gradientContainer.className = 'gradient-cards';
-
-    // Definir los pares según el tipo de armonía
-    let colorPairs = [];
+            const harmonyType = document.getElementById('harmonyType').value;
+            const harmonyColors = document.getElementById('harmonyColors');
+            
+            // Crear contenedor para gradientes
+            const gradientContainer = document.createElement('div');
+            gradientContainer.className = 'gradient-cards';
+            
+            // Definir los pares según el tipo de armonía
+            let colorPairs = [];
     switch (harmonyType) {
-      case 'complementary':
-        colorPairs = [[colors[0], colors[1]]];
-        break;
-      case 'triadic':
-        colorPairs = [
-          [colors[0], colors[1]],
-          [colors[1], colors[2]],
+                case 'complementary':
+                    colorPairs = [[colors[0], colors[1]]];
+                    break;
+                case 'triadic':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
           [colors[2], colors[0]],
-        ];
-        break;
-      case 'square':
-        colorPairs = [
-          [colors[0], colors[1]],
-          [colors[1], colors[2]],
-          [colors[2], colors[3]],
+                    ];
+                    break;
+                case 'square':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
+                        [colors[2], colors[3]],
           [colors[3], colors[0]],
-        ];
-        break;
-      case 'analogous':
-        colorPairs = [
-          [colors[0], colors[1]],
-          [colors[1], colors[2]],
+                    ];
+                    break;
+                case 'analogous':
+                    colorPairs = [
+                        [colors[0], colors[1]],
+                        [colors[1], colors[2]],
           [colors[2], colors[0]],
-        ];
-        break;
-    }
-
-    // Crear tarjetas de gradiente
+                    ];
+                    break;
+            }
+            
+            // Crear tarjetas de gradiente
     colorPairs.forEach((pair) => {
-      const card = document.createElement('div');
-      card.className = 'color-card';
-
-      const preview = document.createElement('div');
-      preview.className = 'color-preview';
-      preview.style.backgroundImage = `linear-gradient(45deg, ${pair[0]} 0%, ${pair[1]} 100%)`;
-
-      const info = document.createElement('div');
-      info.className = 'color-info';
-      info.innerHTML = `
+                const card = document.createElement('div');
+                card.className = 'color-card';
+                
+                const preview = document.createElement('div');
+                preview.className = 'color-preview';
+                preview.style.backgroundImage = `linear-gradient(45deg, ${pair[0]} 0%, ${pair[1]} 100%)`;
+                
+                const info = document.createElement('div');
+                info.className = 'color-info';
+                info.innerHTML = `
                     <div class="color-name">Gradient</div>
                     <div class="color-hex">${pair[0]} → ${pair[1]}</div>
                 `;
-
-      card.appendChild(preview);
-      card.appendChild(info);
-      gradientContainer.appendChild(card);
-    });
-
-    // Añadir después de las tarjetas de colores sólidos
-    harmonyColors.appendChild(gradientContainer);
-  }
-
-  function updateColorIndicators(colors) {
+                
+                card.appendChild(preview);
+                card.appendChild(info);
+                gradientContainer.appendChild(card);
+            });
+            
+            // Añadir después de las tarjetas de colores sólidos
+            harmonyColors.appendChild(gradientContainer);
+        }
+    
+        function updateColorIndicators(colors) {
     const colorWheelContainer = document.getElementById('colorWheelContainer');
     if (!colorWheelContainer) return;
 
@@ -350,33 +351,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Obtener dimensiones del color wheel
     const wheelSize = colorWheel.props.width;
-    const wheelRadius = wheelSize / 2;
-    const centerX = wheelRadius;
-    const centerY = wheelRadius;
+            const wheelRadius = wheelSize / 2;
+            const centerX = wheelRadius;
+            const centerY = wheelRadius;
 
     // Crear indicadores solo para los colores armónicos (excluyendo el color base)
-    colors.forEach((color, index) => {
+            colors.forEach((color, index) => {
       if (index === 0) return; // Saltar el color base
 
       const hue = chroma(color).get('hsl.h') || 0; // Asegurar que hue sea un número
       const angleRadians = ((hue + 360) % 360) * (Math.PI / 180); // Normalizar el ángulo
-
+                
       // Calcular posición en el círculo
-      const indicatorX = centerX + (wheelRadius - 15) * Math.cos(angleRadians);
-      const indicatorY = centerY - (wheelRadius - 15) * Math.sin(angleRadians);
+                const indicatorX = centerX + (wheelRadius - 15) * Math.cos(angleRadians);
+                const indicatorY = centerY - (wheelRadius - 15) * Math.sin(angleRadians);
 
-      const indicator = document.createElement('div');
-      indicator.classList.add('colorIndicator');
-      indicator.style.position = 'absolute';
-      indicator.style.left = `${indicatorX}px`;
-      indicator.style.top = `${indicatorY}px`;
-      indicator.style.backgroundColor = color;
+                const indicator = document.createElement('div');
+                indicator.classList.add('colorIndicator');
+                indicator.style.position = 'absolute';
+                indicator.style.left = `${indicatorX}px`;
+                indicator.style.top = `${indicatorY}px`;
+                indicator.style.backgroundColor = color;
       indicator.style.transform = 'translate(-50%, -50%)';
 
-      colorWheelContainer.appendChild(indicator);
-    });
-  }
-
+                colorWheelContainer.appendChild(indicator);
+            });
+        }
+    
   // Event listeners
   colorWheel.on(['color:init', 'color:change'], function (color) {
     const harmonyType = document.getElementById('harmonyType').value;
@@ -398,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (colors) {
       displayColors(colors);
       displayGradientCards(colors);
-      updateDisplayedPalettes(colors);
+            updateDisplayedPalettes(colors);
       displayColorCards(colors);
       updateCSSVariables(currentColor, colors);
       updateColorIndicators(colors);
@@ -406,111 +407,111 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   hexInput.addEventListener('input', function (e) {
-    const hexValue = this.value.trim();
+            const hexValue = this.value.trim();
+            
+            // Permitir pegar y editar
+            if (e.inputType === 'insertFromPaste') {
+                setTimeout(() => {
+                    if (chroma.valid(hexValue)) {
+                        colorWheel.color.hexString = hexValue;
+                        this.value = hexValue;
+                    }
+                }, 0);
+                return;
+            }
 
-    // Permitir pegar y editar
-    if (e.inputType === 'insertFromPaste') {
-      setTimeout(() => {
-        if (chroma.valid(hexValue)) {
-          colorWheel.color.hexString = hexValue;
-          this.value = hexValue;
-        }
-      }, 0);
-      return;
-    }
+            // Validar entrada manual
+            if (hexValue.length === 7 && chroma.valid(hexValue)) {
+                colorWheel.color.hexString = hexValue;
+            }
+        });
 
-    // Validar entrada manual
-    if (hexValue.length === 7 && chroma.valid(hexValue)) {
-      colorWheel.color.hexString = hexValue;
-    }
-  });
-
-  // Agregar evento de pegado específico
+        // Agregar evento de pegado específico
   hexInput.addEventListener('paste', function (e) {
-    e.preventDefault();
-    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-    const cleanHex = pastedText.trim();
-
-    if (chroma.valid(cleanHex)) {
-      this.value = cleanHex;
-      colorWheel.color.hexString = cleanHex;
-    }
-  });
-
-  updateHarmonyColors(colorWheel.color.hexString);
-
-  // Export functions
-  document.getElementById('exportSvgButton').addEventListener('click', exportPalettesAsSVG);
-  document.getElementById('exportJsonButton').addEventListener('click', exportPalettesAsJSON);
-
-  function generatePaletteJSON(baseColors) {
-    const palettes = {};
-
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const cleanHex = pastedText.trim();
+            
+            if (chroma.valid(cleanHex)) {
+                this.value = cleanHex;
+                colorWheel.color.hexString = cleanHex;
+            }
+        });
+    
+        updateHarmonyColors(colorWheel.color.hexString);
+    
+        // Export functions
+        document.getElementById('exportSvgButton').addEventListener('click', exportPalettesAsSVG);
+        document.getElementById('exportJsonButton').addEventListener('click', exportPalettesAsJSON);
+    
+        function generatePaletteJSON(baseColors) {
+            const palettes = {};
+    
     baseColors.forEach((color) => {
-      let colorName = ntc.name(color)[1];
+                let colorName = ntc.name(color)[1];
       colorName = colorName
         .replace(/-color.*$/i, '')
         .trim()
         .toLowerCase()
         .replace(/\s+/g, '-');
-
-      const palette = {};
+    
+                const palette = {};
       const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
-
-      shades.forEach((shade, i) => {
+    
+                shades.forEach((shade, i) => {
         const lightness = 1 - i * 0.1;
         const paletteColor = chroma(color)
           .set('hsl.l', i === 0 ? 0.95 : lightness)
           .hex();
-        palette[shade] = paletteColor.toLowerCase();
-      });
-
-      palettes[colorName] = palette;
-    });
-
-    return palettes;
-  }
-
-  function exportPalettesAsJSON() {
-    if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
+                    palette[shade] = paletteColor.toLowerCase();
+                });
+    
+                palettes[colorName] = palette;
+            });
+    
+            return palettes;
+        }
+    
+        function exportPalettesAsJSON() {
+            if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
       alert('No palettes to export.');
-      return;
-    }
-
+                return;
+            }
+    
     const jsonBlob = new Blob([JSON.stringify(currentPalettes, null, 2)], {
       type: 'application/json',
     });
-    const url = URL.createObjectURL(jsonBlob);
-
+            const url = URL.createObjectURL(jsonBlob);
+    
     const link = document.createElement('a');
-    link.href = url;
+            link.href = url;
     link.download = 'color_palettes.json';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }
-
-  function createSVGPaletteFromCurrent() {
-    if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    
+        function createSVGPaletteFromCurrent() {
+            if (!currentPalettes || Object.keys(currentPalettes).length === 0) {
       alert('No palettes to export.');
-      return null;
-    }
-
+                return null;
+            }
+    
     const svgNS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(svgNS, 'svg');
-    const totalHeight = Object.keys(currentPalettes).length * 120 + 20; // Calculate height based on number of palettes
+            const totalHeight = Object.keys(currentPalettes).length * 120 + 20; // Calculate height based on number of palettes
     svg.setAttribute('width', '810');
     svg.setAttribute('height', `${totalHeight}`);
-
-    Object.keys(currentPalettes).forEach((colorName, index) => {
-      const palette = currentPalettes[colorName];
-
-      // Create a group element for each color's palette
+    
+            Object.keys(currentPalettes).forEach((colorName, index) => {
+                const palette = currentPalettes[colorName];
+    
+                // Create a group element for each color's palette
       const group = document.createElementNS(svgNS, 'g');
       group.setAttribute('transform', `translate(0, ${index * 120 + 20})`);
-
-      // Add the color name as a text element
+    
+                // Add the color name as a text element
       const text = document.createElementNS(svgNS, 'text');
       text.setAttribute('x', '10');
       text.setAttribute('y', '30');
@@ -519,19 +520,19 @@ document.addEventListener('DOMContentLoaded', function () {
       text.textContent = colorName
         .replace(/-/g, ' ')
         .replace(/\b\w/g, (char) => char.toUpperCase());
-      group.appendChild(text);
-
-      // Create rectangles for the color shades
-      Object.keys(palette).forEach((shade, i) => {
+                group.appendChild(text);
+    
+                // Create rectangles for the color shades
+                Object.keys(palette).forEach((shade, i) => {
         const rect = document.createElementNS(svgNS, 'rect');
         rect.setAttribute('x', `${80 * i + 10}`);
         rect.setAttribute('y', '40');
         rect.setAttribute('width', '70');
         rect.setAttribute('height', '70');
         rect.setAttribute('fill', palette[shade]);
-        group.appendChild(rect);
-
-        // Add the shade number as a text element on each rectangle
+                    group.appendChild(rect);
+    
+                    // Add the shade number as a text element on each rectangle
         const shadeText = document.createElementNS(svgNS, 'text');
         shadeText.setAttribute('x', `${80 * i + 45}`);
         shadeText.setAttribute('y', '90');
@@ -539,65 +540,65 @@ document.addEventListener('DOMContentLoaded', function () {
         shadeText.setAttribute('font-family', 'Arial');
         shadeText.setAttribute('text-anchor', 'middle');
         shadeText.setAttribute('fill', chroma(palette[shade]).luminance() > 0.5 ? '#333' : '#fff');
-        shadeText.textContent = shade;
-        group.appendChild(shadeText);
-      });
-
-      svg.appendChild(group);
-    });
-
-    return svg;
-  }
-
-  function exportPalettesAsSVG() {
-    const svg = createSVGPaletteFromCurrent();
-    if (!svg) return;
-
-    const serializer = new XMLSerializer();
-    const svgString = serializer.serializeToString(svg);
-
+                    shadeText.textContent = shade;
+                    group.appendChild(shadeText);
+                });
+    
+                svg.appendChild(group);
+            });
+    
+            return svg;
+        }
+    
+        function exportPalettesAsSVG() {
+            const svg = createSVGPaletteFromCurrent();
+            if (!svg) return;
+    
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svg);
+    
     const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(svgBlob);
-
+            const url = URL.createObjectURL(svgBlob);
+    
     const link = document.createElement('a');
-    link.href = url;
+            link.href = url;
     link.download = 'color_palettes.svg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    
+    let debounceTimer;
+    
+    hexInput.addEventListener('input', function () {
+        const hexValue = hexInput.value.trim();
+    
+        // Clear previous debounce timer if still running
+        clearTimeout(debounceTimer);
+    
+        // Set a debounce timer to update the color after a delay
+        debounceTimer = setTimeout(() => {
+            if (chroma.valid(hexValue)) {
+                colorWheel.color.hexString = hexValue; // Update the color wheel
+            }
+        }, 300); // Delay in milliseconds (300ms)
+    });
+    });
+    
+    function applyDynamicStyles(colorPalette) {
+        const root = document.documentElement;
+        
+        // Verificar si colorWheel está definido
+        if (!colorWheel) {
+            console.warn('ColorWheel no está inicializado');
+            return;
+        }
 
-  let debounceTimer;
+        const selectedColor = colorWheel.color.hexString;
+        const color = chroma(selectedColor);
 
-  hexInput.addEventListener('input', function () {
-    const hexValue = hexInput.value.trim();
-
-    // Clear previous debounce timer if still running
-    clearTimeout(debounceTimer);
-
-    // Set a debounce timer to update the color after a delay
-    debounceTimer = setTimeout(() => {
-      if (chroma.valid(hexValue)) {
-        colorWheel.color.hexString = hexValue; // Update the color wheel
-      }
-    }, 300); // Delay in milliseconds (300ms)
-  });
-});
-
-function applyDynamicStyles(colorPalette) {
-  const root = document.documentElement;
-
-  // Verificar si colorWheel está definido
-  if (!colorWheel) {
-    console.warn('ColorWheel no está inicializado');
-    return;
-  }
-
-  const selectedColor = colorWheel.color.hexString;
-  const color = chroma(selectedColor);
-
-  // Generar escala de colores desde más claro a más oscuro
+        // Generar escala de colores desde más claro a más oscuro
   const scale = chroma
     .scale([
       color.luminance(0.95), // 50
@@ -613,173 +614,173 @@ function applyDynamicStyles(colorPalette) {
     ])
     .colors(10);
 
-  // Establecer variables del color primario
-  root.style.setProperty('--color-primary-50', scale[0]);
-  root.style.setProperty('--color-primary-100', scale[1]);
-  root.style.setProperty('--color-primary-200', scale[2]);
-  root.style.setProperty('--color-primary-300', scale[3]);
-  root.style.setProperty('--color-primary-400', scale[4]);
-  root.style.setProperty('--color-primary-500', scale[5]);
-  root.style.setProperty('--color-primary-600', selectedColor);
-  root.style.setProperty('--color-primary-700', scale[7]);
-  root.style.setProperty('--color-primary-800', scale[8]);
-  root.style.setProperty('--color-primary-900', scale[9]);
+        // Establecer variables del color primario
+        root.style.setProperty('--color-primary-50', scale[0]);
+        root.style.setProperty('--color-primary-100', scale[1]);
+        root.style.setProperty('--color-primary-200', scale[2]);
+        root.style.setProperty('--color-primary-300', scale[3]);
+        root.style.setProperty('--color-primary-400', scale[4]);
+        root.style.setProperty('--color-primary-500', scale[5]);
+        root.style.setProperty('--color-primary-600', selectedColor);
+        root.style.setProperty('--color-primary-700', scale[7]);
+        root.style.setProperty('--color-primary-800', scale[8]);
+        root.style.setProperty('--color-primary-900', scale[9]);
 
-  // Asignar las variables CSS dinámicamente para los otros colores
-  Object.keys(colorPalette).forEach((colorKey, index) => {
-    if (index >= 4) return;
+        // Asignar las variables CSS dinámicamente para los otros colores
+        Object.keys(colorPalette).forEach((colorKey, index) => {
+            if (index >= 4) return;
 
-    const palette = colorPalette[colorKey];
-    const colorName = `color-${index + 1}`;
+            const palette = colorPalette[colorKey];
+            const colorName = `color-${index + 1}`;
 
     root.style.setProperty(`--background-${colorName}-50`, palette['50']);
     root.style.setProperty(`--background-${colorName}-100`, palette['100']);
     root.style.setProperty(`--color-${colorName}`, palette['800']);
     root.style.setProperty(`--button-${colorName}`, index === 0 ? selectedColor : palette['600']);
-  });
+        });
 
-  // Asignar las variables CSS estáticas
-  root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
-  root.style.setProperty('--color-primary', 'var(--color-color-1)');
-  root.style.setProperty('--button-primary', selectedColor);
-}
-
-// Dropdown functionality
+        // Asignar las variables CSS estáticas
+        root.style.setProperty('--background-primary', 'var(--background-color-1-50)');
+        root.style.setProperty('--color-primary', 'var(--color-color-1)');
+        root.style.setProperty('--button-primary', selectedColor);
+    }
+    
+    // Dropdown functionality
 document.querySelectorAll('.ui-dropdown-toggle').forEach((toggle) => {
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const menu = toggle.nextElementSibling;
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  });
-});
-
-// Close dropdowns when clicking outside
-document.addEventListener('click', () => {
-  document.querySelectorAll('.ui-dropdown-menu').forEach((menu) => {
-    menu.style.display = 'none';
-  });
-});
-
-// Cascade Dropdown
-document.querySelectorAll('.ui-cascade-button').forEach((button) => {
-  button.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const menu = button.nextElementSibling;
-    const isOpen = menu.style.display === 'block';
-
-    // Cerrar todos los menús primero
-    document.querySelectorAll('.ui-cascade-menu, .ui-cascade-submenu').forEach((m) => {
-      m.style.display = 'none';
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = toggle.nextElementSibling;
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
     });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+  document.querySelectorAll('.ui-dropdown-menu').forEach((menu) => {
+            menu.style.display = 'none';
+        });
+    });
+    
+    // Cascade Dropdown
+document.querySelectorAll('.ui-cascade-button').forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = button.nextElementSibling;
+            const isOpen = menu.style.display === 'block';
+            
+            // Cerrar todos los menús primero
+    document.querySelectorAll('.ui-cascade-menu, .ui-cascade-submenu').forEach((m) => {
+                m.style.display = 'none';
+            });
 
-    // Abrir/cerrar el menú actual
-    menu.style.display = isOpen ? 'none' : 'block';
-  });
-});
+            // Abrir/cerrar el menú actual
+            menu.style.display = isOpen ? 'none' : 'block';
+        });
+    });
 
 document.querySelectorAll('.ui-cascade-item').forEach((item) => {
-  const submenu = item.querySelector('.ui-cascade-submenu');
-  if (submenu) {
-    item.addEventListener('mouseenter', () => {
-      submenu.style.display = 'block';
+        const submenu = item.querySelector('.ui-cascade-submenu');
+        if (submenu) {
+            item.addEventListener('mouseenter', () => {
+                submenu.style.display = 'block';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                submenu.style.display = 'none';
+            });
+        }
     });
 
-    item.addEventListener('mouseleave', () => {
-      submenu.style.display = 'none';
-    });
-  }
-});
-
-// Cerrar al hacer clic fuera
-document.addEventListener('click', () => {
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', () => {
   document.querySelectorAll('.ui-cascade-menu, .ui-cascade-submenu').forEach((menu) => {
-    menu.style.display = 'none';
-  });
-});
-
-// Custom Select
+            menu.style.display = 'none';
+        });
+    });
+    
+    // Custom Select
 document.querySelectorAll('.ui-select').forEach((select) => {
-  select.addEventListener('click', (e) => {
-    const options = select.nextElementSibling;
-    options.style.display = options.style.display === 'block' ? 'none' : 'block';
-  });
-});
-
-function generateShades(baseColor) {
-  const color = chroma(baseColor);
-  const shades = {};
-
-  // El 600 es el color base seleccionado
-  shades[600] = baseColor;
-
-  // Generar tonos desde 700 hasta 900 (más oscuros)
+        select.addEventListener('click', (e) => {
+            const options = select.nextElementSibling;
+            options.style.display = options.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+    
+    function generateShades(baseColor) {
+        const color = chroma(baseColor);
+        const shades = {};
+        
+        // El 600 es el color base seleccionado
+        shades[600] = baseColor;
+        
+        // Generar tonos desde 700 hasta 900 (más oscuros)
   for (let i = 7; i <= 9; i++) {
-    const shade = i * 100;
+            const shade = i * 100;
     shades[shade] = color.darken((i - 6) * 0.3).hex();
-  }
-
-  // Generar todos los tonos más claros desde 500 hasta 50 con una degradación constante
-  const steps = [500, 400, 300, 200, 100, 50];
-  const baseHue = color.get('hsl.h');
-  const baseSaturation = color.get('hsl.s');
-  const baseLightness = color.get('hsl.l');
-
-  steps.forEach((step, index) => {
-    // Calcular el incremento gradual de luminosidad
-    const luminosityIncrease = (index + 1) * 0.08;
-    // Reducir gradualmente la saturación
+        }
+        
+        // Generar todos los tonos más claros desde 500 hasta 50 con una degradación constante
+        const steps = [500, 400, 300, 200, 100, 50];
+        const baseHue = color.get('hsl.h');
+        const baseSaturation = color.get('hsl.s');
+        const baseLightness = color.get('hsl.l');
+        
+        steps.forEach((step, index) => {
+            // Calcular el incremento gradual de luminosidad
+            const luminosityIncrease = (index + 1) * 0.08;
+            // Reducir gradualmente la saturación
     const saturationDecrease = 1 - index * 0.1;
-
+            
     shades[step] = chroma
       .hsl(
-        baseHue,
-        Math.max(0, baseSaturation * saturationDecrease),
-        Math.min(0.98, baseLightness + luminosityIncrease)
+                baseHue,
+                Math.max(0, baseSaturation * saturationDecrease),
+                Math.min(0.98, baseLightness + luminosityIncrease)
       )
       .hex();
-  });
-
-  return shades;
-}
-
-// Establecer Square como valor por defecto en el select
+        });
+        
+        return shades;
+    }
+    
+    // Establecer Square como valor por defecto en el select
 document.addEventListener('DOMContentLoaded', function () {
-  const harmonySelect = document.getElementById('harmonyType');
-  harmonySelect.value = 'square';
-  // Disparar el evento de cambio para actualizar los colores
+        const harmonySelect = document.getElementById('harmonyType');
+        harmonySelect.value = 'square';
+        // Disparar el evento de cambio para actualizar los colores
   updateHarmonyColors('#5036C2');
-});
-
-function updateCSSVariables(selectedColor, colors) {
-  const root = document.documentElement;
-
+    });
+    
+    function updateCSSVariables(selectedColor, colors) {
+        const root = document.documentElement;
+        
   // Generar escala para color primario
   const primaryScale = chroma
     .scale([
-      chroma(selectedColor).luminance(0.95),
-      chroma(selectedColor).luminance(0.9),
-      chroma(selectedColor).luminance(0.8),
-      chroma(selectedColor).luminance(0.7),
-      chroma(selectedColor).luminance(0.6),
-      chroma(selectedColor).luminance(0.5),
-      selectedColor,
-      chroma(selectedColor).darken(0.5),
-      chroma(selectedColor).darken(1),
+            chroma(selectedColor).luminance(0.95),
+            chroma(selectedColor).luminance(0.9),
+            chroma(selectedColor).luminance(0.8),
+            chroma(selectedColor).luminance(0.7),
+            chroma(selectedColor).luminance(0.6),
+            chroma(selectedColor).luminance(0.5),
+            selectedColor,
+            chroma(selectedColor).darken(0.5),
+            chroma(selectedColor).darken(1),
       chroma(selectedColor).darken(1.5),
     ])
     .colors(10);
 
   // Establecer variables del color primario
-  root.style.setProperty('--color-primary-50', primaryScale[0]);
-  root.style.setProperty('--color-primary-100', primaryScale[1]);
-  root.style.setProperty('--color-primary-200', primaryScale[2]);
-  root.style.setProperty('--color-primary-300', primaryScale[3]);
-  root.style.setProperty('--color-primary-400', primaryScale[4]);
-  root.style.setProperty('--color-primary-500', primaryScale[5]);
-  root.style.setProperty('--color-primary-600', selectedColor);
-  root.style.setProperty('--color-primary-700', primaryScale[7]);
-  root.style.setProperty('--color-primary-800', primaryScale[8]);
-  root.style.setProperty('--color-primary-900', primaryScale[9]);
+        root.style.setProperty('--color-primary-50', primaryScale[0]);
+        root.style.setProperty('--color-primary-100', primaryScale[1]);
+        root.style.setProperty('--color-primary-200', primaryScale[2]);
+        root.style.setProperty('--color-primary-300', primaryScale[3]);
+        root.style.setProperty('--color-primary-400', primaryScale[4]);
+        root.style.setProperty('--color-primary-500', primaryScale[5]);
+        root.style.setProperty('--color-primary-600', selectedColor);
+        root.style.setProperty('--color-primary-700', primaryScale[7]);
+        root.style.setProperty('--color-primary-800', primaryScale[8]);
+        root.style.setProperty('--color-primary-900', primaryScale[9]);
 
   // Generar y establecer variables para los colores secundarios
   colors.forEach((color, index) => {
@@ -828,147 +829,147 @@ function updateCSSVariables(selectedColor, colors) {
   // Después de establecer todas las variables CSS, actualizar el contraste
   updateButtonsContrast();
 }
-
-// Función para cambiar la tipografía
-function initTypographyCards() {
-  const typographyCards = document.querySelectorAll('.typography-card');
-
+    
+    // Función para cambiar la tipografía
+    function initTypographyCards() {
+        const typographyCards = document.querySelectorAll('.typography-card');
+        
   typographyCards.forEach((card) => {
-    card.addEventListener('click', () => {
+            card.addEventListener('click', () => {
       typographyCards.forEach((c) => c.classList.remove('active'));
-      card.classList.add('active');
-
-      const fontFamily = card.getAttribute('data-font');
-      document.body.style.fontFamily = fontFamily;
-
+                card.classList.add('active');
+                
+                const fontFamily = card.getAttribute('data-font');
+                document.body.style.fontFamily = fontFamily;
+                
       const fontName = card.querySelector('.typography-name').textContent;
       showCustomAlert(`Typography changed to ${fontName}`, 'typography');
-    });
-  });
-}
+            });
+        });
+    }
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-  initTypographyCards();
-  initSidebar();
-  updateHarmonyColors(); // Si es necesario
-  // ... resto de inicializaciones
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        initTypographyCards();
+        initSidebar();
+        updateHarmonyColors(); // Si es necesario
+        // ... resto de inicializaciones
   updateButtonsContrast();
-});
-
-// Animación de los círculos de progreso
-document.addEventListener('DOMContentLoaded', () => {
-  const circles = document.querySelectorAll('.circle');
+    });
+    
+    // Animación de los círculos de progreso
+    document.addEventListener('DOMContentLoaded', () => {
+        const circles = document.querySelectorAll('.circle');
   circles.forEach((circle) => {
-    const value = circle.getAttribute('stroke-dasharray').split(',')[0];
-    circle.style.strokeDasharray = `0, 100`;
-    setTimeout(() => {
-      circle.style.strokeDasharray = `${value}, 100`;
-    }, 100);
-  });
+            const value = circle.getAttribute('stroke-dasharray').split(',')[0];
+            circle.style.strokeDasharray = `0, 100`;
+            setTimeout(() => {
+                circle.style.strokeDasharray = `${value}, 100`;
+            }, 100);
+        });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Elementos DOM
-  const recTimeEl = document.querySelector('.rec-time');
-  const fpsCounter = document.querySelector('.fps-counter');
-  const batteryValue = document.querySelector('.battery .value');
-  const altitudeValue = document.querySelector('.altitude .value');
-  const speedValue = document.querySelector('.flight-data .data-item:nth-child(1) .value');
-  const distanceValue = document.querySelector('.flight-data .data-item:nth-child(2) .value');
-  const flightTimeValue = document.querySelector('.flight-data .data-item:nth-child(3) .value');
+    // Elementos DOM
+    const recTimeEl = document.querySelector('.rec-time');
+    const fpsCounter = document.querySelector('.fps-counter');
+    const batteryValue = document.querySelector('.battery .value');
+    const altitudeValue = document.querySelector('.altitude .value');
+    const speedValue = document.querySelector('.flight-data .data-item:nth-child(1) .value');
+    const distanceValue = document.querySelector('.flight-data .data-item:nth-child(2) .value');
+    const flightTimeValue = document.querySelector('.flight-data .data-item:nth-child(3) .value');
 
-  // Variables de control
-  let seconds = 0;
-  let distance = 0;
-  let battery = 100;
-  let altitude = 270;
-  let speed = 20;
+    // Variables de control
+    let seconds = 0;
+    let distance = 0;
+    let battery = 100;
+    let altitude = 270;
+    let speed = 20;
 
-  // Función para números aleatorios con rango
-  function randomInRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  // Actualizar tiempo de grabación
-  setInterval(() => {
-    seconds++;
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    recTimeEl.textContent = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  }, 1000);
-
-  // Fluctuar FPS
-  setInterval(() => {
-    const fps = randomInRange(19.2, 20.1).toFixed(2);
-    fpsCounter.textContent = `${fps} FPS`;
-  }, 500);
-
-  // Actualizar batería
-  setInterval(() => {
-    if (battery > 5) {
-      battery -= 0.1;
-      batteryValue.textContent = `${Math.round(battery)}%`;
-
-      // Cambiar icono de batería según nivel
-      const batteryIcon = document.querySelector('.battery .material-symbols-outlined');
-      if (battery < 20) {
-        batteryValue.style.color = '#ff4444';
-        batteryIcon.textContent = 'battery_1_bar';
-      }
+    // Función para números aleatorios con rango
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
     }
-  }, 5000);
 
-  // Simular vuelo
-  setInterval(() => {
-    // Altitud
-    altitude += randomInRange(-5, 5);
-    altitude = Math.max(0, Math.min(500, altitude));
-    altitudeValue.textContent = `${Math.round(altitude)} m`;
+    // Actualizar tiempo de grabación
+    setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        recTimeEl.textContent = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }, 1000);
 
-    // Velocidad
-    speed += randomInRange(-2, 2);
-    speed = Math.max(0, Math.min(40, speed));
-    speedValue.textContent = `${Math.round(speed)} km/h`;
+    // Fluctuar FPS
+    setInterval(() => {
+        const fps = randomInRange(19.2, 20.1).toFixed(2);
+        fpsCounter.textContent = `${fps} FPS`;
+    }, 500);
 
-    // Distancia
-    distance += speed / 3600; // Convertir km/h a km por segundo
-    distanceValue.textContent = `${distance.toFixed(1)} km`;
-  }, 1000);
+    // Actualizar batería
+    setInterval(() => {
+        if (battery > 5) {
+            battery -= 0.1;
+            batteryValue.textContent = `${Math.round(battery)}%`;
+            
+            // Cambiar icono de batería según nivel
+            const batteryIcon = document.querySelector('.battery .material-symbols-outlined');
+            if (battery < 20) {
+                batteryValue.style.color = '#ff4444';
+                batteryIcon.textContent = 'battery_1_bar';
+            }
+        }
+    }, 5000);
 
-  // Actualizar tiempo de vuelo
-  let flightSeconds = 0;
-  setInterval(() => {
-    flightSeconds++;
-    const fMinutes = Math.floor(flightSeconds / 60);
-    const fSecs = flightSeconds % 60;
-    flightTimeValue.textContent = `${String(fMinutes).padStart(2, '0')}:${String(fSecs).padStart(2, '0')}`;
-  }, 1000);
+    // Simular vuelo
+    setInterval(() => {
+        // Altitud
+        altitude += randomInRange(-5, 5);
+        altitude = Math.max(0, Math.min(500, altitude));
+        altitudeValue.textContent = `${Math.round(altitude)} m`;
+
+        // Velocidad
+        speed += randomInRange(-2, 2);
+        speed = Math.max(0, Math.min(40, speed));
+        speedValue.textContent = `${Math.round(speed)} km/h`;
+
+        // Distancia
+        distance += speed / 3600; // Convertir km/h a km por segundo
+        distanceValue.textContent = `${distance.toFixed(1)} km`;
+    }, 1000);
+
+    // Actualizar tiempo de vuelo
+    let flightSeconds = 0;
+    setInterval(() => {
+        flightSeconds++;
+        const fMinutes = Math.floor(flightSeconds / 60);
+        const fSecs = flightSeconds % 60;
+        flightTimeValue.textContent = `${String(fMinutes).padStart(2, '0')}:${String(fSecs).padStart(2, '0')}`;
+    }, 1000);
 });
 
 // Añadir al JavaScript existente:
 document.querySelectorAll('.tab-btn').forEach((button) => {
-  button.addEventListener('click', () => {
-    // Remover active de todos los botones y contenidos
+    button.addEventListener('click', () => {
+        // Remover active de todos los botones y contenidos
     document.querySelectorAll('.tab-btn').forEach((btn) => btn.classList.remove('active'));
     document
       .querySelectorAll('.tab-content')
       .forEach((content) => content.classList.remove('active'));
-
-    // Activar el botón clickeado y su contenido
-    button.classList.add('active');
-    document.getElementById(button.dataset.tab).classList.add('active');
-  });
+        
+        // Activar el botón clickeado y su contenido
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+    });
 });
 
 // Dentro del addEventListener('DOMContentLoaded') existente
 document.addEventListener('DOMContentLoaded', () => {
-  // Añadir estos nuevos event listeners (sintaxis corregida)
+    // Añadir estos nuevos event listeners (sintaxis corregida)
   document.querySelectorAll('.radius-card').forEach((card) => {
-    card.addEventListener('click', () => {
+        card.addEventListener('click', () => {
       updateButtonRadius(card.dataset.radius, true);
+        });
     });
-  });
 
   // Aplicar el radio inicial sin mostrar toast
   updateButtonRadius(currentButtonRadius, false);
@@ -1360,6 +1361,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cards.forEach((card) => createCustomTooltip(card));
 });
 
+// Función para actualizar el contraste de los botones
 function updateButtonsContrast() {
   const root = document.documentElement;
 
@@ -1394,7 +1396,7 @@ function updateButtonsContrast() {
     .forEach((element) => {
       element.style.color = getTextColor(colors[200]);
     });
-
+  
   // Aplicar contraste a icon buttons
   document.querySelectorAll('.icon-button').forEach((element) => {
     element.style.color = 'var(--color-primary-600)';
@@ -1425,6 +1427,114 @@ function updateButtonsContrast() {
       });
     }
   });
+}
+
+// Actualizar la función updateButtonStyles
+function updateButtonStyles(e) {
+  const selectedStyle = e.target.value;
+  const buttons = document.querySelectorAll('.ui-button.primary');
+  
+  buttons.forEach(button => {
+    // Remover todas las clases de gradiente existentes
+    button.classList.remove('gradient-1', 'gradient-2', 'gradient-3', 'gradient-4');
+    
+    if (selectedStyle !== 'solid') {
+      button.classList.add(selectedStyle);
+    }
+  });
+
+  // Actualizar el contraste del texto
+  updateButtonsContrast();
+
+  // Guardar la preferencia
+  localStorage.setItem('preferredButtonStyle', selectedStyle);
+  
+  // Mostrar notificación
+  showCustomAlert(`Button style changed to ${selectedStyle === 'solid' ? 'Solid' : selectedStyle.replace('-', ' ')}`, 'palette');
+}
+
+// Actualizar la función generateGradientOptions
+function generateGradientOptions() {
+  const gradientContainer = document.querySelector('.gradient-options');
+  if (!gradientContainer) return;
+
+  // Limpiar el contenedor
+  gradientContainer.innerHTML = '';
+
+  // Obtener el color base y crear objeto chroma
+  const baseColor = chroma(colorWheel.color.hexString);
+  
+  // Obtener los colores armónicos
+  const harmonyType = document.getElementById('harmonyType').value;
+  const harmonyColors = getHarmonyColors(baseColor.hex(), harmonyType);
+  
+  // Crear pares de colores para gradientes
+  let colorPairs = [];
+  
+  switch (harmonyType) {
+    case 'complementary':
+      colorPairs = [[baseColor, chroma(harmonyColors[1])]];
+      break;
+    case 'triadic':
+      colorPairs = [
+        [baseColor, chroma(harmonyColors[1])],
+        [chroma(harmonyColors[1]), chroma(harmonyColors[2])],
+        [chroma(harmonyColors[2]), baseColor]
+      ];
+      break;
+    case 'analogous':
+      colorPairs = [
+        [baseColor, chroma(harmonyColors[1])],
+        [chroma(harmonyColors[1]), chroma(harmonyColors[2])],
+        [chroma(harmonyColors[2]), baseColor]
+      ];
+      break;
+    case 'square':
+      colorPairs = [
+        [baseColor, chroma(harmonyColors[1])],
+        [chroma(harmonyColors[1]), chroma(harmonyColors[2])],
+        [chroma(harmonyColors[2]), chroma(harmonyColors[3])],
+        [chroma(harmonyColors[3]), baseColor]
+      ];
+      break;
+  }
+
+  // Crear las opciones de radio para cada gradiente
+  colorPairs.forEach((pair, index) => {
+    const label = document.createElement('label');
+    label.className = 'style-option';
+    
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'buttonStyle';
+    input.value = `gradient-${index + 1}`;
+    
+    const preview = document.createElement('span');
+    preview.className = 'style-preview gradient-preview';
+    
+    // Crear el gradiente usando los colores
+    const color1 = pair[0].hex();
+    const color2 = pair[1].hex();
+    preview.style.background = `linear-gradient(180deg, ${color1}, ${color2})`;
+    
+    // Calcular el color de texto basado en el contraste promedio
+    const avgColor = chroma.mix(color1, color2, 0.5);
+    preview.style.color = avgColor.luminance() > 0.5 ? '#000000' : '#FFFFFF';
+    
+    preview.textContent = `Gradient ${index + 1}`;
+    
+    label.appendChild(input);
+    label.appendChild(preview);
+    gradientContainer.appendChild(label);
+  });
+
+  // Añadir event listeners
+  document.querySelectorAll('input[name="buttonStyle"]').forEach(radio => {
+    radio.addEventListener('change', updateButtonStyles);
+  });
+
+  // Actualizar el contraste de los botones existentes
+  updateButtonsContrast();
 }
 
 // Design Tokens System
@@ -2362,4 +2472,28 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ... rest of the event listeners ...
+});
+
+// Añadir al DOMContentLoaded existente
+document.addEventListener('DOMContentLoaded', () => {
+  // ... existing code ...
+  
+  // Generar opciones de gradiente iniciales
+  generateGradientOptions();
+  
+  // Restaurar preferencia guardada
+  const savedStyle = localStorage.getItem('preferredButtonStyle');
+  if (savedStyle) {
+    const radio = document.querySelector(`input[name="buttonStyle"][value="${savedStyle}"]`);
+    if (radio) {
+      radio.checked = true;
+      const event = new Event('change');
+      radio.dispatchEvent(event);
+    }
+  }
+  
+  // Actualizar gradientes cuando cambian los colores
+  colorWheel.on('color:change', () => {
+    setTimeout(generateGradientOptions, 100); // Pequeño delay para asegurar que los colores se han actualizado
+  });
 });

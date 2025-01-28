@@ -1,5 +1,5 @@
 #designTokensButton {
-  color: var(--color-primary-50);
+  color: var(--color-primary-900);
 }
 
 #designTokensButton .material-symbols-outlined {
@@ -220,4 +220,8 @@
 }
 .drawer.open .token-section:nth-child(3) {
   --animation-order: 3;
+}
+
+.test-class-3 {
+  color: green;
 }
